@@ -45,15 +45,20 @@ The current edition explains:
 - **Landau nonvanishing:** smoothed prime sums, transform residues, localized
   kernels, tail estimates, and the growth contradiction that excludes a zero.
 - **Arithmetic windows:** localization kernels in Galois cohomology, logarithmic
-  size bounds, scale changes, and the quantifiers needed for long intervals.
+  size bounds from nonzero congruence integers, exceptional-twist cutoffs, and
+  the quantifiers needed for long intervals.
+- **The prime-sum comparison:** finite character orthogonality, cancellation of
+  main terms, and four normalized costs balanced by a square-root chain length.
 - **Galois and local compatibility:** representations, characteristic polynomials,
   Hodge weights, local parameters, and the hypotheses on their comparisons.
 - **Theta matching:** convergent integrals, nonzero proportionality constants,
-  test vectors, and constructions that use the same parameters.
+  test vectors, periods in a common lattice, correlation bounds, and mean slopes.
 - **Covolume estimates:** lattices, slopes, projection losses, and the absorption
-  of exponentially small errors.
+  of exponentially small errors, with component-rank comparisons and local
+  determinant jets that survive cancellation.
 - **The final deduction:** an explicit small-parameter choice, passage from
-  primitive to all characters, and reflection through the functional equation.
+  primitive to all characters, and reflection through the functional equation,
+  including the explicit trivial-zero exclusions for zeta.
 
 ## Scope and verification
 

@@ -50,7 +50,7 @@
       <div class="technical-meta">
         <span><strong>Level</strong> Graduate &amp; research</span>
         <span><strong>Prerequisites</strong> Complex analysis; algebraic and automorphic number theory for the deeper sections</span>
-        <span><strong>Edition</strong> 20 November 2026</span>
+        <span><strong>Edition</strong> 21 November 2026</span>
       </div>
       <p class="technical-scope">This edition explains the quantitative route to universal Dirichlet nonvanishing and the contracts supplied by its main dependencies. It also retains a complete explanation of the final conditional critical-line deduction. Source inspection and mathematical exposition are distinct from compiling and auditing the full Lean project.</p>
       <div class="technical-hero-actions">
@@ -200,12 +200,14 @@
     <li><a href="#nv-literature">The compatible inputs</a><p>Galois representations, local correspondence, theta matching and geometric bounds are assembled into the required records.</p></li>
     <li><a href="#nv-assembly">One theorem for every character</a><p>The final assembly supplies those inputs, proves the universal nonvanishing statement, and feeds it into the critical-line deduction.</p></li>
   </ol>
+  <div class="technical-note"><p><strong>Where the numerical estimate comes from.</strong> The <a href="#arithmetic-fourier">finite Fourier calculation</a> identifies the prime sum, the <a href="#theta-main-cancellation">period normalization</a> cancels its large main terms, and the <a href="#arithmetic-square-root">four normalized costs</a> explain the square-root scale. These are the intermediate calculations connecting the arithmetic inputs to Landau.</p></div>
   <div class="dependency-key"><p><strong>How to read this expansion.</strong> The formulas and contracts below are traced to selected declarations in the downloaded source. We explain the analytic implication and the roles of the main dependencies. The construction of every imported representation, cohomology object and geometric estimate is not reproduced; this is a dependency-level exposition, not a new independent verification of the entire Lean development.</p></div>
   <p class="source-callout">Entry points: <a href="sources.html#main-conclusion">the arithmetic assembly</a>, <a href="sources.html#every-character">the universal nonvanishing proposition</a>, and <a href="sources.html#assembly">the final theorem exports</a>.</p>
 </section>
 <section class="technical-section" id="nv-analytic" aria-labelledby="nv-analytic-title">
   <p class="technical-kicker">From arithmetic to analysis</p>
   <h3 id="nv-analytic-title"><span class="note-number">2.3</span> Control a smoothed prime sum on long windows.</h3>
+  <h4 id="prime-error"><span class="note-number">2.3.1</span> Separate the prime sum from its main term.</h4>
   <p>The quantity bounded by the arithmetic machinery is a corrected, smoothed von Mangoldt sum. Put \((t)_+=\max(t,0)\) and write \(\gamma_E\) for Euler’s constant. The source defines</p>
   <div class="technical-equation">
     \[A_\chi(y)=\sum_{1\le n\le\lfloor y\rfloor}
@@ -216,13 +218,22 @@
     \end{cases}\]
   </div>
   <p>The formal sum includes zero, whose von Mangoldt coefficient is zero; it can be read as a sum over positive integers. In the analytic families, a principal character is allowed only at modulus one. The correction therefore removes the zeta main term in that case. <a href="sources.html#nv-char-family-L10">Definitions of <code>ramp</code>, <code>Gchi</code> and admissibility.</a></p>
+  <h4 id="prime-smoothing"><span class="note-number">2.3.2</span> See what the ramp does to the counting function.</h4>
+  <p>Define the character-weighted counting function \(\psi_\chi(t)=\sum_{1\le n\le t}\Lambda_{\mathrm{vM}}(n)\chi(n)\). Each prime power enters this function abruptly. In the smoothed sum, its contribution starts at zero when \(y=n\), then grows linearly. The precise relationship, for \(y\ge1\), is</p>
+  <div class="technical-equation">\[
+    A_\chi(y)=y\int_1^y\frac{\psi_\chi(t)}{t^2}\,dt.
+  \]</div>
+  <p>To check it, interchange the finite sum and the integral. The term indexed by \(n\le y\) contributes \(y\int_n^y t^{-2}\,dt=y/n-1\). The endpoint \(n=y\) contributes zero. This averaging produces a continuous function while keeping the prime-power coefficients. It also creates the factor \(1/[s(s-1)]\) in the Mellin transform below. Smoothing changes how zeros are detected; it does not erase their contributions.</p>
+  <h4 id="prime-family"><span class="note-number">2.3.3</span> Combine the characters with positive weights.</h4>
   <p>A finite family \(F=(\chi_i,a_i)\) has strictly positive real weights and the real-valued error</p>
   <div class="technical-equation">\[G_F(y)=\sum_i a_i\operatorname{Re}G_{\chi_i}(y),\qquad a_i&gt;0.\]</div>
   <p>This is exactly the arithmetic level’s \(G_m\) after the comparison theorem identifies the families. Positivity concerns the weights; the error itself may have either sign. <a href="sources.html#nv-char-family-L24">Family definition.</a> <a href="sources.html#nv-level-family-L41">Exact comparison.</a></p>
+  <h4 id="prime-window"><span class="note-number">2.3.4</span> Keep the exponent fixed while moving the window.</h4>
   <p>For each primitive character, the preceding construction supplies a level containing it and constants \(e_D,e_L,\varepsilon_1\), with \(\varepsilon_1&gt;0\). For <em>every</em> \(0&lt;\varepsilon&lt;\varepsilon_1\), it supplies a compatible family of windows. The constants \(e_D,e_L\) are chosen before \(\varepsilon\); the host/window family and the sufficiently-large threshold may depend on it. The analytic character family \(F\) attached to the fixed level stays fixed. On those windows, the arithmetic comparison gives</p>
   <div class="technical-equation">\[G_F(y)\le y^{\frac12+(e_D+e_L+7)\varepsilon}.\]</div>
   <p>More precisely: beyond any requested lower bound, there is a whole interval \([Y,Y^\lambda]\) where this estimate holds. The final assembly uses \(\lambda=3/2\). These are arbitrarily late intervals, not an assertion about every sufficiently large real number. <a href="sources.html#nv-top-win-L23">Quantifier order.</a> <a href="sources.html#nv-core-gm-L12">Exact exponent.</a> <a href="sources.html#nv-window-L7">Meaning of a window.</a> <a href="sources.html#every-character-L8">The choice \(\lambda=3/2\).</a></p>
   <div class="technical-note"><p><strong>What is supplied here.</strong> <code>TopG</code> and the character-specific host supply produce the compatible families; <code>core_gm</code> converts their explicit-formula conditions and geometric bounds into the displayed estimate. Its inputs <code>EAtH</code> and <code>CoreAtH</code> package substantial compatibility, size, divisibility, loss and error estimates. This section follows their numerical consequence rather than proving each packaged condition. <a href="sources.html#nv-top-g-L26">Assembly into nonvanishing.</a></p></div>
+  <h4 id="prime-exponent"><span class="note-number">2.3.5</span> Choose an exponent to the left of a candidate zero.</h4>
   <p>The final choice of exponent is elementary and exact. Fix a candidate point with real part \(\sigma&gt;1/2\), and set</p>
   <div class="technical-equation">
     \[m=\min(\sigma-\tfrac12,\tfrac12),\qquad
@@ -289,6 +300,23 @@
       +sL'(1,\chi)/L(1,\chi)}{s(s-1)}.
   \]</div>
   <p>The numerator vanishes at \(s=1\), where the denominator suggests an extra singularity. Since \(L(1,\chi)\ne0\), this singularity is removable. For the principal character allowed in this family, the function is zeta; its separate main-term correction plays the corresponding role, using the holomorphic regularization of \((s-1)\zeta(s)\) at \(1\). Thus the relevant singularities in the positive half-plane come from zeros, rather than from the removed main terms.</p>
+  <h5 id="landau-zeta-cancellation"><span class="note-number">2.4.2.1</span> Check the cancellation for zeta explicitly.</h5>
+  <p>The zeta case explains the otherwise unusual coefficient \(1+\gamma_E\). Integrating its two correction terms gives</p>
+  <div class="technical-equation">\[
+    \Phi_1(s)=\frac{-\zeta'(s)/\zeta(s)}{s(s-1)}
+      -\frac1{(s-1)^2}+\frac{1+\gamma_E}{s-1}.
+  \]</div>
+  <p>Put \(h=s-1\). The <a href="https://dlmf.nist.gov/25.2#E4">Laurent expansion of zeta</a> starts with \(\zeta(1+h)=h^{-1}+\gamma_E+O(h)\). Consequently</p>
+  <div class="technical-equation">\[
+    -\frac{\zeta'(1+h)}{\zeta(1+h)}=\frac1h-\gamma_E+O(h),
+    \qquad \frac1{1+h}=1-h+O(h^2),
+  \]
+  \[
+    \frac{-\zeta'(s)/\zeta(s)}{s(s-1)}
+       =\frac1{h^2}-\frac{1+\gamma_E}{h}+O(1).
+  \]</div>
+  <p>The double-pole and simple-pole terms cancel exactly against the corrections in \(\Phi_1\). Here \(O(h)\) means a remainder bounded in magnitude by a constant times \(|h|\) near zero. The resulting meromorphic expression has a removable singularity at \(1\); the prime-sum correction was chosen to enforce this, not merely to make its average small.</p>
+  <h5 id="landau-paired-transform"><span class="note-number">2.4.2.2</span> Recombine the characters without losing analyticity.</h5>
   <p>Finally, \(G\) is a positive weighted sum of real parts. The identity \(\operatorname{Re}z=(z+\overline z)/2\), together with conjugation of Dirichlet characters, gives the paired transform</p>
   <div class="technical-equation">\[
     \Phi(s)=\sum_i\frac{a_i}{2}
@@ -454,13 +482,13 @@
   <p>Now this term itself supplies the lower bound. Set \(t=0\) in the window estimate and use \(|D_k(\tau)|\ge0\). This is the point at which positivity of a real pole’s residue is essential.</p>
   <details class="landau-detail">
     <summary>Why these two configurations cover every possible pole set</summary>
-    <p>Look at the closed disc centered at \(\tau\) with radius \(E=\tau-\theta\). It lies entirely in \(\operatorname{Re}s\ge\theta&gt;0\), so it contains finitely many poles. If it contains none, take \(D=E\); the pole \(\rho_0\) has horizontal distance \(\tau-\operatorname{Re}\rho_0&lt;E\), giving configuration A.</p>
-    <p>Otherwise let \(D\) be the smallest distance from \(\tau\) to a pole in that disc. The open disc of radius \(D\) is free of poles. If any pole has horizontal distance less than \(D\), we again have A. If none does, a nearest pole \(\rho\) satisfies</p>
+    <p>Look at the closed disc centered at \(\tau\) with radius \(E=\tau-\theta\). It lies entirely in \(\operatorname{Re}s\ge\theta&gt;0\), so it contains finitely many poles. If it contains none, take \(D=E\); the pole \(\rho_0\) has horizontal distance \(\tau-\operatorname{Re}\rho_0&lt;E\), giving the <a href="#landau-isolation-shifted">shifted-center configuration</a>.</p>
+    <p>Otherwise let \(D\) be the smallest distance from \(\tau\) to a pole in that disc. The open disc of radius \(D\) is free of poles. If any pole has horizontal distance less than \(D\), use the same shifted-center configuration. If none does, a nearest pole \(\rho\) satisfies</p>
     <div class="technical-equation">\[
       D=|\tau-\rho|\ge\tau-\operatorname{Re}\rho\ge D.
     \]</div>
-    <p>Equality forces \(\operatorname{Im}\rho=0\). Every nearest pole must therefore be the same real point \(\beta=\tau-D\). Moreover \(D&lt;E\), because the originally assumed pole has horizontal distance less than \(E\). Thus \(\beta&gt;\theta\), and finiteness lets us enlarge the disc a little while keeping \(\beta\) as its only pole. This gives B.</p>
-    <p>For A, the small height adjustment has a concrete justification. Only finitely many poles can compete near the chosen center. The difference between two squared distances to \(\tau+it\) is affine in \(t\). Distinct poles to the left of the line cannot have identically equal distances along the line. Avoiding finitely many tie heights therefore makes the nearest one unique, while keeping its distance below \(D\).</p>
+    <p>Equality forces \(\operatorname{Im}\rho=0\). Every nearest pole must therefore be the same real point \(\beta=\tau-D\). Moreover \(D&lt;E\), because the originally assumed pole has horizontal distance less than \(E\). Thus \(\beta&gt;\theta\), and finiteness lets us enlarge the disc a little while keeping \(\beta\) as its only pole. This gives the <a href="#landau-isolation-real">real-pole configuration</a>.</p>
+    <p>For the shifted-center case, the small height adjustment has a concrete justification. Only finitely many poles can compete near the chosen center. The difference between two squared distances to \(\tau+it\) is affine in \(t\). Distinct poles to the left of the line cannot have identically equal distances along the line. Avoiding finitely many tie heights therefore makes the nearest one unique, while keeping its distance below \(D\).</p>
     <p>This selection uses finite sets inside bounded regions. It never requires the entire set of zeros to have a rightmost member.</p>
   </details>
 
@@ -642,6 +670,53 @@
   <p>The passage to a common window has a useful logical form. One theorem supplies an arithmetic window with prescribed properties beyond a threshold; another gives the cohomology estimate on any such window beyond its own threshold. Taking the maximum of the two thresholds lets the proof choose the interval once and apply both conclusions there. Two unrelated existence statements, each selecting its own interval, would not be enough.</p>
   <p>Further construction and selection results arrange the fields and ranks needed by the automorphic argument. This chapter treats those deeper arithmetic results as inputs and explains their quantitative use below. The <a href="#nv-galois">Galois representation section</a> and <a href="#nv-literature">theta and geometric sections</a> describe the other branches that must be made compatible with them.</p>
 
+<h5 id="arithmetic-congruence-integer"><span class="note-number">2.6.6.1</span> Pay for many coefficient primes with one integer.</h5>
+  <p>A separate bound at each prime would not control their total: the number of contributing primes might grow. For the generic character components, the source instead bounds their lengths by valuations of a single nonzero integer. This is where the Galois representations become quantitative.</p>
+  <p>Fix a positive twist \(r\) and an auxiliary Frobenius prime \(p\). Let \(q\ge7\) be the corresponding residue-field size and put \(B=q^r\). The automorphic input supplies a finite list of trace labels \((t_s)_{s\in S}\), with \(|t_s|\le3\), \(Bt_s\) algebraically integral, and the list stable under algebraic conjugation. Labels distinguish representation classes even when two numerical traces coincide. For a conjugation-stable orbit \(\mathcal O\) of character values \(z_\psi\), each a root of unity, form</p>
+  <div class="technical-equation">\[
+    \tau_\psi=B^{-1}z_\psi+1+Bz_\psi^{-1},\qquad
+    N_p=\prod_{\psi\in\mathcal O}\prod_s B(t_s-\tau_\psi).
+  \]</div>
+  <p>Each factor is an algebraic integer. Conjugation permutes all the factors, so \(N_p\) is an ordinary rational integer. It is nonzero because</p>
+  <div class="technical-equation">\[
+    B(t_s-\tau_\psi)=Bt_s-z_\psi-B-B^2z_\psi^{-1},
+    \qquad B^2&gt;4B+1\ge|Bt_s-z_\psi-B|.
+  \]</div>
+  <p>The last term cannot be canceled by the others. The upper estimate \(|B(t_s-\tau_\psi)|\le2B^2\) also gives a height budget:</p>
+  <div class="technical-equation">\[
+    \log|N_p|\le|\mathcal O|\,|S|\,(2r\log q+1).
+  \]</div>
+  <p>The substantive deformation comparison bounds the sum of the relevant normalized character lengths by \(2v_\ell(N_p)\), for the qualifying generic primes \(\ell\ne p\). Here \(v_\ell(\ell)=1\); normalized length means length over the coefficient discrete valuation ring divided by its ramification index. One obtains these bounds through a cotangent module of a deformation ring and trace congruences. They are not a consequence of the integer construction alone.</p>
+  <p>Choose a second auxiliary prime \(p'\ne p\) to cover the omitted coefficient prime. For any finite set \(P\) of qualifying primes, unique factorization now yields</p>
+  <div class="technical-equation">\[
+    \begin{aligned}
+    \sum_{\ell\in P}\log\ell\sum_{\psi\in\mathcal O}L_\ell(\psi)
+      &amp;\le2\sum_{\ell\in P}v_\ell(N_p)\log\ell
+          +2\sum_{\ell\in P}v_\ell(N_{p'})\log\ell\\
+      &amp;\le2\log|N_p|+2\log|N_{p'}|.
+    \end{aligned}
+  \]</div>
+  <p>This bound does not grow with \(|P|\). A polynomial bound for the number of automorphic trace labels, followed by summation over character orbits and twists, supplies the generic contribution. The comparison back to field cohomology also accounts for conductor and index factors. Exceptional primes and the prime \(2\) require additional arguments.</p>
+  <p class="source-callout">Source entry point: <a href="https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AutomorphicArithmetic/AutomorphicVarieties/UnitaryThreeGroups/CorGSumLog.lean#L37">the sum of normalized lengths over coefficient primes</a>.</p>
+
+  <h5 id="arithmetic-exceptional-window"><span class="note-number">2.6.6.2</span> Choose a window where exceptional twists are small.</h5>
+  <p>The exceptional-prime argument produces at most \(R\) troublesome twist indices. A coarse bound can handle them if they are small, but becomes too expensive at large twists. The interval selection therefore aims at a precise implication: for each exceptional \(k\), throughout the chosen window,</p>
+  <div class="technical-equation">\[
+    k\le x^{C_t}\quad\Longrightarrow\quad k\le x^\alpha,
+    \qquad 0&lt;\alpha\le C_t.
+  \]</div>
+  <p>A troublesome twist is either below the cheaper cutoff or above the full cutoff. It need not disappear. To see how one interval can achieve this simultaneously, write \(u=\log x\), \(a_k=(\log k)/C_t\), and \(D=C_t/\alpha\). The forbidden condition becomes</p>
+  <div class="technical-equation">\[
+    a_k\le u&lt;Da_k.
+  \]</div>
+  <p>For \(X&gt;1\), start with \(U=\log X\) and try \([U/2,U]\). If some \(a_k\) lies in \((U/(2D),U]\), move the upper endpoint down to \(U/(2D)\); that obstruction then lies above the new search range. At most \(R\) such reductions are needed. Exponentiating a surviving interval \([y,2y]\) gives</p>
+  <div class="technical-equation">\[
+    X^{1/J}\le Y,\qquad Y^2\le X,
+    \qquad J=2^{R+2}(C_t/\alpha)^R.
+  \]</div>
+  <p>The arithmetic tower estimates supply the uniform bound \(R\); the interval selection is the elementary final step. The exceptional indices can change with \(X\), while the bound on their number stays fixed. That is enough to choose \(J\) before \(X\) and obtain the required arbitrarily late power windows.</p>
+  <p class="source-callout">Source entry point: <a href="https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AutomorphicArithmetic/AutomorphicVarieties/LayeredIsomorphisms/Window1.lean#L6">the logarithmic interval-selection lemma</a>.</p>
+
   <h4 id="arithmetic-rescaling"><span class="note-number">2.6.7</span> Fit the arithmetic window to the host construction.</h4>
   <p>The next stage constructs a <em>host</em>: one collection of fields, ranks and selected arithmetic classes on which all the comparison estimates can be stated together. The host carries both the cohomology budget and the character information needed for the prime sum. Its field can vary with \(x\); the analytic character family attached to the fixed target level stays fixed.</p>
   <p>Some room is reserved when passing from the arithmetic window \([W,W^2]\) to the later window \([Z,Z^{3/2}]\). A fixed field-size factor \(c\ge1\) is absorbed by a rescaling</p>
@@ -678,7 +753,7 @@
     \eta_j\le d_j
        \left[C\left(fm\,bL^2+(\log x)^2N_c\right)+V\right].
   \]</div>
-  <p>Here \(d_j\) is a dimension factor, \(f,m\ge1\) are rank parameters, \(N_c\ge0\) is another size budget, and \(C\) is a comparison constant. This inequality is substantive input from the compatible geometric construction. It describes where the cohomology contribution enters; it is not a formal consequence of the definition of length.</p>
+  <p>Here \(d_j\) is a dimension factor, \(f,m\ge1\) are positive size parameters, with \(m\) the chain length, \(N_c\ge0\) is another size budget, and \(C\) is a comparison constant. This inequality is substantive input from the compatible geometric construction. It describes where the cohomology contribution enters; it is not a formal consequence of the definition of length.</p>
   <p>Now the absorption is elementary. Put \(B_0=fm\,bL\). For sufficiently large \(x\), the construction identifies \(d_j=D_0\) and has \(L,b\ge1\). A fixed positive power eventually dominates the squared logarithm, so \((\log x)^2\le L\). Consequently</p>
   <div class="technical-equation">\[
     V\le\sqrt b\le b\le B_0,\qquad
@@ -713,6 +788,64 @@
     \end{aligned}
   \]</div>
   <p>All eventual thresholds can be met by choosing a sufficiently late available window. The important output is an estimate on the entire interval, with \(e_D,e_L\) fixed before \(\varepsilon\) is chosen. The host family and its thresholds may depend on \(\varepsilon\); those loss exponents do not.</p>
+
+<h5 id="arithmetic-fourier"><span class="note-number">2.6.9.1</span> Recover the prime sum from local arithmetic.</h5>
+  <p>The comparison uses a finite abelian group \(\Gamma=(\mathbb Z/2\mathbb Z)^2\times H\) to record arithmetic classes; write \(n=|H|\). At a prime \(p\), let \(I_p\) be the inertia subgroup and \(F_p+I_p\) the Frobenius coset. For a character \(\xi\) define</p>
+  <div class="technical-equation">\[
+    v_\xi(p^j)=\frac1{|I_p|}\sum_{h\in I_p}\xi(jF_p+h).
+  \]</div>
+  <p>Character orthogonality converts the condition that a prime power occupies a specified arithmetic class into a sum over characters:</p>
+  <div class="technical-equation">\[
+    \frac1{|\Gamma|}\sum_{\xi\in\widehat\Gamma}
+       \overline{\xi(g)}\,v_\xi(p^j)
+       =\frac1{|I_p|}\mathbf1_{g-jF_p\in I_p}.
+  \]</div>
+  <p>The conjugate on \(\xi(g)\) is essential. Local divisibility terms involve positive ramps \((a/p^j-w)_+\), where \(w&gt;0\) and \((t)_+=\max(t,0)\). The identity</p>
+  <div class="technical-equation">\[
+    (a/p^j-w)_+=w\bigl((a/w)/p^j-1\bigr)_+
+  \]</div>
+  <p>turns them into the same smoothing used in the analytic error. Logarithms of local ideal sizes supply the factors \(\log p\), with inertia and residue degrees accounted for in the arithmetic-class formula. Subtracting the matching main terms leaves character errors. Averaging over translations removes unwanted phases and produces the positive weighted family \(G_F\).</p>
+  <p>More precisely, let \(N_T\) count the selected translates, \(m\) be the chain length, and \(b&gt;0\) its weight scale. A second selected subset of \(H\) has \(N_2\) elements and positive proportion \(\delta=N_2/n\); the parameter bounds below give \(\delta\ge x^{-\varepsilon}&gt;0\). Put \(Q=N_Tmb\). After controlling the changes of weights and arguments, the averaged comparison reads</p>
+  <div class="technical-equation">\[
+    \frac{Q\delta}{2}
+       \bigl(G_F(x)-\Sigma(x)-4x^{1/2+\varepsilon}\bigr)
+       \le E_x+\frac{2Q}{x}.
+  \]</div>
+  <p>Here \(E_x\) is the lattice-comparison error and \(\Sigma(x)\) is the sum of the absolute errors of the discarded auxiliary characters. The chosen host supplies \(\Sigma(x)\le C_{\mathrm{lev}}x^{1/2+\varepsilon}\). This concerns the auxiliary characters; the target family remains on the left-hand side to be bounded.</p>
+
+  <h5 id="arithmetic-square-root"><span class="note-number">2.6.9.2</span> Balance the four normalized costs.</h5>
+  <p>Work at \(x\ge3\) with \(\varepsilon&gt;0\). The decisive quantity is \(E_x/Q\). The source bounds \(E_x\le x^{C\varepsilon}B_x\), where the error bracket is</p>
+  <div class="technical-equation">\[
+    B_x=N_Ta_E(1+m^2/k)
+       +m\left(2nmbx^\varepsilon
+       +\frac{N_2kbx^\varepsilon}{n^2x^{-\varepsilon}}\right).
+  \]</div>
+  <p>The parameter \(a_E\) is the degree allowance and \(k&gt;0\) is a size parameter in the comparison, unrelated to the Tate twist index above. The chosen parameters satisfy</p>
+  <div class="technical-equation">\[
+    \begin{gathered}
+      0\le a_E\le2xb,\qquad N_T\ge\tfrac12nx^{-\varepsilon/8},
+      \qquad x^{-\varepsilon}\le\delta\le1,\\
+      x^{1/2-\varepsilon}\le m\le x^{1/2+\varepsilon/2},
+      \qquad xm\le k\le n^2x^{1/2-\varepsilon}.
+    \end{gathered}
+  \]</div>
+  <p>Dividing each term by \(Q\) shows what those choices accomplish:</p>
+  <div class="technical-equation">\[
+    \begin{aligned}
+      \frac{a_E}{mb}&amp;\le2x/m\le2x^{1/2+\varepsilon},\\
+      \frac{a_Em}{bk}&amp;\le2xm/k\le2,\\
+      2\frac n{N_T}mx^\varepsilon&amp;\le4x^{1/2+13\varepsilon/8},\\
+      \frac{N_2}{N_T}\frac{k}{n^2}x^{2\varepsilon}
+        &amp;\le2x^{1/2+9\varepsilon/8}.
+    \end{aligned}
+  \]</div>
+  <p>The first cost falls as the chain gets longer; the third grows with its length. Ignoring the explicitly displayed small powers for intuition, they behave as \(x/m\) and \(m\), balanced at \(m\approx\sqrt x\). Adding all four bounds gives \(B_x/Q\le10x^{1/2+13\varepsilon/8}\). Dividing the previous comparison by \(Q\delta/2\), and using \(\delta^{-1}\le x^\varepsilon\), gives for \(x\ge3\) and \(C\ge0\)</p>
+  <div class="technical-equation">\[
+    G_F(x)-\Sigma(x)
+       \le26x^{1/2+(C+21/8)\varepsilon}
+       \le x^{1/2+(C+3)\varepsilon}.
+  \]</div>
+  <p>The last inequality holds once \(26\le x^{3\varepsilon/8}\). Substituting \(C=e_D+e_L+3\) and restoring \(\Sigma\) gives exactly the estimate at the start of step 2.6.9. Thus the square-root scale comes from balancing normalized comparison costs.</p>
 
   <h4 id="arithmetic-landau"><span class="note-number">2.6.10</span> Hand Landau precisely its required hypothesis.</h4>
   <p>Fix a candidate zero with real part \(\sigma&gt;1/2\), and choose</p>
@@ -832,7 +965,7 @@
 <section class="technical-section" id="nv-literature" aria-labelledby="nv-literature-title">
   <p class="technical-kicker">The theta and representation branch</p>
   <h3 id="nv-literature-title"><span class="note-number">2.9</span> Make two descriptions carry the same information.</h3>
-  <p>The theta branch connects local representation data to global integrals, test vectors, and evaluation conditions. Its role is to make the arithmetic and geometric estimates apply to one compatible construction. We can follow this connection in six steps, keeping the deep comparison theorems explicit.</p>
+  <p>The theta branch connects local representation data to global integrals, test vectors, and evaluation conditions. Its role is to make the arithmetic and geometric estimates apply to one compatible construction. The steps below first assemble that construction, then explain its common lattice, correlation bounds, slope comparison, and main-term cancellation.</p>
 
   <h4 id="theta-integrals"><span class="note-number">2.9.1</span> Form an integral, then justify that it converges.</h4>
   <p>A test function \(\Phi\) is an input that we can vary. The Weil representation \(\omega(g,h)\) transforms it using elements of two unitary groups. The model’s theta sum turns the transformed function into \(\theta_\Phi(g,h)\). Integrating in the first variable leaves a function of the second:</p>
@@ -897,6 +1030,97 @@
   \]</div>
   <p>where \(\mathcal A,\mathcal F,\mathcal G\) schematically denote the arithmetic, functional, and geometric conditions. Separate witnesses for each condition would not suffice. The resulting compatible family feeds the aggregate prime-sum estimate, together with the Green input; the arithmetic window then supplies the character-specific data used by Landau.</p>
   <p class="source-callout"><a href="sources.html#nv-theta-bridge">The test-vector, common-threshold, and covolume assembly.</a></p>
+  <h4 id="theta-common-target"><span class="note-number">2.9.7</span> Compare the periods inside one common space.</h4>
+  <p>Why is matching needed for a quantitative estimate? A norm bound for each period separately does not tell us whether different periods detect different directions. We need to compare their images. The seesaw construction supplies that common setting: it moves a lift from one side of a pairing to the other, with the test data and normalizations carried along.</p>
+  <p>For a choice of character data \(i\), the period comparison has the form</p>
+  <div class="technical-equation">\[
+    B_i(\phi,F)=a_i\,B_i^{\mathrm{Bes}}(U_i\phi,VF),
+    \qquad a_i\ne0.
+  \]</div>
+  <p>Here \(U_i\) is an isometry of the source and \(V\) is one fixed isometry of the target, shared by every \(i\). This last condition lets us take inner products between the images of different character choices. The scalar \(a_i\) remains part of the calculation: its absolute values and finite-place valuations affect the height and divisibility estimates.</p>
+  <p>The arithmetic construction also provides lattices \(N_i\), integral period maps \(B_i:N_i\to C\), and height allowances \(h_i\). The common lattice \(C\) is in a dual period space. Local divisibility permits the prescribed adjustment of each \(N_i\), while the resulting maps still land in \(C\). Thus the same maps have both an integral meaning at finite places and a Hermitian norm at infinity. That compatibility is what allows the next linear-algebra estimate to constrain arithmetic size.</p>
+
+  <h4 id="theta-correlations"><span class="note-number">2.9.8</span> Measure whether the periods cover the target.</h4>
+  <p>At a fixed infinite place, the full period matrices are \(\widetilde B_i:V_i\to H\). Their prescribed retained target coordinates give the integral maps \(B_i\) introduced above. In orthonormal coordinates write \(A_i=\sqrt{c_i}\,\widetilde B_i\), where \(c_i&gt;0\) incorporates the chosen normalization. Put \(r_i=\dim V_i\), \(R=\sum_i r_i&gt;0\), and \(D=\dim H&gt;0\). The two operators</p>
+  <div class="technical-equation">\[
+    K_i=A_i^*A_i,\qquad Q=\sum_i A_iA_i^*
+  \]</div>
+  <p>answer different questions. \(K_i\) measures distortion within one source; \(Q\) measures the total mass reaching each target direction. The required estimates are</p>
+  <div class="technical-equation">\[
+    \sum_i\|K_i-I\|_{\mathrm{HS}}^2\le eR,
+    \qquad
+    \operatorname{tr}(Q^2)\le
+    \frac{1+\eta}{D}\bigl(\operatorname{tr}Q\bigr)^2,
+    \qquad 0\le e\le\tfrac14,\quad\eta\ge0.
+  \]</div>
+  <p>The Hilbert–Schmidt norm is the square root of the sum of squared matrix entries in orthonormal bases. Nearly preserving lengths is insufficient by itself: many isometries could all have the same image. The second inequality prevents this concentration. The first bound gives \(|\operatorname{tr}Q-R|\le R\sqrt e\), so \(T=\operatorname{tr}Q\ge R/2&gt;0\). For the eigenvalues \(q_1,\ldots,q_D\ge0\) of \(Q\), Cauchy–Schwarz gives</p>
+  <div class="technical-equation">\[
+    T^2\le\operatorname{rank}(Q)\sum_jq_j^2
+    \quad\Longrightarrow\quad
+    \operatorname{rank}(Q)\ge\frac{D}{1+\eta}.
+  \]</div>
+  <p>Since \(\ker Q=\bigcap_i\ker A_i^*\), the range of \(Q\) is the span of the period images. Small \(\eta\) therefore forces these images to cover almost all of \(H\). The trace identity</p>
+  <div class="technical-equation">\[
+    \operatorname{tr}(Q^2)=\sum_{i,j}\|A_i^*A_j\|_{\mathrm{HS}}^2
+  \]</div>
+  <p>explains where comparisons between different characters enter. The automorphic calculation bounds these cross terms near the scale \(r_ir_j/D_*\), with a leading factor approaching one and \(D_*\) close to \(D\). The diagonal terms are controlled separately. An unspecified constant factor would not give a vanishing fraction of missing directions.</p>
+  <p>The source proves a version that survives removing some source directions. If \(S_i\subseteq V_i\) and \(\sum_i\operatorname{codim}S_i\le\alpha R\), then</p>
+  <div class="technical-equation">\[
+    \dim\left(\sum_i A_iS_i\right)^\perp
+    \le(\eta+4\alpha+4\sqrt e)D.
+  \]</div>
+  <p>The added terms account for the removed columns and the aggregate distortion. The deep orbital and local-density estimates supply \(e\) and \(\eta\); the passage from those estimates to coverage of the target is finite-dimensional linear algebra.</p>
+
+  <h4 id="theta-mean-slope"><span class="note-number">2.9.9</span> Turn coverage into an arithmetic slope inequality.</h4>
+  <p>For the integral sources, let \(\mu(N_i)\) be mean slope and \(\mu_{\max}(N_i)\) maximal slope, in the source’s common normalization. Subtract each map’s height allowance and define</p>
+  <div class="technical-equation">\[
+    s=\frac{\sum_i r_i(\mu(N_i)-h_i)}{R},
+    \qquad U=\max_i\{\mu_{\max}(N_i)-h_i\}-s\ge0.
+  \]</div>
+  <p>The slope filtration separates high-slope directions from low-slope ones. If a fraction \(\alpha\) of the adjusted source slopes is below \(s-\tau\), while none exceeds \(s+U\), their mean satisfies</p>
+  <div class="technical-equation">\[
+    s\le\alpha(s-\tau)+(1-\alpha)(s+U)
+    \quad\Longrightarrow\quad
+    \alpha\le\frac{U}{U+\tau}
+    \qquad(U&gt;0,\ \tau\ge0).
+  \]</div>
+  <p>Apply the coverage estimate to the remaining filtration subspaces. Integrality and the height bound ensure that a high-slope source image cannot acquire an arbitrarily low slope in the target: for a nonzero image, \(\mu_{\min}(B_iM)\ge\mu_{\min}(M)-h_i\). Integrating the resulting bounds over the slope thresholds controls the target’s mean slope.</p>
+  <p>Concretely, let \(W\) be the nonempty finite set of alternatives. The full target splits in the prescribed coordinates as \(H=H_C\oplus H_{\mathrm{bad}}\), where the lattice \(C\) spans \(H_C\), and the retained block of each \(\widetilde B_i\) is the matrix of \(B_i\) in the specified metrics. Suppose \(\dim H_C\ge(1-\delta)D\) with \(0\le\delta&lt;1\), and choose \(H_*\ge\max\{0,s-\mu_{\min}(C)\}\). For these compatible integral maps and coordinates, the comparison gives</p>
+  <div class="technical-equation">\[
+    s-\mu(C)\le\log|W|+
+    \frac{4U\log(1+H_*/U)+(\eta+4\sqrt e)H_*}{1-\delta}.
+  \]</div>
+  <p>At \(U=0\), interpret \(U\log(1+H_*/U)\) by its limiting value zero. The logarithm comes from integrating \(U/(U+\tau)\). This is why a rate for the correlation error matters: it is multiplied by the potentially large scale \(H_*\). On the selected scales the construction makes that product small enough to enter the final error budget.</p>
+  <p class="source-callout"><a href="https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/HarderNarasimhan/StatementFrameF.lean#L10">The frame and mean-slope estimates in Lean.</a></p>
+
+  <h4 id="theta-main-cancellation"><span class="note-number">2.9.10</span> Cancel the large terms before estimating the error.</h4>
+  <p>The slope comparison still contains terms much larger than a square-root error. Their cancellation uses the exact CM-period normalization. Let \(d&gt;0\) be the absolute quadratic discriminant. Write \(\ell=\operatorname{Re}(L'(1,\chi_d)/L(1,\chi_d))\) for the selected quadratic character of discriminant \(-d\), let \(\gamma_E\) be Euler’s constant, and put \(v=\operatorname{rd}(E)/2&gt;0\), half the host field’s root discriminant. The normalized period constant is</p>
+  <div class="technical-equation">\[
+    \log\Omega=\gamma_E+\log(\pi/v)-\ell.
+  \]</div>
+  <p>The CM-period theorem first supplies \(\gamma_E+\log(2\pi/\sqrt d)-\ell\); transferring to the host scale adds \(\log(\sqrt d/\operatorname{rd}(E))\). Keeping this scale change is essential.</p>
+  <p>Fix one translate \(u\), and abbreviate \(w_{u,j}(r)\) to \(w_{jr}\). Let \(j=1,\ldots,m\) index the lift stages and \(f\ge1\) be the number of positive weights \(w_{j1},\ldots,w_{jf}\). Independently, \(t\in T\) labels the selected top places, with degree parameters \(a_t&gt;0\). Set \(A=\sum_{t\in T}a_t\), and abbreviate the counting error by \(E_{\mathrm{count}}\). The two large expressions are</p>
+  <div class="technical-equation">\[
+    \begin{aligned}
+    P&amp;=m\sum_ta_t(\log a_t-1-\log\Omega),\\
+    Q_{\mathrm{count}}&amp;=
+      \sum_{j=1}^m\frac1f\sum_{r=1}^f\log(w_{jr}v/\pi)
+      +mg_0-E_{\mathrm{count}}.
+    \end{aligned}
+  \]</div>
+  <p>Here \(Q_{\mathrm{count}}\) is a lower bound for the logarithm of the relevant count, and \(g_0\) is the archimedean constant appearing in both comparisons. Expand the logarithms and substitute the period formula:</p>
+  <div class="technical-equation">\[
+    \begin{aligned}
+    P-AQ_{\mathrm{count}}+mAg_0
+      &amp;=\mathcal M+A E_{\mathrm{count}},\\
+    \mathcal M&amp;=\sum_{j,t}a_t\left(
+      \log a_t-1-\gamma_E+\ell
+      -\frac1f\sum_r\log w_{jr}\right).
+    \end{aligned}
+  \]</div>
+  <p>The \(g_0\) terms cancel directly. The \(mA\log(\pi/v)\) terms cancel because the period and count use the same host normalization. The surviving \(\mathcal M\) is the explicit main term used in the arithmetic prime-sum comparison. Finite Fourier inversion identifies the corresponding prime contribution; subtracting this main term leaves the corrected error that Landau can use. A bound on the uncancelled large expressions would lose the desired exponent.</p>
+  <p class="source-callout"><a href="https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/SizeWindowBrackets/ChainSlopeWindows/LevelOfCongruence.lean#L105">The cancellation identity and the resulting bound.</a></p>
+
   <details class="landau-detail"><summary>What does the “literature” package assume?</summary><p>The top-level package has three fields: two copies of the Galois-representation contract and existence of the local correspondence. The final assembly supplies those fields and constructs the larger representation-theoretic, theta, and geometric packages through imported theorems. A helper’s name ending in “of literature” does not by itself identify an extra assumption. <a href="sources.html#nv-literature">Inspect the package and its final application.</a></p></details>
 </section>
 
@@ -940,6 +1164,24 @@
     \qquad 2\log N\le b\le E_i.
   \]</div>
   <p>The denominator cost is thus paid for by the same error budget. This is why a vector-space decomposition alone would be insufficient.</p>
+
+<p>The dependence on the bad rank can be seen directly. Let \(L=\Lambda_{\mathrm{type}}\ne0\), \(L_g=L\cap\operatorname{im}P\), and \(L_b=L\cap\ker P\), with ranks \(r_g,r_b\), so \(r_g+r_b&gt;0\). The complementary projection sends \(L\) into \(N^{-1}L_b\): indeed \(N(1-P)v=Nv-NPv\in L_b\). Its kernel modulo \(L_b\) is exactly \(L_g+L_b\). Consequently the finite quotient \(L/(L_g+L_b)\) embeds in \(N^{-1}L_b/L_b\). The denominator cost is proportional to \(r_b\), not to the full rank.</p>
+  <p>Combining this index bound with orthogonality gives, in the source's squared-norm convention,</p>
+  <div class="technical-equation">\[
+    (r_g+r_b)\mu(L)
+      \le r_g\mu(L_g)+r_b\bigl(M+2\log N\bigr),
+  \]</div>
+  <p>where \(M\) bounds the slope of the bad part. If \(r_b\le3\delta(r_g+r_b)\) and \(\delta\le1/12\), then \(r_g&gt;0\) and</p>
+  <div class="technical-equation">\[
+    \frac{r_b}{r_g}\le\frac{3\delta}{1-3\delta}\le4\delta.
+  \]</div>
+  <p>Choose \(Q\ge0\) with \(M\le Q\), \(2\log N\le Q\), and \(-\mu(L)\le Q\). Rearranging the determinant inequality now explains the constant in the loss estimate:</p>
+  <div class="technical-equation">\[
+    \mu(L_g)\ge\mu(L)
+       -\frac{r_b}{r_g}\bigl(M+2\log N-\mu(L)\bigr)
+       \ge\mu(L)-12\delta Q.
+  \]</div>
+  <p>A small discarded proportion is useful precisely because both its slope and the denominator cost have controlled size.</p>
 
   <h4 id="geometric-bad"><span class="note-number">2.10.4</span> Bound both the number and the size of bad directions.</h4>
   <p>Set \(\delta(x)=\exp(-x^{\eta/7})\), where \(\eta&gt;0\) is fixed within the family. The source combines an exponentially small bad-rank proportion with a polynomial ceiling for the maximal slope:</p>
@@ -991,6 +1233,35 @@
   \]</div>
   <p>Lower bounds for the left-hand side therefore give lower bounds for the cover’s slope. Descent and norm comparisons carry that information back to the core. Toroidal models and Hodge bundles supply the geometric objects; resolution, positivity, and deformation results support the height and section estimates. <a href="sources.html#nv-covolume-proof">The geometric assembly</a> shows where those inputs enter. The inequalities above explain their role; their individual construction proofs remain deeper dependencies.</p>
 
+<details>
+    <summary>Why the distribution of component ranks matters</summary>
+    <p>The cover has components \(Z\), each with a section-space rank \(r_Z\), a positive geometric degree \(d_Z\), and an arithmetic degree \(\widehat{\deg}_Z\). A bound for the average component height does not immediately bound a rank-weighted average: a component of poor height might carry most of the rank. The geometric estimates prevent that concentration.</p>
+    <p>For a flag dimension \(d\) and a truncation length \(L\), put \(b_*=\binom{L-1}{d}\). Under the source's positivity, vanishing, and weight hypotheses, the comparison has the following form, with \(d_*&gt;0\) and \(0\le\rho&lt;1\):</p>
+    <div class="technical-equation">\[
+      (1-z)r_Z\le b_*d_Z\le r_Z,
+      \qquad d_*\le d_Z\le\frac{d_*}{1-\rho},
+      \qquad z=7\left(\frac{d^2}{L}+d\rho\right)&lt;1.
+    \]</div>
+    <p>The binomial coefficient counts the growth allowed by successive hyperplane restrictions. The upper rank estimate bounds sections after each restriction; the lower estimate also needs vanishing of higher cohomology, so that sections lift through the restriction sequences. Thus the close comparison uses geometric theorems, not only a count of monomials.</p>
+    <p>Let \(M\ge1\) be the number of components, \(R=\sum_Zr_Z\), and \(w_Z=b_*d_Z/R\). These are controlled weights:</p>
+    <div class="technical-equation">\[
+      \sum_Zw_Z\le1,
+      \qquad w_Z\ge\frac{(1-z)(1-\rho)}{M}.
+    \]</div>
+    <p>The first inequality bounds any common cost; the second ensures that no component disappears from the mean. Write \(h_Z\) for its normalized height and \(s_Z\) for a comparison slope. With nonnegative allowances \(c_s,c_c,X\), the component inputs give</p>
+    <div class="technical-equation">\[
+      h_Z+c_s\ge0,\qquad
+      h_Z+c_s+c_c\ge(1-\rho)(s_Z+c_s)_+,
+      \qquad \frac1M\sum_Zs_Z\ge-X,
+    \]</div>
+    <p>where \(u_+=\max(u,0)\). Multiplying the nonnegative height terms by their minimum weight, summing, and using \((s_Z+c_s)_+\ge s_Z+c_s\) yields</p>
+    <div class="technical-equation">\[
+      \sum_Zw_Z(h_Z+c_s)
+        \ge(1-z)(1-\rho)^2(c_s-X)-c_c.
+    \]</div>
+    <p>This is the missing passage from an ordinary mean to the degree/rank weights. A finite-degree arithmetic Hilbert–Samuel estimate then bounds each \(\widehat{\deg}_Z\) below by a leading height term minus explicit linear and logarithmic losses. Those losses are controlled in the family before taking the total degree divided by total rank. The resulting lower bound for the cover slope feeds into the core-lattice estimate in step <a href="#geometric-core">2.10.2</a>. An asymptotic formula for one fixed variety would not by itself provide the uniform errors needed as this family grows. <a href="https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/UniformLowerBoundOfSums.lean#L15">The component-to-slope theorem states these hypotheses together.</a></p>
+  </details>
+
   <h4 id="geometric-handoff"><span class="note-number">2.10.7</span> Make the estimate uniform and carry it to the same data.</h4>
   <p>The constants and thresholds are chosen for an eligible family, before the later point and lift index. With \(C_0=C_1+C_2+1\), the result has the order of quantifiers</p>
   <div class="technical-equation">\[
@@ -1000,6 +1271,47 @@
     \mathcal C_i(p)\le T_i(p)+CE_i(p).
   \]</div>
   <p>Eligibility includes the family’s base threshold and the required correspondence ties. Taking the maximum of finitely many thresholds makes the component bounds hold together. The <a href="sources.html#nv-linked-covolume">transport theorem</a> then carries this estimate to the compatible selections used by the theta and Galois branches. It becomes one geometric input to the <a href="#arithmetic-comparison">prime-sum comparison</a>; the cohomology bound supplies another. The ensuing interval estimate is what the Landau argument can use.</p>
+<h4 id="geometric-jets"><span class="note-number">2.10.8</span> Keep a local derivative from vanishing.</h4>
+  <p>A local divisibility estimate must be accompanied by a nonzero object to which it applies. Normalize the additive valuation by \(v_p(p)=1\), with \(v_p(0)=+\infty\). A lower bound \(v_p(J)\ge b\) says that \(J\) is divisible to at least the prescribed order; it allows \(J=0\). An upper bound \(v_p(J)\le B&lt;\infty\) instead guarantees that the chosen derivative survives cancellation. Both directions enter the local construction.</p>
+  <p>A jet is a weighted derivative at the origin. If \(P=\sum_\nu P_\nu X^\nu\) is a polynomial and \(F\) a formal power series, then</p>
+  <div class="technical-equation">\[
+    P(\partial)F(0)=\sum_\nu P_\nu\,\nu!\,[X^\nu]F.
+  \]</div>
+  <p>The factorials are essential arithmetic factors. In one variable on each side, take an odd \(i\ge1\), a prime \(p\ge5\), and an integer \(y\ge0\). Set</p>
+  <div class="technical-equation">\[
+    e_i=1+\frac{p^i-p}{p^2-1},\qquad
+    F(X,Y)=\exp(-p^{-e_i}X^{p^i}Y),\qquad
+    J_y=\partial_X^{p^iy}\partial_Y^yF(0,0).
+  \]</div>
+  <p>Only the term with exponential index \(y\) can contribute. Differentiation in \(Y\) cancels its \(y!\) denominator, while differentiation in \(X\) leaves</p>
+  <div class="technical-equation">\[
+    J_y=(-p^{-e_i})^y(p^iy)!,\qquad
+    v_p(J_y)=y\left(\frac{p(p^i+1)}{p^2-1}-1\right)
+                 -\frac{s_p(y)}{p-1},
+  \]</div>
+  <p>Here \(s_p(y)\) is the sum of the base-\(p\) digits of \(y\). The identity follows from \(v_p(n!)=(n-s_p(n))/(p-1)\) and \(s_p(p^iy)=s_p(y)\). It exhibits a nonzero derivative and its exact valuation.</p>
+  <p>For \(r\times r\) matrices of variables with \(r\ge1\), replace the exponent by \(-p^{-e_i}\sum_{a,b}X_{ab}^{p^i}Y_{ab}+h_1(X,Y)\) and take the jet with \(\det(\partial_X)^{p^iy}\det(\partial_Y)^y\). Different determinant terms can now cancel. The source separates an explicit factorial factor from a binomial sum:</p>
+  <div class="technical-equation">\[
+    J_y=(-p^{-e_i})^{ry}C_r(p^iy)B_y,
+    \quad C_r(k)=\prod_{a=0}^{r-1}\frac{(k+a)!}{a!},
+    \quad B_y=\sum_{s=0}^y\binom ys a_s,\quad a_0=1.
+  \]</div>
+  <p>The perturbation is constrained. Every monomial of \(h_1\) must contain a \(Y\)-variable. For a coefficient \(c\) of total \(X\)-degree \(u\) and total \(Y\)-degree \(v\), require</p>
+  <div class="technical-equation">\[
+    \begin{aligned}
+      v_p(c)&amp;\ge\frac1{p-1}
+        -u\left(\rho_p+\frac1{2p^i}-\delta_p\right)
+        -v\left(\rho_p+\frac12-\delta_p\right),\\
+      \rho_p&amp;=\frac1{p^2-1},\qquad\delta_p=\frac1{8p^i}.
+    \end{aligned}
+  \]</div>
+  <p>These bounds leave enough valuation gain to dominate the factorial losses. Under these hypotheses the source proves \(v_p(a_s)&gt;0\) once</p>
+  <div class="technical-equation">\[
+    s\ge S=\left\lceil64r^2\bigl(i+3+3\log_p(r+1)\bigr)\right\rceil.
+  \]</div>
+  <p>For each integer \(Y_0\ge0\), there must be an integer \(y\in[Y_0,Y_0+S)\) with \(v_p(B_y)\le0\). Otherwise remove the positive-valuation tail and consider the remaining \(S\) binomial combinations. Their coefficient matrix is \(M_{j,s}=\binom{Y_0+j}{s}\), for \(0\le j,s&lt;S\). Successive forward differences turn it into an upper triangular matrix with diagonal entries one. Hence \(\det M=1\), and its inverse has integer entries. If every combination had positive valuation, every \(a_s\) with \(s&lt;S\) would too, contradicting \(a_0=1\).</p>
+  <p>The conclusion is a good derivative somewhere in a controlled short interval, rather than at every prescribed order. That flexibility lets the later local construction round degree allocations to admissible integer orders. The geometric identification with actual theta sections and the coefficient bounds remain essential inputs to this calculation.</p>
+  <p class="source-callout"><a href="https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/LocalToGlobal/CharacterGerms/BiadditiveInSingleVariables.lean#L106">The local source statements specify the perturbation, factorization, and short-window bounds.</a></p>
 </section>
 
 
@@ -1014,6 +1326,16 @@
     \exists D,\quad \mathcal A(D)\land\mathcal F(D)\land\mathcal G(D),
   \]</div>
   <p>where the three predicates stand for the required arithmetic, functional, and geometric conditions. This single witness matters: an arithmetic bound for one family and a geometric bound for an unrelated family cannot be substituted into the same comparison. The source’s constructor also includes the definite-side condition needed downstream. It constructs these conditions without assuming Dirichlet nonvanishing.</p>
+
+<p>The selection has a precise order. Let \(K\) encode lower requirements on auxiliary parameters, \(P(F,K)\) mean that a family \(F\) meets them, \(B(F)\) collect the comparison bounds, and \(W(F)\) be the required arithmetic-window property. The useful combination is</p>
+  <div class="technical-equation">\[
+    \begin{gathered}
+      \bigl[\exists K\;\forall F:\ P(F,K)\Rightarrow B(F)\bigr]\ \land\\
+      \bigl[\forall K\;\exists F:\ P(F,K)\land W(F)\bigr]\\
+      \Longrightarrow\quad\exists F:\ B(F)\land W(F).
+    \end{gathered}
+  \]</div>
+  <p>First obtain sufficient requirements for every comparison, combine them by taking their componentwise maxima, and intersect the allowed ranges of \(\varepsilon\). Then invoke existence with those combined requirements to select one family carrying the window. Every comparison applies to that family. Separate assertions \(\exists F\,B(F)\) and \(\exists F\,W(F)\) would not justify the conclusion. This selection happens before the later maximum of scale thresholds in step <a href="#assembly-window">2.11.4</a>.</p>
 
   <h4 id="assembly-order"><span class="note-number">2.11.2</span> Fix the loss exponents before choosing a small parameter.</h4>
   <p>Fix the analytic character family \(\mathcal F\), so its prime-sum error \(G_{\mathcal F}\) is fixed. The compatible arithmetic and geometric data, together with the Green representation input, supply the aggregate comparison. The arithmetic window provides a realization for that character family. After these steps, the useful numerical conclusion has the form</p>
@@ -1133,6 +1455,16 @@
             <h4 id="proof-conclusion"><span class="note-number">3.2.6</span> Both alternatives are impossible.</h4>
             <p>A zero in the open strip can be neither to the right nor to the left of the critical line. Hence \(\operatorname{Re}s=\tfrac12\). This completes the conditional proof.</p>
 
+            <h4 id="proof-zeta"><span class="note-number">3.2.7</span> Recover RH with the trivial zeros accounted for.</h4>
+            <p>The character of modulus one gives zeta, so \(H\) supplies \(\zeta(s)\ne0\) for \(\operatorname{Re}s&gt;1/2\), apart from \(s=1\). The usual RH statement also explicitly sets aside the negative even integers. To see the complete deduction, suppose \(\zeta(\rho)=0\), \(\rho\ne1\), and \(\rho\notin\{-2,-4,-6,\ldots\}\).</p>
+            <p>A point to the right of the line is already excluded. If \(\operatorname{Re}\rho&lt;1/2\), then \(\operatorname{Re}(1-\rho)&gt;1/2\). Also \(\rho\ne0\), because \(\zeta(0)=-1/2\). Apply the <a href="https://dlmf.nist.gov/25.4#E2">zeta functional equation</a>:</p>
+            <div class="technical-equation">\[
+              \zeta(\rho)=2^\rho\pi^{\rho-1}
+                \sin\!\left(\frac{\pi\rho}{2}\right)
+                \Gamma(1-\rho)\zeta(1-\rho).
+            \]</div>
+            <p>The exponential factors never vanish. The gamma factor is finite and nonzero since its argument has positive real part. The reflected zeta factor is nonzero by \(H\), and its argument is not \(1\). Finally, the sine factor vanishes only when \(\rho\) is an even integer. In this left half-plane those are zero and the negative even integers, all excluded above. Every factor is therefore nonzero, a contradiction. Only \(\operatorname{Re}\rho=1/2\) remains. <a href="sources.html#rh-of-right">The zeta deduction in the original source</a> checks these same exceptions.</p>
+
         </section>
 
         <section class="technical-section" id="lean" aria-labelledby="lean-title">
@@ -1159,7 +1491,7 @@
         <section class="technical-section" id="scope" aria-labelledby="scope-title">
           <p class="technical-kicker">The boundary of this chapter</p>
           <h3 id="scope-title"><span class="note-number">3.4</span> The conclusion is conditional on the input.</h3>
-          <p>The final deduction explains the full implication from \(H\) to the primitive-character critical-line statement. The source separately derives the all-character strip statement, and specializes the nonvanishing input to modulus one to obtain a zeta result. Its <code>rh_of_right</code> lemma explicitly treats the trivial-zero exclusions when deriving <code>RiemannHypothesis</code>. <a href="sources.html#rh-of-right">Inspect that separate zeta deduction.</a></p>
+          <p>The final deduction explains the full implication from \(H\) to the primitive-character critical-line statement. <a href="#nv-imprimitive">Restoring Euler factors</a> extends the conclusion to all characters in the open strip. <a href="#proof-zeta">Step 3.2.7</a> specializes to zeta and treats the trivial-zero exclusions explicitly, matching the source’s <code>rh_of_right</code> lemma.</p>
           <p>The functional equation alone would only pair off-line zeros; it would not forbid them. The force of this proof comes from \(H\), which rules out the reflected zero. The nonvanishing chapter explains the source’s route to \(H\), including the quantitative analytic criterion and its principal arithmetic dependencies. Fully reconstructing every supporting proof remains a larger task.</p>
           <p>The downloaded files have been checked for complete extraction. The Lean project has not been compiled or independently audited for this website. The source links record what the files state; they do not stand in for a successful formal verification run. <a href="sources.html">Read the provenance and review status.</a></p>
           <div class="technical-hero-actions">
