@@ -697,19 +697,19 @@
   <p>The resulting local bound is combined with rank, divisibility, slope, irreducibility and global comparison estimates. Their role is to tie the geometric quantities to the character sums using the same parameters and selected classes. This compatibility is the substantial bridge between the arithmetic budget and the following analytic estimate.</p>
 
   <h3 id="arithmetic-comparison">9. Obtain the square-root-scale prime-sum estimate.</h3>
-  <p>Once the compatible bounds are in place, the character-sum comparison yields, on the usable windows and beyond a threshold,</p>
+  <p>Once the compatible bounds are in place, the character-sum comparison yields an estimate on the usable windows and beyond a threshold. Write \(C_{\mathrm{lev}}:=4\,o\ge0\), where \(o\) is the fixed nonnegative integer parameter of the character level. This is an ordinary constant coefficient, not big-O or little-o notation. The estimate is</p>
   <div class="technical-equation">\[
     G_F(x)\le
-      x^{1/2+(e_D+e_L+6)\varepsilon}
-       +4o\,x^{1/2+\varepsilon}.
+      x^{\frac12+(e_D+e_L+6)\varepsilon}
+       +C_{\mathrm{lev}}\cdot x^{\frac12+\varepsilon}.
   \]</div>
-  <p>The parameter \(o\) belongs to the fixed character level; \(e_D,e_L\) record losses in the comparison, with \(e_D+e_L\ge0\). The exponent \(1/2\) enters through this comparison of character sums and the geometric size estimates. It is not obtained by merely taking a square root of the cohomology budget.</p>
-  <p>The final simplification costs one extra \(\varepsilon\). For \(x\ge1\), the second power is no larger than the first. For sufficiently large \(x\), we also have \(1+4o\le x^\varepsilon\). Thus</p>
+  <p>The dot makes explicit that the second term is a constant times a power of \(x\). The constants \(e_D,e_L\) record losses in the comparison, with \(e_D+e_L\ge0\). The exponent \(1/2\) enters through this comparison of character sums and the geometric size estimates. It is not obtained by merely taking a square root of the cohomology budget.</p>
+  <p>The final simplification costs one extra \(\varepsilon\). For \(x\ge1\), the second power is no larger than the first. For sufficiently large \(x\), we also have \(1+C_{\mathrm{lev}}\le x^\varepsilon\). Thus</p>
   <div class="technical-equation">\[
     \begin{aligned}
     G_F(x)
-      &amp;\le(1+4o)x^{1/2+(e_D+e_L+6)\varepsilon}\\
-      &amp;\le x^{1/2+(e_D+e_L+7)\varepsilon}.
+      &amp;\le(1+C_{\mathrm{lev}})\cdot x^{\frac12+(e_D+e_L+6)\varepsilon}\\
+      &amp;\le x^{\frac12+(e_D+e_L+7)\varepsilon}.
     \end{aligned}
   \]</div>
   <p>All eventual thresholds can be met by choosing a sufficiently late available window. The important output is an estimate on the entire interval, with \(e_D,e_L\) fixed before \(\varepsilon\) is chosen. The host family and its thresholds may depend on \(\varepsilon\); those loss exponents do not.</p>
