@@ -1,0 +1,1175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b3537">
+  <meta name="author" content="Alexis Plascencia">
+  <meta name="description" content="The nonvanishing theorem and its analytic, arithmetic and geometric dependencies, with exact Lean source links and a detailed critical-line deduction.">
+  <title>Riemann — Nonvanishing, dependencies &amp; the critical line</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/technical.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/counters.css">
+  <script defer data-math-dependency src="assets/vendor/katex/katex.min.js"></script>
+  <script defer data-math-dependency src="assets/vendor/katex/contrib/auto-render.min.js"></script>
+  <script defer src="assets/math.js"></script>
+  <script defer src="assets/counters.js"></script>
+  <script defer src="assets/technical.js"></script>
+</head>
+<body class="technical-page" id="top">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="reading-progress" aria-hidden="true"><span id="reading-progress"></span></div>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Riemann field guide home">
+      <img src="assets/favicon.svg" alt="" width="32" height="32">
+      <span>RIEMANN<span class="brand-sub">A mathematical field guide</span></span>
+    </a>
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav id="main-nav" aria-label="Main navigation">
+      <a href="index.html">Overview</a>
+      <a href="index.html#proof-map">Proof map</a>
+      <a href="technical.html" aria-current="page">Technical notes</a>
+      <a href="sources.html">Sources</a>
+    </nav>
+  </header>
+  <div class="author-strip page-width">
+    <p class="author-byline"><span>Created by</span> <a href="https://alexisplascencia.com" rel="author noopener" target="_blank">Alexis Plascencia</a></p>
+    <div class="visit-counters" role="group" aria-label="Riemann field guide counters from HitsCounter.dev and Hits.sh">
+      <span class="visit-total" data-visit-counter data-counter-state="loading" data-counter-url="https://hitscounter.dev/api/hit?url=https%3A%2F%2Falexisdpc.github.io%2Friemann%2F&amp;output=json" role="img" aria-label="Total website visits: loading" title="Overall page visits across the guide, technical notes and sources, counted by HitsCounter.dev"><span class="visit-total-label">Visits</span><span class="visit-total-value">—</span></span>
+      <img src="https://hits.sh/alexisdpc.github.io/riemann.svg?label=Hits&amp;color=2e8177" alt="Riemann website hits from Hits.sh" height="20" decoding="async" referrerpolicy="no-referrer" title="Page hits to the Riemann field guide, counted by Hits.sh">
+    </div>
+  </div>
+  <main id="main-content">
+    <section class="technical-hero page-width" aria-labelledby="technical-title">
+      <p class="eyebrow"><span class="tiny-line"></span>The technical companion</p>
+      <h1 id="technical-title">From arithmetic<br>to a <em>critical line.</em></h1>
+      <p class="technical-lead">Trace the nonvanishing theorem through its main dependencies, then follow the final critical-line deduction in full.</p>
+      <div class="technical-meta">
+        <span><strong>Level</strong> Graduate &amp; research</span>
+        <span><strong>Prerequisites</strong> Complex analysis; algebraic and automorphic number theory for the deeper sections</span>
+        <span><strong>Edition</strong> 20 November 2026</span>
+      </div>
+      <p class="technical-scope">This edition explains the quantitative route to universal Dirichlet nonvanishing and the contracts supplied by its main dependencies. It also retains a complete explanation of the final conditional critical-line deduction. Source inspection and mathematical exposition are distinct from compiling and auditing the full Lean project.</p>
+      <div class="technical-hero-actions">
+        <a class="button button-dark" href="#nonvanishing">Explore the nonvanishing theorem</a>
+        <a href="#foundations">Start with the foundations</a>
+      </div>
+    </section>
+    <div class="technical-layout page-width">
+      <aside class="technical-toc" aria-label="Contents">
+        <details open>
+          <summary>In these notes</summary>
+          <nav aria-label="Technical sections">
+            <p class="toc-part-label">Foundations</p>
+            <ol>
+              <li><a href="#zeta">Zeta, zeros &amp; the strip</a></li>
+              <li><a href="#characters">Dirichlet characters</a></li>
+              <li><a href="#completed">The completed function</a></li>
+            </ol>
+            <p class="toc-part-label">The nonvanishing theorem</p>
+            <ol>
+              <li><a href="#input">The precise conclusion</a></li>
+              <li><a href="#nonvanishing">A dependency roadmap</a></li>
+              <li><a href="#nv-analytic">Smoothed prime sums</a></li>
+              <li><a href="#nv-landau">Landau: step by step</a></li>
+              <li><a href="#nv-imprimitive">Every character</a></li>
+              <li><a href="#nv-window">Arithmetic window: step by step</a></li>
+              <li><a href="#nv-galois">Galois representations: step by step</a></li>
+              <li><a href="#nv-local-global">Local correspondence: step by step</a></li>
+              <li><a href="#nv-literature">Theta matching: step by step</a></li>
+              <li><a href="#nv-geometric">Covolumes: step by step</a></li>
+              <li><a href="#nv-assembly">From estimates to nonvanishing</a></li>
+            </ol>
+            <p class="toc-part-label">The critical-line deduction</p>
+            <ol>
+              <li><a href="#reflection">The precise theorem</a></li>
+              <li><a href="#proof">The argument, step by step</a></li>
+              <li><a href="#lean">Following the Lean source</a></li>
+              <li><a href="#scope">What this establishes</a></li>
+            </ol>
+            <a class="toc-sources" href="sources.html">Source records &amp; references</a>
+          </nav>
+        </details>
+        <a class="toc-back" href="index.html">Back to the overview</a>
+      </aside>
+      <article class="technical-article" aria-label="Foundations, nonvanishing dependencies and the critical-line deduction">
+        <div class="technical-part-banner" id="foundations">
+          <p class="technical-kicker">Foundations</p>
+          <h2>The objects behind the statement.</h2>
+          <p>Write a complex number as \(s=\sigma+it\). Its real part \(\sigma\) measures horizontal position in the diagrams. The vertical line \(\sigma=\tfrac12\) is the critical line.</p>
+        </div>
+
+        <section class="technical-section" id="zeta" aria-labelledby="zeta-title">
+          <p class="technical-kicker">The first object</p>
+          <h2 id="zeta-title">A function that remembers the primes.</h2>
+          <p>For \(\operatorname{Re}s&gt;1\), the Riemann zeta function has both a sum over positive integers and a product over primes:</p>
+          <div class="technical-equation">
+            \[\zeta(s)=\sum_{n=1}^{\infty}n^{-s}
+            =\prod_{p\ \mathrm{prime}}(1-p^{-s})^{-1}.\]
+          </div>
+          <p>Unique factorization explains the link. Expanding each geometric factor selects a power of each prime; multiplying collects every positive integer exactly once. Absolute convergence in this region makes that rearrangement legitimate. The product also gives nonvanishing there.</p>
+          <p>Analytic continuation extends \(\zeta\) to a meromorphic function on the complex plane, with a simple pole at \(s=1\). The original series is not a formula for directly evaluating it throughout the critical strip. Zeros at \(-2,-4,-6,\ldots\) are called <em>trivial zeros</em>. The remaining zeros lie in the open strip \(0&lt;\sigma&lt;1\); RH says that their real part is always \(\tfrac12\).</p>
+          <div class="technical-equation">
+            \[\zeta(\rho)=0,\quad 0&lt;\operatorname{Re}\rho&lt;1
+            \quad\Longrightarrow\quad \operatorname{Re}\rho=\tfrac12.\]
+          </div>
+          <p>The archive also uses a formulation that explicitly excludes the negative even integers and \(s=1\). These exceptions matter when comparing a familiar textbook statement with an exact formal declaration. <a href="sources.html#statements">Read the target statements.</a></p>
+          <details>
+            <summary>Why does a line of zeros concern prime numbers?</summary>
+            <p>In the absolutely convergent region, differentiating the Euler product gives</p>
+            <div class="equation-scroll">\[-\frac{\zeta'(s)}{\zeta(s)}
+              =\sum_{n=1}^{\infty}\frac{\Lambda_{\mathrm{vM}}(n)}{n^s},
+              \qquad \operatorname{Re}s&gt;1.\]</div>
+            <p>Here the von Mangoldt function is \(\Lambda_{\mathrm{vM}}(p^k)=\log p\) for prime powers and is zero otherwise. Zeros of \(\zeta\) become poles of its logarithmic derivative. Through explicit formulas, their locations govern oscillations in prime-counting quantities. This explains why controlling zeros is arithmetic information; the detailed explicit-formula argument is outside this chapter.</p>
+          </details>
+        </section>
+
+        <section class="technical-section" id="characters" aria-labelledby="characters-title">
+          <p class="technical-kicker">The larger family</p>
+          <h2 id="characters-title">Twist the integers by a character.</h2>
+          <p>A Dirichlet character modulo a positive integer \(q\) is a multiplicative character of the finite group \((\mathbb Z/q\mathbb Z)^\times\), extended periodically to the integers and set to zero on integers not coprime to \(q\). On units its values are roots of unity. The principal character \(\chi_0\) is one on units and zero elsewhere.</p>
+          <div class="technical-equation">
+            \[L(s,\chi)=\sum_{n=1}^{\infty}\frac{\chi(n)}{n^s}
+            =\prod_p(1-\chi(p)p^{-s})^{-1},
+            \qquad \operatorname{Re}s&gt;1.\]
+          </div>
+          <p>These functions continue meromorphically. Nonprincipal characters give entire functions; a principal character gives a simple pole at \(1\). Their zeros in the open critical strip form the family addressed here. <a href="https://dlmf.nist.gov/25.15">DLMF §25.15 gives the classical definitions and identities.</a></p>
+          <p>A character is <strong>primitive</strong> when it is not induced from a character of a proper divisor of its modulus. Its conductor then equals \(q\). The clean functional equation used below applies to primitive characters. For an imprimitive character, one first relates its \(L\)-function to a primitive one, accounting for finitely many Euler factors.</p>
+          <p>The inverse character \(\chi^{-1}\) equals the complex conjugate \(\overline\chi\): a unit-modulus value has inverse equal to its conjugate, and both extensions are zero off the units. Inversion preserves the conductor, so the inverse of a primitive character is again primitive. This is why the argument can change characters without losing the functional equation.</p>
+          <div class="technical-note">
+            <p><strong>A precise scope.</strong> “Dirichlet GRH” here means the critical-line assertion for Dirichlet \(L\)-functions. It does not mean a theorem about every automorphic or other \(L\)-function. The source exposes several formulations, including a primitive-character statement and a statement for all characters in the open strip.</p>
+          </div>
+        </section>
+
+        <section class="technical-section" id="completed" aria-labelledby="completed-title">
+          <p class="technical-kicker">The symmetry</p>
+          <h2 id="completed-title">Complete the function before reflecting it.</h2>
+          <p>A primitive character has parity \(a\in\{0,1\}\), defined by \(\chi(-1)=(-1)^a\). In a conventional normalization, the completed function is</p>
+          <div class="technical-equation">
+            \[\Lambda(s,\chi)=
+              \left(\frac q\pi\right)^{(s+a)/2}
+              \Gamma\!\left(\frac{s+a}{2}\right)L(s,\chi).\]
+          </div>
+          <p>The positive real base \(q/\pi\) fixes the power unambiguously through the real logarithm. Its complex exponential never vanishes. In the open strip, \(\operatorname{Re}((s+a)/2)&gt;0\), so the gamma factor is finite and nonzero. Consequently \(L(s,\chi)\) and \(\Lambda(s,\chi)\) have the same zeros there. The classical fact used is that <a href="https://dlmf.nist.gov/5.2">the gamma function has no zeros and only nonpositive-integer poles</a>.</p>
+          <p>The functional equation has the symmetric form</p>
+          <div class="technical-equation">
+            \[\Lambda(s,\chi)=
+              \varepsilon(\chi)\Lambda(1-s,\overline\chi),
+              \qquad |\varepsilon(\chi)|=1.\]
+          </div>
+          <p>The constant \(\varepsilon(\chi)\) is the root number. This is the completed version of the <a href="https://dlmf.nist.gov/25.15#E5">primitive Dirichlet functional equation</a>. For the character modulo one, it is interpreted meromorphically; the poles at \(0\) and \(1\) do not meet the open strip.</p>
+          <p>The transformation is \(s\mapsto1-s\), so \(\sigma+it\) goes to \(1-\sigma-it\), and \(\chi\) changes to \(\overline\chi\). It exchanges the two sides of the critical line. For a nonreal character it relates two different \(L\)-functions; one must not silently keep the same character.</p>
+          <details>
+            <summary>How does this notation compare with the Lean source?</summary>
+            <p>The source uses <code>completedLFunction</code> and <code>gammaFactor</code>, with even and odd gamma factors expressed using \(\Gamma_{\mathbb R}\). Its normalization places conductor powers differently from the conventional \(\Lambda\) above. Those powers are nonvanishing, so this change of normalization does not alter the zero-transfer argument. The definitions are in <a href="https://github.com/leanprover-community/mathlib4/blob/0df444a360eaa60ab8c11dca51a86af692955474/Mathlib/NumberTheory/LSeries/DirichletContinuation.lean">the Mathlib revision pinned by this archive</a>.</p>
+            <p>For the formal correspondence, we use the exact source identity <code>LFunction_eq_completed_div_gammaFactor</code> and the functional equation <code>completedLFunction_one_sub</code>, rather than identifying their prefactors with the displayed root number. <a href="sources.html#crit-line">The relevant uses appear together in the source.</a></p>
+          </details>
+        </section>
+
+        <div class="technical-part-banner technical-part-release">
+          <p class="technical-kicker">The nonvanishing theorem</p>
+          <h2>The input, and the mathematics that supplies it.</h2>
+          <p>We first state the universal conclusion. The following sections trace its analytic criterion and its main arithmetic dependencies, before returning to the final critical-line deduction.</p>
+        </div>
+
+        <section class="technical-section" id="input" aria-labelledby="input-title">
+          <p class="technical-kicker">The precise conclusion</p>
+          <h2 id="input-title">Nonvanishing to the right of one half.</h2>
+          <p>Call the following proposition \(H\). For every positive modulus, every Dirichlet character \(\psi\), and every complex number \(w\),</p>
+          <div class="technical-equation">
+            \[\operatorname{Re}w&gt;\tfrac12,\quad
+              (\psi\ne\chi_0\ \text{or}\ w\ne1)
+              \quad\Longrightarrow\quad L(w,\psi)\ne0.\]
+          </div>
+          <p>The alternative in parentheses excludes the principal-character pole. This is the source proposition <code>UpperTheory.EveryCharacter</code>. The universal quantifier is essential: the left-side case will apply \(H\) to \(\chi^{-1}\), not just to the original character. <a href="sources.html#every-character">Inspect its exact definition.</a></p>
+          <p>In the released source, <code>allChi</code> obtains this proposition from <code>UpperTheory.FinalTheorems.everyCharacter</code>. The next chapter traces how the source supplies \(H\); the final reflection argument then takes it as an input. The dependency guide states explicitly which supporting results remain imported inputs. <a href="sources.html#assembly">See how the final declarations are assembled.</a></p>
+        </section>
+
+<!-- nonvanishing-chapter:start -->
+<section class="technical-section" id="nonvanishing" aria-labelledby="nonvanishing-title">
+  <p class="technical-kicker">The nonvanishing theorem</p>
+  <h2 id="nonvanishing-title">How the arithmetic reaches the half-plane.</h2>
+  <p>The proposition \(H\) above is the universal analytic conclusion. Its quantifiers cover every positive modulus, every character and the whole right half-plane. To understand how the source reaches it, we follow the quantitative analytic criterion first, then examine the arithmetic and geometric inputs that supply its hypotheses.</p>
+  <ol class="dependency-route">
+    <li><a href="#nv-analytic">Smoothed prime sums</a><p>Character-weighted prime-power sums, with their main terms removed, are bounded on arbitrarily late intervals.</p></li>
+    <li><a href="#nv-landau">The analytic exclusion</a><p>A windowed Landau criterion turns the quantitative bound and the source’s pole data into a zero-free region.</p></li>
+    <li><a href="#nv-window">Arithmetic window: step by step</a><p>Bounds on weighted lengths of cohomology kernels supply a specific input to the estimates.</p></li>
+    <li><a href="#nv-literature">The compatible inputs</a><p>Galois representations, local correspondence, theta matching and geometric bounds are assembled into the required records.</p></li>
+    <li><a href="#nv-assembly">One theorem for every character</a><p>The final assembly supplies those inputs, proves the universal nonvanishing statement, and feeds it into the critical-line deduction.</p></li>
+  </ol>
+  <div class="dependency-key"><p><strong>How to read this expansion.</strong> The formulas and contracts below are traced to selected declarations in the downloaded source. We explain the analytic implication and the roles of the main dependencies. The construction of every imported representation, cohomology object and geometric estimate is not reproduced; this is a dependency-level exposition, not a new independent verification of the entire Lean development.</p></div>
+  <p class="source-callout">Entry points: <a href="sources.html#main-conclusion">the arithmetic assembly</a>, <a href="sources.html#every-character">the universal nonvanishing proposition</a>, and <a href="sources.html#assembly">the final theorem exports</a>.</p>
+</section>
+<section class="technical-section" id="nv-analytic" aria-labelledby="nv-analytic-title">
+  <p class="technical-kicker">From arithmetic to analysis</p>
+  <h2 id="nv-analytic-title">Control a smoothed prime sum on long windows.</h2>
+  <p>The quantity bounded by the arithmetic machinery is a corrected, smoothed von Mangoldt sum. Put \((t)_+=\max(t,0)\) and write \(\gamma_E\) for Euler’s constant. The source defines</p>
+  <div class="technical-equation">
+    \[A_\chi(y)=\sum_{1\le n\le\lfloor y\rfloor}
+      \Lambda_{\mathrm{vM}}(n)\chi(n)(y/n-1)_+,\]
+    \[G_\chi(y)=\begin{cases}
+      A_\chi(y)-y\log y+(1+\gamma_E)y,&\chi=1,\\
+      A_\chi(y)+y\,L'(1,\chi)/L(1,\chi),&\chi\ne1.
+    \end{cases}\]
+  </div>
+  <p>The formal sum includes zero, whose von Mangoldt coefficient is zero; it can be read as a sum over positive integers. In the analytic families, a principal character is allowed only at modulus one. The correction therefore removes the zeta main term in that case. <a href="sources.html#nv-char-family-L10">Definitions of <code>ramp</code>, <code>Gchi</code> and admissibility.</a></p>
+  <p>A finite family \(F=(\chi_i,a_i)\) has strictly positive real weights and the real-valued error</p>
+  <div class="technical-equation">\[G_F(y)=\sum_i a_i\operatorname{Re}G_{\chi_i}(y),\qquad a_i&gt;0.\]</div>
+  <p>This is exactly the arithmetic level’s \(G_m\) after the comparison theorem identifies the families. Positivity concerns the weights; the error itself may have either sign. <a href="sources.html#nv-char-family-L24">Family definition.</a> <a href="sources.html#nv-level-family-L41">Exact comparison.</a></p>
+  <p>For each primitive character, the preceding construction supplies a level containing it and constants \(e_D,e_L,\varepsilon_1\), with \(\varepsilon_1&gt;0\). For <em>every</em> \(0&lt;\varepsilon&lt;\varepsilon_1\), it supplies a compatible family of windows. The constants \(e_D,e_L\) are chosen before \(\varepsilon\); the host/window family and the sufficiently-large threshold may depend on it. The analytic character family \(F\) attached to the fixed level stays fixed. On those windows, the arithmetic comparison gives</p>
+  <div class="technical-equation">\[G_F(y)\le y^{\frac12+(e_D+e_L+7)\varepsilon}.\]</div>
+  <p>More precisely: beyond any requested lower bound, there is a whole interval \([Y,Y^\lambda]\) where this estimate holds. The final assembly uses \(\lambda=3/2\). These are arbitrarily late intervals, not an assertion about every sufficiently large real number. <a href="sources.html#nv-top-win-L23">Quantifier order.</a> <a href="sources.html#nv-core-gm-L12">Exact exponent.</a> <a href="sources.html#nv-window-L7">Meaning of a window.</a> <a href="sources.html#every-character-L8">The choice \(\lambda=3/2\).</a></p>
+  <div class="technical-note"><p><strong>What is supplied here.</strong> <code>TopG</code> and the character-specific host supply produce the compatible families; <code>core_gm</code> converts their explicit-formula conditions and geometric bounds into the displayed estimate. Its inputs <code>EAtH</code> and <code>CoreAtH</code> package substantial compatibility, size, divisibility, loss and error estimates. This section follows their numerical consequence rather than proving each packaged condition. <a href="sources.html#nv-top-g-L26">Assembly into nonvanishing.</a></p></div>
+  <p>The final choice of exponent is elementary and exact. Fix a candidate point with real part \(\sigma&gt;1/2\), and set</p>
+  <div class="technical-equation">
+    \[m=\min(\sigma-\tfrac12,\tfrac12),\qquad
+      \theta=\tfrac12+\tfrac m2,\qquad C_*=e_D+e_L+7,\]
+    \[\varepsilon=\min\!\left(\frac{\varepsilon_1}{2},
+      \frac{m}{2(|C_*|+1)}\right).\]
+  </div>
+  <p>Then \(0&lt;\varepsilon&lt;\varepsilon_1\), \(C_*\varepsilon\le m/2\), and \(1/2&lt;\theta&lt;\min(1,\sigma)\). Once \(y\ge1\), the arithmetic estimate implies \(G_F(y)\le y^\theta\) on arbitrarily late windows. The next theorem excludes zeros to the right of \(\theta\), hence excludes the candidate point. No substitution \(\varepsilon=0\) is required. <a href="sources.html#nv-top-win-L59">The small-\(\varepsilon\) choice and its application.</a></p>
+</section>
+
+<section class="technical-section" id="nv-landau" aria-labelledby="nv-landau-title">
+  <p class="technical-kicker">The analytic mechanism · a step-by-step argument</p>
+  <h2 id="nv-landau-title">Why one-sided windows exclude zeros.</h2>
+  <p>A zero of an L-function leaves a pole in a transform of its prime-sum error. A pole, in turn, forces large high-order derivatives. The arithmetic window estimate puts an incompatible bound on a particular combination of those derivatives. We will build each connection, including the reason a bound on only some intervals is enough.</p>
+  <p>Throughout, \(F=(\chi_i,a_i)\) is the finite admissible family from the preceding section, \(a_i&gt;0\), and \(G(y)=G_F(y)\) is its real-valued corrected prime sum. The arithmetic construction is an input to this analytic argument. Once it supplies the following estimate, the remaining reasoning concerns transforms, positive kernels and isolated poles.</p>
+
+  <nav class="landau-step-nav" aria-label="Steps in the Landau argument">
+    <ol>
+      <li><a href="#landau-target">State the window hypothesis</a></li>
+      <li><a href="#landau-transform">Turn the error into a transform</a></li>
+      <li><a href="#landau-residues">Turn zeros into genuine poles</a></li>
+      <li><a href="#landau-mass">Measure a window’s weighted mass</a></li>
+      <li><a href="#landau-derivatives">Make derivatives look inside a window</a></li>
+      <li><a href="#landau-one-sided">Use the one-sided bound correctly</a></li>
+      <li><a href="#landau-tails">Control the unobserved tails</a></li>
+      <li><a href="#landau-isolation">Isolate a pole in two possible ways</a></li>
+      <li><a href="#landau-contradiction">Compare the growth rates</a></li>
+      <li><a href="#landau-conclusion">Return to nonvanishing</a></li>
+    </ol>
+  </nav>
+
+  <h3 id="landau-target">1. State exactly what the window gives.</h3>
+  <p>Fix \(0&lt;\theta&lt;1\), \(\delta&gt;0\), and a real constant \(C\). The hypothesis is</p>
+  <div class="technical-equation">\[
+    \forall Y_0\;\exists Y\ge Y_0\;\forall y\in[Y,Y^{1+\delta}],
+    \qquad G(y)\le Cy^\theta.
+  \]</div>
+  <p>There are three distinct pieces here. The windows occur arbitrarily far out. The bound holds at every point of each chosen interval. And its exponent and interval shape are fixed before the interval is chosen. The theorem concludes that no character in the family has an L-function zero with real part greater than \(\theta\), with the principal-character pole treated separately.</p>
+  <p>This is an upper bound on a signed function. A very negative value of \(G\) satisfies it too. Between the good windows we retain only the much weaker global estimate \(|G(y)|\le C_0y^2\) for \(y\ge1\), with a fixed \(C_0\ge0\). The proof must therefore control both the sign issue and the intervals where the sharper estimate is unavailable.</p>
+
+  <h3 id="landau-transform">2. Turn prime-sum errors into an analytic function.</h3>
+  <p>Set \(y=e^u\) and \(g(u)=G(e^u)\). The crude growth estimate becomes \(|g(u)|\le C_0e^{2u}\). Consequently the Laplace transform</p>
+  <div class="technical-equation">\[
+    \Phi(s)=\int_0^\infty g(u)e^{-su}\,du
+           =\int_1^\infty G(y)y^{-s-1}\,dy,
+    \qquad \operatorname{Re}s&gt;2,
+  \]</div>
+  <p>converges absolutely and defines a holomorphic function there. The second expression is a Mellin transform. It makes the connection to L-functions visible: the smoothing factor in the prime sum has an elementary integral. For \(n\ge1\),</p>
+  <div class="technical-equation">\[
+    \int_n^\infty (y/n-1)y^{-s-1}\,dy
+      =\frac{n^{-s}}{s(s-1)}
+      \qquad(\operatorname{Re}s&gt;1).
+  \]</div>
+  <p>Indeed, integrate \(y^{-s}/n-y^{-s-1}\) term by term. Multiplying by the von Mangoldt coefficient and the character, then summing in a half-plane of absolute convergence, brings in the logarithmic derivative</p>
+  <div class="technical-equation">\[
+    \sum_{n\ge1}\frac{\Lambda_{\mathrm{vM}}(n)\chi(n)}{n^s}
+      =-\frac{L'(s,\chi)}{L(s,\chi)}.
+  \]</div>
+  <p>Here \(\Lambda_{\mathrm{vM}}(n)=\log p\) when \(n\) is a positive power of a prime \(p\), and is zero otherwise. This identity follows by logarithmically differentiating the Euler product. It explains why information about primes can detect zeros: division by \(L\) exposes them as singularities.</p>
+  <p>For a nonprincipal character, the correction term in \(G_\chi\) gives the individual transform</p>
+  <div class="technical-equation">\[
+    \Phi_\chi(s)=
+    \frac{-L'(s,\chi)/L(s,\chi)
+      +sL'(1,\chi)/L(1,\chi)}{s(s-1)}.
+  \]</div>
+  <p>The numerator vanishes at \(s=1\), where the denominator suggests an extra singularity. Since \(L(1,\chi)\ne0\), this singularity is removable. For the principal character allowed in this family, the function is zeta; its separate main-term correction plays the corresponding role, using the holomorphic regularization of \((s-1)\zeta(s)\) at \(1\). Thus the relevant singularities in the positive half-plane come from zeros, rather than from the removed main terms.</p>
+  <p>Finally, \(G\) is a positive weighted sum of real parts. The identity \(\operatorname{Re}z=(z+\overline z)/2\), together with conjugation of Dirichlet characters, gives the paired transform</p>
+  <div class="technical-equation">\[
+    \Phi(s)=\sum_i\frac{a_i}{2}
+       \bigl(\Phi_{\chi_i}(s)+\Phi_{\chi_i^{-1}}(s)\bigr).
+  \]</div>
+  <p>The transform identities continue \(\Phi\) meromorphically into \(\operatorname{Re}s&gt;0\). Its defining integral is still used only where \(\operatorname{Re}s&gt;2\). Analytic continuation supplies the larger domain; a sparse collection of good windows does not itself establish convergence of that integral throughout the larger half-plane.</p>
+
+  <h3 id="landau-residues">3. Show that a zero produces a pole that cannot cancel.</h3>
+  <p>Suppose \(L(s,\chi)\) has a zero of order \(m\ge1\) at \(\rho\), with \(0&lt;\operatorname{Re}\rho&lt;1\). Locally one can factor it as \(L(s,\chi)=(s-\rho)^m h(s)\), where \(h\) is holomorphic and \(h(\rho)\ne0\). Taking the logarithmic derivative yields</p>
+  <div class="technical-equation">\[
+    \frac{L'(s,\chi)}{L(s,\chi)}
+      =\frac{m}{s-\rho}+\frac{h'(s)}{h(s)}.
+  \]</div>
+  <p>So even a multiple zero gives a simple pole of the logarithmic derivative. In the transform, its residue is \(-m/[\rho(\rho-1)]\). The other correction terms are holomorphic near this point. Adding the family’s contributions therefore gives</p>
+  <div class="technical-equation">\[
+    \Phi(s)=\frac{c_\rho}{s-\rho}+H_\rho(s),
+    \qquad c_\rho=-\frac{S_\rho}{\rho(\rho-1)},
+  \]
+  \[
+    S_\rho=\sum_i\frac{a_i}{2}
+       \bigl(m_{\chi_i}(\rho)+m_{\chi_i^{-1}}(\rho)\bigr)&gt;0.
+  \]</div>
+  <p>The multiplicity is zero when the corresponding function is nonzero. All multiplicities are nonnegative, at least one is positive, and every weight is positive. Every contribution shares the same complex factor \(-1/[\rho(\rho-1)]\), so they cannot cancel. Hence \(c_\rho\ne0\), and \(H_\rho\) is holomorphic near the pole.</p>
+  <p>A real zero \(\beta\in(0,1)\) has the stronger property \(c_\beta&gt;0\): the denominator \(\beta(\beta-1)\) is negative. This sign will handle one of the two pole configurations later. Zeros away from the real axis need not have positive real residues.</p>
+  <p>The analytic setup also gives local finiteness: every compact subset strictly inside the positive half-plane contains only finitely many poles. This follows from isolated zeros of the finitely many nonzero analytic functions involved. It lets us isolate a pole on a bounded disc, even if the full set of zeros is infinite.</p>
+
+  <h3 id="landau-mass">4. Measure a window after taking logarithms.</h3>
+  <p>Choose a good window with \(Y&gt;1\). The multiplicative interval becomes an interval whose length grows with its starting point:</p>
+  <div class="technical-equation">\[
+    [Y,Y^{1+\delta}]\longmapsto[U,(1+\delta)U],
+    \qquad U=\log Y.
+  \]</div>
+  <p>On this interval, take the nonnegative majorant \(R(u)=|C|e^{\theta u}\). Then \(g(u)\le R(u)\), even if the original constant \(C\) was negative. After removing the expected exponential growth, its weighted mass is simply</p>
+  <div class="technical-equation">\[
+    \int_U^{(1+\delta)U}R(u)e^{-\theta u}\,du
+      =|C|\delta U\le e^{\eta U}
+      \quad\text{for sufficiently large }U,
+      \quad\eta&gt;0.
+  \]</div>
+  <p>Every positive exponential eventually dominates this linear function. Given any \(\eta&gt;0\) and any requested starting point, we can therefore choose a good window late enough for this mass bound. The order matters: \(\eta\) is chosen first. We will later choose it small enough to contradict the growth forced by a pole.</p>
+
+  <h3 id="landau-derivatives">5. Use high derivatives to look inside a late window.</h3>
+  <p>At a fixed real center \(\tau&gt;2\), define the normalized derivatives</p>
+  <div class="technical-equation">\[
+    D_k(z)=\frac{(-1)^k\Phi^{(k)}(z)}{k!}.
+  \]</div>
+  <p>Dividing by the factorial removes the routine factorial growth of derivatives, leaving the geometric growth that measures distance to a pole. Differentiating the convergent Laplace integral gives a factor \((-u)^k\); the sign in \(D_k\) cancels it. The global exponential bound justifies differentiation under the integral for each fixed \(k\). Thus, for every real \(t\),</p>
+  <div class="technical-equation">\[
+    D_k(\tau+it)=\int_0^\infty g(u)w_k(u)e^{-itu}\,du,
+    \qquad w_k(u)=\frac{u^k e^{-\tau u}}{k!}\ge0.
+  \]</div>
+  <p>The kernel is a movable positive weight. For \(k&gt;0\), logarithmic differentiation shows that its maximum occurs at \(u=k/\tau\). Raising the derivative order moves its main contribution farther out. Choosing \(k\) proportional to \(U\) therefore aims the integral at the good interval, while the factor \(e^{-itu}\), of absolute value one, changes only its oscillation.</p>
+  <figure class="landau-figure">
+    <svg viewBox="0 0 680 230" role="img" aria-labelledby="landau-window-figure-title landau-window-figure-desc">
+      <title id="landau-window-figure-title">A kernel concentrated inside a good window</title>
+      <desc id="landau-window-figure-desc">A positive bell-shaped kernel peaks between U and (1 plus delta) U. The shaded interval is where the sharper bound holds. Small tails on either side are controlled using the global growth estimate.</desc>
+      <rect x="246" y="27" width="188" height="148" rx="4" fill="#e1ece0"/>
+      <line x1="54" y1="175" x2="626" y2="175" stroke="#7a9588"/>
+      <line x1="246" y1="58" x2="246" y2="182" stroke="#7a9588" stroke-dasharray="4 5"/>
+      <line x1="434" y1="58" x2="434" y2="182" stroke="#7a9588" stroke-dasharray="4 5"/>
+      <path d="M54 175 C150 175 199 174 237 157 C275 140 287 57 329 57 C371 57 388 135 434 159 C474 176 532 175 626 175" fill="none" stroke="#2e8177" stroke-width="3"/>
+      <text x="340" y="45" text-anchor="middle" fill="#0b3537">window</text>
+      <text x="130" y="119" text-anchor="middle" fill="#4e6863">left tail</text>
+      <text x="542" y="119" text-anchor="middle" fill="#4e6863">right tail</text>
+      <text x="246" y="208" text-anchor="middle" fill="#0b3537">U</text>
+      <text x="434" y="208" text-anchor="middle" fill="#0b3537">(1 + δ)U</text>
+      <text x="626" y="208" text-anchor="middle" fill="#0b3537">u</text>
+    </svg>
+    <figcaption>Schematic localization. The proof chooses the derivative order so that the weighted integral concentrates inside the controlled interval, and estimates both tails explicitly.</figcaption>
+  </figure>
+
+  <h3 id="landau-one-sided">6. Keep the term that makes an upper bound useful.</h3>
+  <p>Taking the absolute value of the oscillatory integral gives \(|D_k(\tau+it)|\le\int_0^\infty |g|w_k\). At the real center, \(\operatorname{Re}D_k(\tau)=\int_0^\infty gw_k\). Adding these two relations is the crucial move:</p>
+  <div class="technical-equation">\[
+    |D_k(\tau+it)|+\operatorname{Re}D_k(\tau)
+      \le\int_0^\infty (|g(u)|+g(u))w_k(u)\,du.
+  \]</div>
+  <p>For a real number \(g\), the expression \(|g|+g=2\max(g,0)\) discards its negative part. On a good window this is at most \(2R\). We have converted one-sided information into control of a nonnegative integrand.</p>
+  <p>To bound the window contribution, use \(v^k/k!\le e^v\) for \(v\ge0\), which follows because this is one term of the exponential series. Taking \(v=(\tau-\theta)u\) gives</p>
+  <div class="technical-equation">\[
+    w_k(u)\le\frac{e^{-\theta u}}{(\tau-\theta)^k}.
+  \]</div>
+  <p>Outside the window, use \(|g|+g\le2|g|\le2C_0e^{2u}\). Splitting the integral into its window and tails now yields</p>
+  <div class="technical-equation">\[
+    \begin{aligned}
+    |D_k(\tau+it)|+\operatorname{Re}D_k(\tau)
+      &amp;\le \frac{2e^{\eta U}}{(\tau-\theta)^k}+2C_0T_k,\\
+    T_k&amp;=\int_{(0,\infty)\setminus[U,(1+\delta)U]}
+         \frac{u^k e^{-(\tau-2)u}}{k!}\,du.
+    \end{aligned}
+  \]</div>
+  <div class="technical-note"><p><strong>Why the real-center term stays.</strong> The displayed estimate does not bound \(|D_k(\tau+it)|\) alone: \(\operatorname{Re}D_k(\tau)\) could be negative. The pole argument below either controls this term by analyticity or makes it positive using the residue of a real pole.</p></div>
+
+  <h3 id="landau-tails">7. Make both uncontrolled tails small.</h3>
+  <p>The tail kernel contains \(\tau-2\), because it must absorb the global bound \(e^{2u}\). Its maximum is at \(k/(\tau-2)\), slightly to the right of the original kernel’s maximum. Choose \(\tau\) sufficiently large depending only on \(\delta\), and then choose</p>
+  <div class="technical-equation">\[
+    k=\left\lceil(1+\delta/2)\tau U\right\rceil.
+  \]</div>
+  <p>The original kernel is aimed near the middle of the interval. A sufficiently large \(\tau\) keeps the tail kernel concentrated inside it as well. The width of the interval grows proportionally to \(U\); the concentration width grows only on the order of \(\sqrt U\) with \(\tau\) fixed. This explains why the window shape is effective. The following exponential estimate makes the intuition quantitative.</p>
+  <p>Put \(a=\tau-2\), \(V=(1+\delta)U\), and choose \(0&lt;q&lt;a\). On the right tail, \(e^{q(u-V)}\ge1\); on the left tail, \(e^{q(U-u)}\ge1\). Multiply by these factors and extend each nonnegative integral to the whole positive axis. The elementary gamma integral then gives</p>
+  <div class="technical-equation">\[
+    T_k\le\frac{e^{-qV}}{(a-q)^{k+1}}
+             +\frac{e^{qU}}{(a+q)^{k+1}},
+    \qquad
+    \int_0^\infty\frac{u^k e^{-bu}}{k!}\,du=\frac1{b^{k+1}}
+    \quad(b&gt;0).
+  \]</div>
+  <p>The integral identity follows by substituting \(v=bu\) and integrating by parts repeatedly: \(\int_0^\infty v^k e^{-v}\,dv=k!\). The boundary terms vanish because the exponential dominates each fixed power.</p>
+  <p>The first tail term penalizes points beyond the right endpoint; the second penalizes points before the left endpoint. Balancing these penalties with the choice of \(k\) gives a fixed constant \(T&gt;0\) such that \(T_k\le T/\tau^k\) for every \(U\ge1\). The constant does not grow when a later window is selected.</p>
+  <details class="landau-detail">
+    <summary>Work through an explicit choice of constants</summary>
+    <p>One choice used in the source is</p>
+    <div class="technical-equation">\[
+      q=2+\frac6\delta,\qquad
+      \tau=q(1+\delta)(q+2),\qquad
+      T=\frac{e}{\tau-2-q}+\frac1{\tau-2+q}.
+    \]</div>
+    <p>Both denominators are positive. Write \(A=(1+\delta/2)\tau\), so \(AU\le k\le AU+1\). Substituting these constants gives</p>
+    <div class="technical-equation">\[
+      -q(1+\delta)U+k\frac{2+q}{\tau-2-q}\le1,
+      \qquad
+      qU+k\frac{2-q}{\tau-2+q}\le0.
+    \]</div>
+    <p>For example, setting \(M=q(1+\delta)\) gives \(A=M(M-1)\) and \((2+q)/(\tau-2-q)=1/(M-1)\), so the first expression is at most \(1/(M-1)\le1\). For the second, \((1+\delta/2)(q-2)=q+1\), and the lower bound on \(k\) makes its negative term large enough.</p>
+    <p>For any positive \(b\), the inequality \(\log(\tau/b)\le(\tau-b)/b\) implies</p>
+    <div class="technical-equation">\[
+      \tau^k\frac{e^x}{b^{k+1}}
+        \le\frac1b\exp\!\left(x+k\frac{\tau-b}{b}\right).
+    \]</div>
+    <p>Apply this first with \(b=\tau-2-q\), \(x=-qV\), and then with \(b=\tau-2+q\), \(x=qU\). The preceding bounds give exactly \(\tau^kT_k\le T\). Also \(k\ge U\), since \(\tau&gt;2\) and \(U\ge1\).</p>
+  </details>
+  <p>Let \(E=\tau-\theta\). Since \(0&lt;E&lt;\tau\) and \(e^{\eta U}\ge1\), the tail bound can be absorbed into the window bound. With the fixed constant \(K=2+2C_0T\), we obtain</p>
+  <div class="technical-equation landau-key-bound">\[
+    |D_k(\tau+it)|+\operatorname{Re}D_k(\tau)
+       \le\frac{K e^{\eta U}}{E^k}
+       \qquad\text{for every }t\in\mathbb R.
+  \]</div>
+  <p>Precisely: \(\tau\) and \(K\) are fixed first; for every \(\eta&gt;0\) and every \(U_0\), there is a good \(U\ge U_0\) and an integer \(k\ge U\) for which this holds. We have not proved a bound for every derivative order. The arbitrarily large orders selected by the windows will be sufficient.</p>
+
+  <h3 id="landau-isolation">8. Isolate a pole while controlling the real-center term.</h3>
+  <p>Assume for contradiction that a pole \(\rho_0\) lies to the right of \(\theta\). The transform is holomorphic for \(\operatorname{Re}s&gt;2\), so every pole lies strictly to the left of our center line \(\operatorname{Re}s=\tau\). We need a pole close enough to some point on that line to force derivatives to grow faster than \(E^{-k}\).</p>
+  <p>There are two possible configurations. Their common ingredient is the behavior near one isolated pole. If a disc centered at \(z\) contains just that pole \(\rho\), write \(\Phi(s)=c/(s-\rho)+H(s)\) on the disc, filling the removable singularity of \(H\). For any smaller radius \(r\) within that disc, Cauchy’s derivative estimate gives</p>
+  <div class="technical-equation">\[
+    D_k(z)=\frac{c}{(z-\rho)^{k+1}}+\varepsilon_k,
+    \qquad |\varepsilon_k|\le\frac{M}{r^k}.
+  \]</div>
+  <p>Here \(M\) bounds \(|H|\) on the circle of radius \(r\) and is independent of \(k\). Choose \(r\) larger than \(d=|z-\rho|\). The pole contribution then grows relative to the holomorphic error by a factor comparable to \((r/d)^k\).</p>
+  <h4>A. A shifted center with a closer pole</h4>
+  <p>There may be a radius \(D\le E\) such that the open disc about the real center \(\tau\) has no poles, but some pole has horizontal distance from the line \(\operatorname{Re}s=\tau\) less than \(D\). Move vertically to a center \(z=\tau+it\) near that pole’s height. Its distance is now less than \(D\). A small adjustment of the height makes the nearest pole unique; local finiteness allows us to choose a disc around \(z\) that contains this pole alone.</p>
+  <p>Choose \(d&lt;r&lt;D\), still inside that isolating disc. Cauchy’s estimate also applies to \(\Phi\) at the real center, because its disc of radius \(D\) is free of poles. Therefore</p>
+  <div class="technical-equation">\[
+    |D_k(z)|\ge\frac{|c|}{d^{k+1}}-\frac{M_1}{r^k},
+    \qquad
+    \operatorname{Re}D_k(\tau)\ge-\frac{M_2}{r^k}.
+  \]</div>
+  <p>The second bound limits how much the real-center term can cancel the first. The window estimate holds for every \(t\), so it applies at this chosen height.</p>
+  <h4>B. A real pole with positive residue</h4>
+  <p>The other configuration gives a real pole \(\beta&gt;\theta\) that is uniquely nearest to \(\tau\) on a suitable disc. The already available nonvanishing for \(\operatorname{Re}s\ge1\) places this pole in \((\theta,1)\), so step 3 gives its positive residue \(c\). Set \(d=\tau-\beta\), and choose \(d&lt;r\le E\) inside the isolating disc. At the real center,</p>
+  <div class="technical-equation">\[
+    \operatorname{Re}D_k(\tau)
+       \ge\frac{c}{d^{k+1}}-\frac{M}{r^k}.
+  \]</div>
+  <p>Now this term itself supplies the lower bound. Set \(t=0\) in the window estimate and use \(|D_k(\tau)|\ge0\). This is the point at which positivity of a real pole’s residue is essential.</p>
+  <details class="landau-detail">
+    <summary>Why these two configurations cover every possible pole set</summary>
+    <p>Look at the closed disc centered at \(\tau\) with radius \(E=\tau-\theta\). It lies entirely in \(\operatorname{Re}s\ge\theta&gt;0\), so it contains finitely many poles. If it contains none, take \(D=E\); the pole \(\rho_0\) has horizontal distance \(\tau-\operatorname{Re}\rho_0&lt;E\), giving configuration A.</p>
+    <p>Otherwise let \(D\) be the smallest distance from \(\tau\) to a pole in that disc. The open disc of radius \(D\) is free of poles. If any pole has horizontal distance less than \(D\), we again have A. If none does, a nearest pole \(\rho\) satisfies</p>
+    <div class="technical-equation">\[
+      D=|\tau-\rho|\ge\tau-\operatorname{Re}\rho\ge D.
+    \]</div>
+    <p>Equality forces \(\operatorname{Im}\rho=0\). Every nearest pole must therefore be the same real point \(\beta=\tau-D\). Moreover \(D&lt;E\), because the originally assumed pole has horizontal distance less than \(E\). Thus \(\beta&gt;\theta\), and finiteness lets us enlarge the disc a little while keeping \(\beta\) as its only pole. This gives B.</p>
+    <p>For A, the small height adjustment has a concrete justification. Only finitely many poles can compete near the chosen center. The difference between two squared distances to \(\tau+it\) is affine in \(t\). Distinct poles to the left of the line cannot have identically equal distances along the line. Avoiding finitely many tie heights therefore makes the nearest one unique, while keeping its distance below \(D\).</p>
+    <p>This selection uses finite sets inside bounded regions. It never requires the entire set of zeros to have a rightmost member.</p>
+  </details>
+
+  <h3 id="landau-contradiction">9. Compare growth rates and get the contradiction.</h3>
+  <p>In either configuration, combine the pole lower bound with the window upper bound and absorb fixed constants. There are \(A&gt;0\), \(M\ge0\), and radii \(0&lt;d&lt;r\le E\) such that every derivative order supplied by the window construction would have to satisfy</p>
+  <div class="technical-equation">\[
+    \frac{A}{d^k}\le\frac{M}{r^k}
+                       +\frac{K e^{\eta U}}{E^k}.
+  \]</div>
+  <p>Multiply by \(d^k\) and put \(q_*=d/r&lt;1\). Since \(r\le E\), the ratio \(d/E\) is at most \(q_*\). Since \(k\ge U\), raising either ratio to the power \(k\) makes it no larger than raising \(q_*\) to the power \(U\). Hence</p>
+  <div class="technical-equation">\[
+    A\le Mq_*^U+K e^{\eta U}q_*^U
+      \le(M+K)\exp\!\left[-\bigl(\log(r/d)-\eta\bigr)U\right].
+  \]</div>
+  <p>Choose \(\eta=\tfrac12\log(r/d)&gt;0\). The right side tends to zero as \(U\) grows, whereas \(A\) is a fixed positive number. The window hypothesis allows \(U\) beyond any requested threshold for this chosen \(\eta\), so the displayed inequality is impossible.</p>
+  <p>Only a sequence of suitable windows and derivative orders is needed: the contradiction holds once that sequence reaches a sufficiently large scale. The strict gap \(d&lt;r\) supplies exponential growth that the arbitrarily small exponential allowance \(e^{\eta U}\) cannot absorb.</p>
+
+  <h3 id="landau-conclusion">10. Translate the absence of poles back into nonvanishing.</h3>
+  <p>We have proved that every pole of the transform in the positive half-plane has real part at most \(\theta\). A zero of any family member with \(\theta&lt;\operatorname{Re}s&lt;1\) would have produced a genuine pole by step 3, so such a zero cannot exist. The existing nonvanishing result on \(\operatorname{Re}s\ge1\) handles the rest of the region, with the principal-character pole at \(s=1\) excluded in the ordinary analytic formulation.</p>
+  <p>For the larger arithmetic argument, fix any candidate point with real part \(\sigma&gt;1/2\). The preceding small-\(\varepsilon\) construction supplies the window estimate for an exponent \(\theta\) satisfying \(1/2&lt;\theta&lt;\min(1,\sigma)\). This Landau argument then excludes that candidate. Repeating the reasoning for each candidate establishes nonvanishing throughout the right half-plane.</p>
+  <div class="technical-note"><p><strong>What each hypothesis contributes.</strong> Positive character weights preserve the poles. The growing windows permit kernel localization. The crude global bound controls the tails. Isolated poles allow Cauchy estimates. Positive residues at real poles resolve the possible cancellation at the real center. Together these facts turn a one-sided arithmetic estimate into a statement about every zero.</p></div>
+  <p class="source-callout"><strong>For readers checking the formal argument.</strong> Three entry points in the source companion cover the <a href="sources.html#nv-rpow-window">window criterion</a>, <a href="sources.html#nv-pole-data">transform and residue construction</a>, and <a href="sources.html#nv-landau-window">derivative estimate and pole contradiction</a>.</p>
+</section>
+
+<section class="technical-section" id="nv-imprimitive" aria-labelledby="nv-imprimitive-title">
+  <p class="technical-kicker">The last extension</p>
+  <h2 id="nv-imprimitive-title">Restore the missing Euler factors.</h2>
+  <p>The argument so far treats primitive characters. Suppose \(\chi\) modulo \(N\) is induced by \(\chi^*\) of conductor dividing \(N\). At the points under consideration, where \(\chi\ne1\) or \(s\ne1\), the change-of-level identity gives</p>
+  <div class="technical-equation">\[L(s,\chi)=L(s,\chi^*)
+    \prod_{p\mid N}\bigl(1-\chi^*(p)p^{-s}\bigr).\]</div>
+  <p>Factors for primes dividing the conductor equal one. For every remaining prime and \(\sigma=\operatorname{Re}s&gt;1/2\),</p>
+  <div class="technical-equation">\[|\chi^*(p)p^{-s}|\le p^{-\sigma}&lt;1.\]</div>
+  <p>A factor could vanish only if its subtracted term equalled one, which has norm one. Thus every factor is nonzero, and the primitive result makes their finite product nonzero. The final statement retains the exception \(\chi\ne1\) or \(s\ne1\), excluding the principal-character pole. This is the complete extension to arbitrary Dirichlet characters used by <code>plugAll</code>. <a href="sources.html#nv-imprimitive-L5">The identity and every step of the norm argument.</a></p>
+</section>
+
+        <section class="technical-section" id="nv-window" aria-labelledby="nv-window-title">
+  <p class="technical-kicker">Arithmetic input · a step-by-step explanation</p>
+  <h2 id="nv-window-title">From local arithmetic to prime-sum windows.</h2>
+  <p>The Landau argument needs an upper bound for a real-valued prime sum on arbitrarily late intervals. The arithmetic window theorem supplies a different kind of information: it bounds the size of certain Galois-cohomology groups, simultaneously across primes and twists. Several comparison theorems carry that information into the prime-sum estimate. This section explains the objects being measured and follows the quantitative passage between the two statements.</p>
+  <p>The central distinction is between the <em>arithmetic budget</em>, which can be very large, and the <em>normalized analytic error</em>, whose exponent approaches one half. The bridge uses compatible automorphic and geometric constructions. A bound on cohomology lengths by itself does not imply nonvanishing.</p>
+
+  <nav class="landau-step-nav" aria-label="Steps from the arithmetic window to Landau">
+    <ol>
+      <li><a href="#arithmetic-cohomology">Identify the global-to-local kernel</a></li>
+      <li><a href="#arithmetic-length">Measure its size by length</a></li>
+      <li><a href="#arithmetic-budget">Combine primes and twists</a></li>
+      <li><a href="#arithmetic-fields">Choose the character fields</a></li>
+      <li><a href="#arithmetic-quantifiers">Read the window in the right order</a></li>
+      <li><a href="#arithmetic-construction">Locate the substantial arithmetic input</a></li>
+      <li><a href="#arithmetic-rescaling">Fit the window to the later construction</a></li>
+      <li><a href="#arithmetic-absorption">Absorb the cohomology contribution</a></li>
+      <li><a href="#arithmetic-comparison">Obtain the prime-sum estimate</a></li>
+      <li><a href="#arithmetic-landau">Supply exactly what Landau needs</a></li>
+    </ol>
+  </nav>
+
+  <h3 id="arithmetic-cohomology">1. Identify what can be trivial locally but nontrivial globally.</h3>
+  <p>Fix a number field \(E\) and a rational prime \(\ell\). Let \(S_\ell\) be the finite places of \(E\) above \(\ell\). The group \(G_{E,S_\ell}\) retains the Galois information unramified outside those places: it is the absolute Galois group with the inertia outside \(S_\ell\) killed. This already incorporates one set of local restrictions.</p>
+  <p>For a positive integer \(k\), the coefficient module is</p>
+  <div class="technical-equation">\[
+    M_{\ell,k}=(\mathbb Q_\ell/\mathbb Z_\ell)(-k),
+    \qquad g\cdot m=\chi_{\mathrm{cyc}}(g)^{-k}m.
+  \]</div>
+  <p>The quotient consists of \(\ell\)-power torsion classes. The twist changes how Galois automorphisms act on them: the cyclotomic character records their action on roots of unity, and here its inverse \(k\)-th power acts by scalar multiplication. The underlying additive group stays the same. Different values of \(k\) therefore probe different arithmetic actions on that group.</p>
+  <p>First cohomology can be understood through a compatibility equation. A continuous cocycle is a map \(f:G\to M\) satisfying</p>
+  <div class="technical-equation">\[
+    f(gh)=f(g)+g\cdot f(h).
+  \]</div>
+  <p>This is exactly the condition that the affine transformations \(g*x=g\cdot x+f(g)\) compose as a group action. A cocycle of the form \(f(g)=g\cdot m-m\) can be removed by changing the origin. Such cocycles are called coboundaries; \(H^1(G,M)\) is the space of cocycles modulo these changes of origin.</p>
+  <p>The arithmetic object in the window theorem is the localization kernel</p>
+  <div class="technical-equation">\[
+    \operatorname{Sha}_\ell(E,k)=\ker\!\left[
+      H^1(G_{E,S_\ell},M_{\ell,k})
+      \longrightarrow
+      \prod_{v\mid\ell}H^1(G_{E_v},M_{\ell,k})
+    \right].
+  \]</div>
+  <p>The local groups are represented in the source by decomposition groups at chosen places in an algebraic closure. A class in this kernel can be removed by a change of origin separately at each place above \(\ell\), but may still resist every single global change of origin. It records global arithmetic information invisible to these particular local tests.</p>
+  <div class="technical-note"><p><strong>Which local tests?</strong> The vanishing restrictions in this kernel are at the finite places above \(\ell\). Unramifiedness outside \(\ell\) is already built into \(G_{E,S_\ell}\). These are different conditions, and the definition does not impose triviality at every place. The symbol \(\operatorname{Sha}\) here refers to this specific cohomology kernel.</p></div>
+
+  <h3 id="arithmetic-length">2. Measure the kernel by its number of simple layers.</h3>
+  <p>The measured quantity is</p>
+  <div class="technical-equation">\[
+    \lambda_{\ell,k}(E)=
+      \operatorname{length}_{\mathbb Z_\ell}\operatorname{Sha}_\ell(E,k)
+      \in\mathbb N\cup\{\infty\}.
+  \]</div>
+  <p>Module length counts the simple layers in a composition series. Over \(\mathbb Z_\ell\), each such layer has \(\ell\) elements. For example,</p>
+  <div class="technical-equation">\[
+    M=\mathbb Z_\ell/\ell^3\mathbb Z_\ell
+       \oplus\mathbb Z_\ell/\ell^2\mathbb Z_\ell,
+    \qquad \operatorname{length}(M)=5,\qquad |M|=\ell^5.
+  \]</div>
+  <p>Thus, whenever the length is finite,</p>
+  <div class="technical-equation">\[
+    \log|M|=\operatorname{length}_{\mathbb Z_\ell}(M)\log\ell.
+  \]</div>
+  <p>This explains why the later bound weights length by \(\log\ell\): it puts groups at different primes on the same logarithmic size scale. Length is additive in short exact sequences of finite-length modules, matching multiplication of cardinalities. That makes it well suited to estimates obtained from cohomological exact sequences.</p>
+  <p>The coefficient module \(\mathbb Q_\ell/\mathbb Z_\ell\) is infinite. The theorem concerns the finiteness and size of the specified kernels inside cohomology. It allows nonzero kernels of positive finite length.</p>
+
+  <h3 id="arithmetic-budget">3. Put all the relevant groups under one budget.</h3>
+  <p>For a twist cutoff \(t\) and a real budget \(B\), the condition called <code>VVle E t B</code> first requires finite lengths for every prime \(\ell\) and every \(1\le k&lt;t\). It then requires, for every finite set \(P\) of primes,</p>
+  <div class="technical-equation">\[
+    \sum_{\ell\in P}\log\ell
+       \sum_{k=1}^{t-1}\lambda_{\ell,k}(E)\le B.
+  \]</div>
+  <p>Finiteness is a separate assertion, made before the lengths are used as ordinary nonnegative integers. The statement also quantifies over the algebraic closure and compatible local choices used to present these groups, so it does not depend on a convenient choice of presentation.</p>
+  <p>This is a shared budget. It bounds each individual length by \(B/\log\ell\), but also limits how much all of them can contribute together. For an illustrative finite collection, lengths \(3,1\) at prime \(2\) and length \(2\) at prime \(3\) contribute</p>
+  <div class="technical-equation">\[
+    (3+1)\log2+2\log3
+       =\log(2^4\,3^2)=\log144.
+  \]</div>
+  <p>The sum is the logarithm of the product of those group sizes. Every summand is nonnegative, so a large contribution at one prime cannot be canceled by another prime.</p>
+  <p>Bounding every finite partial sum also controls the full series. Its partial sums increase and stay below \(B\); their supremum is finite. We can therefore write</p>
+  <div class="technical-equation">\[
+    \mathcal V(E,t)=
+      \sum_{\ell\ \mathrm{prime}}\log\ell
+         \sum_{k=1}^{t-1}\lambda_{\ell,k}(E)\le B.
+  \]</div>
+  <p>For the host's chosen field and local data, the later construction writes this full nonnegative sum as \(V\). The same bound therefore gives \(V\le B\). This is how many cohomology groups become one usable arithmetic error budget.</p>
+
+  <h3 id="arithmetic-fields">4. Choose fields adapted to the character being studied.</h3>
+  <p>Fix the primitive character \(\psi\) whose L-function we want to study. The window theorem applies to a particular family of cyclotomic subfields. This is natural because a Dirichlet character already describes multiplicative symmetries of roots of unity.</p>
+  <p>Choose \(0&lt;\varepsilon&lt;1/52\), and round the desired size to a power of two by selecting a nonnegative integer \(e(x)\) for every \(x\ge1\), with</p>
+  <div class="technical-equation">\[
+    x^{2+8\varepsilon}\le2^{e(x)}
+       \le2x^{2+8\varepsilon}.
+  \]</div>
+  <p>For example, taking the ceiling of \((2+8\varepsilon)\log_2x\) works. This introduces at most a factor of two while allowing a continuously varying scale \(x\) to determine discrete arithmetic data.</p>
+  <p>With two auxiliary primes \(q,d\), an eligible field embeds in a cyclotomic field whose conductor is divisible by the required moduli. Its fixing automorphisms, written as \(\zeta\mapsto\zeta^a\), are exactly those satisfying</p>
+  <div class="technical-equation">\[
+    a\equiv\pm1\pmod{2^{e(x)+2}},\qquad
+    \psi(a)=1,\qquad
+    \left(\frac aq\right)=\left(\frac ad\right)=1.
+  \]</div>
+  <p>The last two symbols are quadratic characters. Together, these conditions select the field by the symmetries we want it to retain. The construction is therefore organized around the target character and controlled auxiliary characters.</p>
+  <details class="landau-detail">
+    <summary>What conditions do the auxiliary primes satisfy?</summary>
+    <p>At a scale \(Z\), the pair must satisfy</p>
+    <div class="technical-equation">\[
+      q\equiv3\pmod8,\qquad d\equiv7\pmod{16},
+      \qquad q\mid d+1,
+    \]</div>
+    <p>and every odd prime \(p\le Z^{\varepsilon/5}\) must divide \(d+1\). Their sizes are coordinated by</p>
+    <div class="technical-equation">\[
+      \tfrac12Z^{\varepsilon/5}&lt;\log q\le Z^{\varepsilon/5},
+    \]
+    \[
+      \tfrac12Z^{\varepsilon/5}(\log Z)^2
+         &lt;\log d\le Z^{\varepsilon/5}(\log Z)^2.
+    \]</div>
+    <p>These congruence, divisibility and size conditions are the definition of an admissible pair in this argument. A separate prime-existence theorem supplies such pairs. The window statement itself says what happens for every pair meeting the conditions.</p>
+  </details>
+
+  <h3 id="arithmetic-quantifiers">5. Read the arithmetic window in the right order.</h3>
+  <p>The character \(\psi\), the small number \(\varepsilon\), and the entire rounding function \(e(\cdot)\) are chosen first. The theorem then supplies constants \(J\ge1\) and \(X_0\). They may depend on these initial choices.</p>
+  <ol class="arithmetic-choices">
+    <li>Take any \(X\ge X_0\), and any admissible prime pair \(q,d\) at scale \(X^{1/J}\).</li>
+    <li>There is a lower endpoint \(Y\) such that \(X^{1/J}\le Y\) and \(Y^2\le X\).</li>
+    <li>For every \(x\in[Y,Y^2]\), every eligible field at that scale satisfies the aggregate cohomology bound with the following cutoff and budget.</li>
+  </ol>
+  <div class="technical-equation">\[
+    t=\lfloor x^{401}\rfloor,\qquad
+    B=\sqrt{\exp(x^\varepsilon)}
+      =\exp\!\left(\tfrac12x^\varepsilon\right).
+  \]</div>
+  <p>In particular, all positive twists below that cutoff have finite length, and their weighted sum across primes is bounded. The useful interval lies inside the larger range:</p>
+  <div class="technical-equation">\[
+    [Y,Y^2]\subseteq[X^{1/J},X].
+  \]</div>
+  <p>The interval can depend on \(X,q,d\). Once it is chosen, the primes \(q,d\) stay fixed throughout it. The rounding value \(e(x)\), the cutoff, the budget, and the eligible number field can vary with \(x\). The theorem covers every eligible field at each point; it does not require one fixed field to serve the whole interval.</p>
+  <p>The lower endpoint escapes to infinity as \(X\) grows, because \(Y\ge X^{1/J}\) with fixed finite \(J\). This provides arbitrarily late usable intervals. Uniformity on the entire interval is what will ultimately matter to Landau.</p>
+  <div class="technical-note"><p><strong>Read the size in context.</strong> For fixed positive \(\varepsilon\), the budget \(\exp(x^\varepsilon/2)\) eventually exceeds every fixed power of \(x\). It is not a small absolute bound. Its usefulness comes from comparison with the still larger geometric scale already built into the construction, as step 8 shows.</p></div>
+
+  <h3 id="arithmetic-construction">6. Locate the substantial theorem behind the window.</h3>
+  <p>The existence of these intervals is the deep arithmetic input. The source constructs it from the Galois-compatibility result explained in the next section, together with base change and local representation, automorphic, cohomological and CM inputs. The elementary facts about length above explain what the conclusion means; they do not establish that conclusion.</p>
+  <p>One layer of the construction is visible as a counting argument. For odd primes, it separates a finite exceptional set from the remaining primes; a separate part of the assembly handles the prime \(2\). The nonexceptional odd primes satisfy estimates polynomial in the relevant arithmetic level and twist cutoff. At exceptional primes, suitable layer bounds supply additional contributions. These nonnegative contributions are summed, and finitely many constants are absorbed into an aggregate estimate.</p>
+  <p>The supporting cohomological results include Poitou–Tate duality, local Tate duality, local finiteness, and generator bounds. They relate the localization kernel to other global and local cohomology groups so that the counting estimates can be applied. The duality statements carry their own hypotheses, including conditions at the prime \(2\); duality alone would not supply the required numerical bound.</p>
+  <p>The passage to a common window has a useful logical form. One theorem supplies an arithmetic window with prescribed properties beyond a threshold; another gives the cohomology estimate on any such window beyond its own threshold. Taking the maximum of the two thresholds lets the proof choose the interval once and apply both conclusions there. Two unrelated existence statements, each selecting its own interval, would not be enough.</p>
+  <p>Further construction and selection results arrange the fields and ranks needed by the automorphic argument. This chapter treats those deeper arithmetic results as inputs and explains their quantitative use below. The <a href="#nv-galois">Galois representation section</a> and <a href="#nv-literature">theta and geometric sections</a> describe the other branches that must be made compatible with them.</p>
+
+  <h3 id="arithmetic-rescaling">7. Fit the arithmetic window to the host construction.</h3>
+  <p>The next stage constructs a <em>host</em>: one collection of fields, ranks and selected arithmetic classes on which all the comparison estimates can be stated together. The host carries both the cohomology budget and the character information needed for the prime sum. Its field can vary with \(x\); the analytic character family attached to the fixed target level stays fixed.</p>
+  <p>Some room is reserved when passing from the arithmetic window \([W,W^2]\) to the later window \([Z,Z^{3/2}]\). A fixed field-size factor \(c\ge1\) is absorbed by a rescaling</p>
+  <div class="technical-equation">\[
+    \kappa=c^{1/(2+8\varepsilon)},\qquad
+    Z=\kappa W,\qquad x=\kappa x'.
+  \]</div>
+  <p>Because \(\kappa^{2+8\varepsilon}=c\), the original rounding estimate becomes</p>
+  <div class="technical-equation">\[
+    x^{2+8\varepsilon}\le c\,2^{e(x')}
+       \le2x^{2+8\varepsilon}.
+  \]</div>
+  <p>The fixed factor is now included in the desired size range. For \(W\ge\kappa^3\),</p>
+  <div class="technical-equation">\[
+    Z^{3/2}=(\kappa W)^{3/2}\le W^2.
+  \]</div>
+  <p>Thus the shorter interval fits safely inside the available scale range. For \(x\) in the desired interval, \(x'=x/\kappa\) is at least \(W\) and at most \(W^2\), so the original arithmetic estimate can be used there.</p>
+  <p>The exponent \(401\) also leaves a concrete amount of room. The ranks required by the host are separately bounded by \(x^{400}\). Once \(x'\ge\kappa^{400}\),</p>
+  <div class="technical-equation">\[
+    x^{400}=\kappa^{400}(x')^{400}\le(x')^{401}.
+  \]</div>
+  <p>The original twist cutoff is therefore large enough after rescaling. Decreasing a cutoff only drops nonnegative terms from the cohomology sum. Also \(x'\le x\), so its budget \(\exp((x')^\varepsilon/2)\) is at most \(\exp(x^\varepsilon/2)\). These elementary comparisons explain the spare exponent and the change of window shape.</p>
+  <p>Separate field, prime-existence, rank and short-norm constructions supply the remaining host conditions. In particular, the same host retains the target characters, controls complementary characters and their logarithmic derivatives at \(1\), and gives the required proportions of selected arithmetic classes. Estimates on unrelated families would not combine in the way used below.</p>
+
+  <h3 id="arithmetic-absorption">8. Absorb the cohomology term into a larger geometric bound.</h3>
+  <p>At a host scale \(x\), write</p>
+  <div class="technical-equation">\[
+    L=x^\varepsilon,\qquad b=e^{x^\varepsilon},
+    \qquad V=\mathcal V(E,t)\le\sqrt b.
+  \]</div>
+  <p>The letter \(L\) in this step denotes a positive scale parameter, not a Dirichlet L-function. Although \(V\) may grow, it is small relative to \(b\): the ratio \(V/b\) is at most \(b^{-1/2}\), which tends to zero.</p>
+  <p>A separate geometric and cohomological comparison bounds a nonnegative weighted local contribution \(\eta_j\) at each relevant lift index \(j\):</p>
+  <div class="technical-equation">\[
+    \eta_j\le d_j
+       \left[C\left(fm\,bL^2+(\log x)^2N_c\right)+V\right].
+  \]</div>
+  <p>Here \(d_j\) is a dimension factor, \(f,m\ge1\) are rank parameters, \(N_c\ge0\) is another size budget, and \(C\) is a comparison constant. This inequality is substantive input from the compatible geometric construction. It describes where the cohomology contribution enters; it is not a formal consequence of the definition of length.</p>
+  <p>Now the absorption is elementary. Put \(B_0=fm\,bL\). For sufficiently large \(x\), the construction identifies \(d_j=D_0\) and has \(L,b\ge1\). A fixed positive power eventually dominates the squared logarithm, so \((\log x)^2\le L\). Consequently</p>
+  <div class="technical-equation">\[
+    V\le\sqrt b\le b\le B_0,\qquad
+    fm\,bL^2=LB_0,\qquad
+    (\log x)^2N_c\le LN_c.
+  \]</div>
+  <p>Substituting these bounds and replacing \(C\) by \(|C|\) gives</p>
+  <div class="technical-equation">\[
+    \begin{aligned}
+    \eta_j
+      &amp;\le D_0\bigl[|C|L(B_0+N_c)+B_0\bigr]\\
+      &amp;\le D_0(|C|+1)L(B_0+N_c).
+    \end{aligned}
+  \]</div>
+  <p>The last step uses \(B_0\le L(B_0+N_c)\). The cohomology term has now been absorbed into a uniform bound with the same shape as the other geometric estimates. No inequality of the form \(\exp(x^\varepsilon/2)\le x^A\) has been used.</p>
+  <p>The resulting local bound is combined with rank, divisibility, slope, irreducibility and global comparison estimates. Their role is to tie the geometric quantities to the character sums using the same parameters and selected classes. This compatibility is the substantial bridge between the arithmetic budget and the following analytic estimate.</p>
+
+  <h3 id="arithmetic-comparison">9. Obtain the square-root-scale prime-sum estimate.</h3>
+  <p>Once the compatible bounds are in place, the character-sum comparison yields, on the usable windows and beyond a threshold,</p>
+  <div class="technical-equation">\[
+    G_F(x)\le
+      x^{1/2+(e_D+e_L+6)\varepsilon}
+       +4o\,x^{1/2+\varepsilon}.
+  \]</div>
+  <p>The parameter \(o\) belongs to the fixed character level; \(e_D,e_L\) record losses in the comparison, with \(e_D+e_L\ge0\). The exponent \(1/2\) enters through this comparison of character sums and the geometric size estimates. It is not obtained by merely taking a square root of the cohomology budget.</p>
+  <p>The final simplification costs one extra \(\varepsilon\). For \(x\ge1\), the second power is no larger than the first. For sufficiently large \(x\), we also have \(1+4o\le x^\varepsilon\). Thus</p>
+  <div class="technical-equation">\[
+    \begin{aligned}
+    G_F(x)
+      &amp;\le(1+4o)x^{1/2+(e_D+e_L+6)\varepsilon}\\
+      &amp;\le x^{1/2+(e_D+e_L+7)\varepsilon}.
+    \end{aligned}
+  \]</div>
+  <p>All eventual thresholds can be met by choosing a sufficiently late available window. The important output is an estimate on the entire interval, with \(e_D,e_L\) fixed before \(\varepsilon\) is chosen. The host family and its thresholds may depend on \(\varepsilon\); those loss exponents do not.</p>
+
+  <h3 id="arithmetic-landau">10. Hand Landau precisely its required hypothesis.</h3>
+  <p>Fix a candidate zero with real part \(\sigma&gt;1/2\), and choose</p>
+  <div class="technical-equation">\[
+    \tfrac12&lt;\theta&lt;\min(1,\sigma).
+  \]</div>
+  <p>The construction works for every sufficiently small positive \(\varepsilon\). Since \(e_D,e_L\) were fixed earlier, choose \(\varepsilon\) small enough that</p>
+  <div class="technical-equation">\[
+    (e_D+e_L+7)\varepsilon\le\theta-\tfrac12.
+  \]</div>
+  <p>For \(x\ge1\), the preceding estimate now implies</p>
+  <div class="technical-equation">\[
+    G_F(x)\le x^\theta
+      \qquad\text{throughout arbitrarily late }[Z,Z^{3/2}].
+  \]</div>
+  <p>This is exactly the <a href="#landau-target">Landau window hypothesis</a> with \(C=1\) and \(\delta=1/2\). The <a href="#nv-landau">step-by-step Landau argument</a> excludes every family zero with real part greater than \(\theta\), and therefore excludes the candidate at real part \(\sigma\). The target character was retained in the fixed family, so the conclusion applies to it.</p>
+  <p>For each candidate point, one chooses a suitable positive \(\varepsilon\) and then an arbitrarily late window. There is no need for one common window to serve all candidate zeros, or for an estimate at the unavailable value \(\varepsilon=0\).</p>
+  <div class="technical-note"><p><strong>The arithmetic-to-analysis chain.</strong> Locally invisible cohomology classes are measured by logarithmic sizes. Their total fits an arithmetic budget on a whole interval. A geometric comparison absorbs that contribution, compatible character estimates produce the power \(1/2+O(\varepsilon)\), and Landau turns the resulting prime-sum windows into nonvanishing.</p></div>
+  <p class="source-callout"><strong>Selected source entry points.</strong> The existing companion contains the <a href="sources.html#nv-sha">cohomology definitions</a>, the <a href="sources.html#nv-vwin">arithmetic window statement</a>, and the <a href="sources.html#nv-core-gm">final prime-sum comparison</a>.</p>
+</section>
+
+        <section class="technical-section" id="nv-galois" aria-labelledby="nv-galois-title">
+  <p class="technical-kicker">From automorphic forms to arithmetic</p>
+  <h2 id="nv-galois-title">Build a representation that remembers the arithmetic.</h2>
+  <p>The cohomology estimates need a connection between automorphic forms and field symmetries. The Galois-representation theorem supplies that connection, with precise local restrictions. It is useful to separate what the representation is, what information it must retain, and how the source constructs it.</p>
+
+  <h3 id="galois-objects">1. Turn field symmetries into linear algebra.</h3>
+  <p>An automorphic representation \(\pi\) organizes symmetries of automorphic forms. A Galois representation assigns an invertible matrix to each automorphism of an algebraic closure, preserving composition:</p>
+  <div class="technical-equation">\[
+    r:G_E=\operatorname{Gal}(\overline E/E)\longrightarrow
+      \operatorname{GL}_a(\overline{\mathbb Q}_\ell),
+    \qquad r(gh)=r(g)r(h).
+  \]</div>
+  <p>Here \(E\) is a CM field, a totally imaginary quadratic extension of a totally real field, and \(\ell\) is a prime. The source starts with a regular algebraic cuspidal \(\pi\) of rank \(a\geq1\), satisfying its polarization condition. For each coefficient identification \(\iota:\overline{\mathbb Q}_\ell\cong\mathbb C\), the theorem supplies a continuous, semisimple \(r\). Semisimplicity means that the representation splits into irreducible pieces; continuity respects the Galois and \(\ell\)-adic topologies.</p>
+
+  <h3 id="galois-polynomials">2. Compare information that does not depend on a basis.</h3>
+  <p>A change of basis replaces a matrix \(A\) by \(BAB^{-1}\). Its entries change, but its characteristic polynomial and trace do not:</p>
+  <div class="technical-equation">\[
+    P_A(T)=\det(TI-A),\qquad
+    P_{BAB^{-1}}(T)=P_A(T),\qquad
+    \operatorname{tr}(BAB^{-1})=\operatorname{tr}(A).
+  \]</div>
+  <p>These invariants let arithmetic and automorphic constructions be compared without choosing the same basis. Frobenius is the local arithmetic operator whose eigenvalues enter familiar unramified comparisons. At ramified places, a Weil–Deligne parameter records both a Weil-group representation and a nilpotent monodromy operator \(N\). This section’s polynomial formula explains the language of the comparison; it does not assert unrestricted Frobenius compatibility. The actual local conclusions are stated below.</p>
+
+  <h3 id="galois-weights">3. Retain the infinity type and its conjugation symmetry.</h3>
+  <p>The theorem also supplies an integer \(\mathrm{wt}\) and integer multisets \(\mathrm{HT}(\tau)\), one for each embedding \(\tau:E\to\overline{\mathbb Q}_\ell\). If \(Z_{\iota\tau}\) denotes the automorphic infinitesimal-character multiset, the source fixes the normalization by</p>
+  <div class="technical-equation">\[
+    \{h:h\in\mathrm{HT}(\tau)\}
+      =\left\{\frac{a-1}{2}-z:z\in Z_{\iota\tau}\right\}.
+  \]</div>
+  <p>This is a multiset equality, retaining multiplicities and viewing the integers in \(\mathbb C\). Complex conjugation \(c_E\) on the CM field pairs the weights:</p>
+  <div class="technical-equation">\[
+    \mathrm{HT}(\tau\circ c_E)
+       =\{\mathrm{wt}-h:h\in\mathrm{HT}(\tau)\}.
+  \]</div>
+  <p>Thus a weight on one embedding determines its partner on the conjugate embedding. Above \(\ell\), the theorem identifies these multisets with the appropriate jumps under its comparison hypotheses. In the spherical local case it supplies crystalline and de Rham properties; the separate “nice” case supplies de Rham, potentially semistable, jump, and local-parameter conclusions under additional conditions. It does not declare every local component crystalline.</p>
+
+  <h3 id="galois-construction">4. Follow the construction from geometry to the final representation.</h3>
+  <p>The inspected construction begins with geometric realizations that supply initial Galois data. It combines these seeds with congruences, passes through a trace-limit theorem, and uses descent and theta lifting to reach a broader representation theorem. Traces are useful because they retain basis-independent information; producing a representation from limiting information is a substantive theorem in this chain.</p>
+  <p>The theta-lift input concerns unitary groups attached to Hermitian and skew spaces over the CM field. For sufficiently large target rank, it supplies a lift when the characters and weights satisfy the prescribed compatibility conditions. This is followed by local compatibility results and a passage to the exact theorem used by the arithmetic window. The assembly therefore supplies the Galois input through theorem constructions. Explaining the assembly does not reproduce the deeper geometric, congruence, trace-limit, or descent proofs.</p>
+
+  <h3 id="galois-local-restrictions">5. Keep the local conclusions at their stated strength.</h3>
+  <p>At a place \(v\nmid\ell\), write \(X_v\) for the Weil–Deligne data from \(r\), and \(Y_v\) for the parameter of the algebraically normalized local automorphic representation. The comparison always gives</p>
+  <div class="technical-equation">\[\dim X_v=\dim Y_v.\]</div>
+  <p>Under the source’s \(\mathrm{Tor}\) condition and \(N_{Y_v}=0\), it gives \(X_v=Y_v\). A different clause assumes the source’s tame and squarefree conditions, zero monodromy on \(Y_v\), a continuous field identification \(E_v\cong\mathbb Q_p\), and</p>
+  <div class="technical-equation">\[
+    a=1\quad\text{or}\quad16a^2&lt;p.
+  \]</div>
+  <p>That clause concludes</p>
+  <div class="technical-equation">\[
+    N_{X_v}=0,\qquad
+    P_{X_v(g)}(T)=P_{Y_v(g)}(T)
+      \quad\text{for every Weil element }g\text{ with }\deg g=0.
+  \]</div>
+  <p>The degree-zero restriction matters: it is not a blanket equality for arbitrary Frobenius powers. These are the local comparisons available for subsequent arithmetic arguments.</p>
+  <p class="source-callout">Selective source links: <a href="sources.html#nv-row-definition">representation, weight, and local conditions</a>; <a href="sources.html#nv-galois-construction">geometry, congruences, trace limits, and descent</a>.</p>
+</section>
+
+<section class="technical-section" id="nv-local-global" aria-labelledby="nv-local-global-title">
+  <p class="technical-kicker">A shared local language</p>
+  <h2 id="nv-local-global-title">Make both sides use the same local parameter.</h2>
+
+  <h3 id="local-parameter">1. Put the local automorphic data into a comparable form.</h3>
+  <p>A representation of \(\operatorname{GL}_n(E_v)\) is a different kind of object from a representation of the local Galois group. The local correspondence supplies a map into Weil–Deligne parameters:</p>
+  <div class="technical-equation">\[
+    \operatorname{rc}_v:
+      \{\text{irreducible local }\operatorname{GL}_n\text{ representations, all }n\}
+      \longrightarrow \{\text{Weil–Deligne parameters}\},
+    \qquad \dim\operatorname{rc}_v(\sigma)=n.
+  \]</div>
+  <p>Now both sides of the Galois comparison live in the same mathematical language. A Weil parameter describes local arithmetic symmetries; its monodromy operator retains extra ramification information that eigenvalues alone can miss.</p>
+
+  <h3 id="local-rank-one">2. Anchor the correspondence in one-dimensional reciprocity.</h3>
+  <p>In rank one, a smooth character \(\chi:E_v^\times\to\mathbb C^\times\) becomes a Weil-group character by composition with the local Artin map:</p>
+  <div class="technical-equation">\[
+    \operatorname{Art}_v:W_{E_v}\longrightarrow E_v^\times,
+    \qquad \operatorname{rc}_v(\chi)=\chi\circ\operatorname{Art}_v.
+  \]</div>
+  <p>This fixes the rank-one normalization. In higher rank, the source first supplies parameters on cuspidal representations, then extends them using Langlands multisegments. Its laws preserve dimension, describe this extension, send cuspidal representations to irreducible parameters, and respect real norm twists.</p>
+
+  <h3 id="local-good">3. Preserve the hypotheses on the stronger laws.</h3>
+  <p>Several further laws require the source’s condition \(\mathrm{Good}\). It asks that the cuspidal support consist of rank-one pieces or specified character twists of representations having nonzero \(K_1\)-fixed vectors, with a local-field condition. Twisting, exact central-character compatibility, duality, injectivity, and the stated depth implication retain this restriction.</p>
+  <p>For example, the injectivity clause reads</p>
+  <div class="technical-equation">\[
+    \mathrm{Good}(\sigma_2),\quad
+    \operatorname{rc}_v(\sigma_1)=\operatorname{rc}_v(\sigma_2)
+       \quad\Longrightarrow\quad \sigma_1=\sigma_2.
+  \]</div>
+  <p>Removing the first hypothesis would assert more than the inspected theorem. The same discipline applies when these laws are used to compare Galois and automorphic data.</p>
+
+  <h3 id="local-existence">4. Supply the map, then use its laws.</h3>
+  <p>The existence theorem chooses an Artin map, chooses cuspidal parameters, extends them by multisegments, and verifies the required laws through extension theorems. The Galois theorem quantifies over maps satisfying precisely these laws. Consequently, the local existence theorem supplies an admissible map and the Galois theorem supplies its comparison with the arithmetic representation. This shared condition is what lets the two constructions fit together.</p>
+  <p class="source-callout">Selective source links: <a href="sources.html#nv-rec-t">the local laws and the Good restriction</a>; <a href="sources.html#nv-rec-exists">construction of the local correspondence</a>.</p>
+</section>
+
+
+<section class="technical-section" id="nv-literature" aria-labelledby="nv-literature-title">
+  <p class="technical-kicker">The theta and representation branch</p>
+  <h2 id="nv-literature-title">Make two descriptions carry the same information.</h2>
+  <p>The theta branch connects local representation data to global integrals, test vectors, and evaluation conditions. Its role is to make the arithmetic and geometric estimates apply to one compatible construction. We can follow this connection in six steps, keeping the deep comparison theorems explicit.</p>
+
+  <h3 id="theta-integrals">1. Form an integral, then justify that it converges.</h3>
+  <p>A test function \(\Phi\) is an input that we can vary. The Weil representation \(\omega(g,h)\) transforms it using elements of two unitary groups. The model’s theta sum turns the transformed function into \(\theta_\Phi(g,h)\). Integrating in the first variable leaves a function of the second:</p>
+  <div class="technical-equation">\[
+    \theta_\Phi(g,h)=\Theta\bigl(\omega(g,h)\Phi\bigr),
+    \qquad
+    I(\Phi,h)=\int_{\mathcal D}\theta_\Phi(g,h)\,d\mu(g).
+  \]</div>
+  <p>Here \(\Theta\), \(\mathcal D\), and \(\mu\) abbreviate the model’s theta sum, integration domain, and measure. The point is that a local-to-global construction has produced something on which analytic operations can act. An integral symbol alone does not justify those operations: the source separately requires integrability for every allowed \(h\), and supplies decay and moderate-growth conditions for the specified test spaces. These conditions control the behavior at infinity.</p>
+
+  <h3 id="theta-matching">2. Match the local images of the test functions.</h3>
+  <p>The two models use different test spaces. Matching does not mean that their functions are equal. Instead, local maps send both spaces to common representation spaces. At infinity call the maps \(p_\infty,p'_\infty\); at a finite place \(v\), call them \(p_v,p'_v\). For a single tensor, the matching condition has the schematic form</p>
+  <div class="technical-equation">\[
+    p_\infty(\phi_\infty)\otimes\bigotimes_{v\in T}p_v(\phi_v)
+    =
+    p'_\infty(\phi'_\infty)\otimes\bigotimes_{v\in T}p'_v(\phi'_v).
+  \]</div>
+  <p>The finite set \(T\) includes the exceptional places; outside it, the construction uses prescribed vacuum vectors. The actual definition allows finite sums of tensors, then extends matching through specified limiting sequences. This retains the shared representation-theoretic information while allowing different formulas on the two sides. The local matching theorem supplies the required maps under the admissibility hypotheses.</p>
+
+  <h3 id="theta-proportionality">3. Transfer information through a nonzero scalar.</h3>
+  <p>For fixed admissible models and matching maps, the global comparison supplies a unique constant \(c\ne0\) such that every matched pair satisfies</p>
+  <div class="technical-equation">\[
+    I(\Phi,h)=c\,I'(\Phi',h),\qquad
+    I'(\Phi',h)=c^{-1}I(\Phi,h).
+  \]</div>
+  <p>The same constant works throughout this comparison; it is not chosen anew at each \(h\). Consequently, for matched data,</p>
+  <div class="technical-equation">\[
+    I(\Phi,h)=0\ \Longleftrightarrow\ I'(\Phi',h)=0,
+    \qquad |I(\Phi,h)|=|c|\,|I'(\Phi',h)|.
+  \]</div>
+  <p>The second identity also shows why normalizations matter: comparison does not make \(|c|=1\). The source additionally supplies a nonzero integral on the second side and identities relating successive lift stages. It does not assert that every test function gives a nonzero integral. These are comparison inputs, not yet the desired nonvanishing theorem for Dirichlet L-functions.</p>
+  <p class="source-callout"><a href="sources.html#nv-theta-matching">Matching, convergence, and the nonzero proportionality constant.</a></p>
+
+  <h3 id="theta-test-vectors">4. Choose test vectors that detect the required information.</h3>
+  <p>An identity between families of integrals becomes useful only after choosing inputs that detect the features we need. The source combines the comparison with separation results for functionals, constructs rational test-vector data, and proves a Fourier-coefficient fitting condition. Rationality is what allows these analytic constructions to interact with arithmetic structures.</p>
+  <p>The elementary linear-algebra picture of separation is helpful. A family of linear measurements \(\lambda_i\) separates vectors when</p>
+  <div class="technical-equation">\[
+    \bigcap_i\ker\lambda_i=\{0\}.
+  \]</div>
+  <p>Then agreement on every measurement forces agreement of the vectors: apply the equation to their difference. This is the intuition for the detection step, not a replacement for the source’s functional and Fourier-fitting hypotheses. Its actual construction also needs local matching, compatible characters, and the specified automorphic inputs to obtain usable test vectors and an evaluation grid.</p>
+
+  <h3 id="theta-thresholds">5. Put the grid and the functional bounds at one scale.</h3>
+  <p>Two construction theorems supply eventual thresholds. Write \(C_{\mathrm{grid}}\) for the threshold of the evaluation-grid theorem and \(C_{\mathrm{fun}}\) for the threshold of the functional theorem. Once the other compatibility hypotheses hold, each conclusion is available for every sufficiently large parameter. Set</p>
+  <div class="technical-equation">\[
+    C_*=\max\{C_{\mathrm{grid}},C_{\mathrm{fun}}\}.
+  \]</div>
+  <p>Both comparisons now apply:</p>
+  <div class="technical-equation">\[
+    C_*\ge C_{\mathrm{grid}},\qquad
+    C_*\ge C_{\mathrm{fun}}
+    \quad\Longrightarrow\quad
+    \text{both conclusions hold at }C_*.
+  \]</div>
+  <p>This is an actual step in the assembly. It works because the statements hold beyond their thresholds. Two unrelated existence assertions, each at one unspecified parameter, would not justify taking a maximum.</p>
+
+  <h3 id="theta-compatible-data">6. Carry the geometry into that same construction.</h3>
+  <p>The proof fixes the local correspondence, uses the grid at \(C_*\), and passes to an extended parameter system retaining the required compatibility conditions. A transport theorem supplies the covolume estimate for these same parameters. The Galois estimate and functional condition are assembled there too.</p>
+  <p>Logically, the required output has the form</p>
+  <div class="technical-equation">\[
+    \exists D,\quad
+    \mathcal A(D)\ \land\ \mathcal F(D)\ \land\ \mathcal G(D),
+  \]</div>
+  <p>where \(\mathcal A,\mathcal F,\mathcal G\) schematically denote the arithmetic, functional, and geometric conditions. Separate witnesses for each condition would not suffice. The resulting compatible family feeds the aggregate prime-sum estimate, together with the Green input; the arithmetic window then supplies the character-specific data used by Landau.</p>
+  <p class="source-callout"><a href="sources.html#nv-theta-bridge">The test-vector, common-threshold, and covolume assembly.</a></p>
+  <details class="landau-detail"><summary>What does the “literature” package assume?</summary><p>The top-level package has three fields: two copies of the Galois-representation contract and existence of the local correspondence. The final assembly supplies those fields and constructs the larger representation-theoretic, theta, and geometric packages through imported theorems. A helper’s name ending in “of literature” does not by itself identify an extra assumption. <a href="sources.html#nv-literature">Inspect the package and its final application.</a></p></details>
+</section>
+
+
+<section class="technical-section" id="nv-geometric" aria-labelledby="nv-geometric-title">
+  <p class="technical-kicker">The geometric estimate</p>
+  <h2 id="nv-geometric-title">From lattice geometry to a usable covolume bound.</h2>
+  <p>The geometric branch controls the integral lattices underlying the automorphic construction. Its key mechanism is quantitative: removing a very small collection of bad directions costs little, provided their slopes cannot be too large. A lower bound for the remaining lattice’s slope becomes an upper bound for the logarithmic-covolume quantity used later.</p>
+
+  <h3 id="geometric-lattice">1. Understand what a covolume measures.</h3>
+  <p>As a model, take a full lattice \(\Lambda\subset\mathbb R^n\), with basis vectors forming the columns of a matrix \(B\). Its covolume is the volume of one fundamental parallelepiped:</p>
+  <div class="technical-equation">\[
+    \operatorname{covol}(\Lambda)=|\det B|
+      =\sqrt{\det(B^{\mathsf T}B)}.
+  \]</div>
+  <p>The Gram matrix \(B^{\mathsf T}B\) records lengths and angles. Rescaling every vector by \(t&gt;0\) multiplies the covolume by \(t^n\). Consequently the model slope \(\mu_{\mathrm{toy}}=-\log\operatorname{covol}(\Lambda)/n\) changes by \(-\log t\). This explains the sign: a lower slope bound prevents the lattice’s fundamental volume from growing too much. The source uses arithmetic lattices over a number field, norms at its embeddings, and its own normalized squared-norm slopes; this Euclidean model motivates the calculation without replacing those definitions.</p>
+
+  <h3 id="geometric-core">2. Put the two slope comparisons together.</h3>
+  <p>Fix an eligible family, a sufficiently large scale \(x\), a compatible point, and a lift index \(i\). Write \(E_i\) for the positive error scale called <code>unitE</code>, \(T_i\) for <code>mainT</code>, and \(\mu_{\mathrm{core}},\mu_{\mathrm{type}},\mu_{\mathrm{good}}\) for the three source slopes. Two geometric inputs give, with fixed \(C_1,C_2\ge0\),</p>
+  <div class="technical-equation">\[
+    \mu_{\mathrm{core}}\ge -T_i-C_2E_i,
+    \qquad
+    \mu_{\mathrm{type}}\ge\mu_{\mathrm{core}}-C_1E_i.
+  \]</div>
+  <p>Substitution supplies the first useful bound:</p>
+  <div class="technical-equation">\[
+    \mu_{\mathrm{type}}\ge -T_i-(C_1+C_2)E_i.
+  \]</div>
+  <p>The first inequality comes from the deeper geometric construction. The second controls the loss when comparing that construction with the lattice at this lift stage. The main term \(T_i\) may have either sign; the positive scale \(E_i\) measures the allowed error. We still need to pass to the good part of the lattice.</p>
+
+  <h3 id="geometric-projection">3. Project onto good directions without losing integrality.</h3>
+  <p>The projection \(P\) is idempotent and orthogonal at every relevant embedding:</p>
+  <div class="technical-equation">\[
+    P^2=P,\qquad
+    \|Pv+(w-Pw)\|_\sigma^2
+      =\|Pv\|_\sigma^2+\|w-Pw\|_\sigma^2.
+  \]</div>
+  <p>Orthogonality controls the norms, but a rational projection need not preserve an integral lattice. The source therefore also supplies a positive integer \(N\) clearing its denominators:</p>
+  <div class="technical-equation">\[
+    NP(\Lambda_{\mathrm{type}})\subseteq\Lambda_{\mathrm{type}},
+    \qquad 2\log N\le b\le E_i.
+  \]</div>
+  <p>The denominator cost is thus paid for by the same error budget. This is why a vector-space decomposition alone would be insufficient.</p>
+
+  <h3 id="geometric-bad">4. Bound both the number and the size of bad directions.</h3>
+  <p>Set \(\delta(x)=\exp(-x^{\eta/7})\), where \(\eta&gt;0\) is fixed within the family. The source combines an exponentially small bad-rank proportion with a polynomial ceiling for the maximal slope:</p>
+  <div class="technical-equation">\[
+    \operatorname{rk}\Lambda_{\mathrm{bad}}
+      \le 3\delta(x)\operatorname{rk}\Lambda_{\mathrm{type}},
+    \qquad \mu_{\max}\le x^A b.
+  \]</div>
+  <p>Its size conditions also give \(|T_i|\le x^B b\) and \(1\le b\le E_i\le x^B b\). These ingredients, together with the projection conditions and a nonzero good lattice, yield the precise slope-loss estimate</p>
+  <div class="technical-equation">\[
+    \mu_{\mathrm{good}}\ge\mu_{\mathrm{type}}-\mathcal E_i(x),
+    \qquad
+    \mathcal E_i(x)=
+      12\delta(x)\bigl(x^A+x^B+C_1+C_2+1\bigr)E_i.
+  \]</div>
+  <p>The small rank proportion controls how much can be discarded; the slope ceiling controls how expensive each discarded direction can be. Both are necessary.</p>
+
+  <h3 id="geometric-absorption">5. Absorb the loss and reverse the slope inequality.</h3>
+  <p>For fixed \(A,B,C_1,C_2,\eta\), exponential decay dominates every polynomial:</p>
+  <div class="technical-equation">\[
+    12e^{-x^{\eta/7}}
+      \bigl(x^A+x^B+C_1+C_2+1\bigr)\longrightarrow0.
+  \]</div>
+  <p>To see why, put \(c=\eta/7&gt;0\). For any fixed exponent \(A\),</p>
+  <div class="technical-equation">\[
+    e^{-x^c}x^A=\exp(A\log x-x^c)\longrightarrow0,
+    \qquad \frac{\log x}{x^c}\longrightarrow0.
+  \]</div>
+  <p>The negative term \( -x^c\) eventually dominates the logarithmic term. The same argument handles \(B\), and a fixed constant times \(e^{-x^c}\) also tends to zero. The conclusion concerns the error divided by \(E_i\), so it remains useful even when \(E_i\) itself grows.</p>
+  <p>Beyond a family-dependent threshold this factor is at most one, hence \(\mathcal E_i(x)\le E_i\). Combining the preceding steps gives</p>
+  <div class="technical-equation">\[
+    \mu_{\mathrm{good}}
+      \ge -T_i-(C_1+C_2+1)E_i.
+  \]</div>
+  <p>Write \(\mathcal C_i\) for the source’s normalized logarithmic-covolume expression, namely its <code>lcv</code> quantity divided by the positive degree parameter \(D\). The recursive comparison states \(\mathcal C_i\le-\mu_{\mathrm{good}}\). Negating the last lower bound now gives the desired upper bound:</p>
+  <div class="technical-equation">\[
+    \boxed{\mathcal C_i
+      \le-\mu_{\mathrm{good}}
+      \le T_i+(C_1+C_2+1)E_i.}
+  \]</div>
+  <p>This is the numerical mechanism of the covolume estimate. <a href="sources.html#nv-covolume-ingredients">The constituent inequalities</a> specify the lattices, norms, and compatibility hypotheses. The loss calculation above follows the archive’s <code>CovolumeFromGramAndBounds.lean</code>, theorem <code>lcv_le</code>.</p>
+
+  <h3 id="geometric-foundations">6. Identify the deeper geometric work behind the lower bound.</h3>
+  <p>The difficult starting inequality for \(\mu_{\mathrm{core}}\) is supplied through deep covers, degree and rank comparisons, height bounds, arithmetic Hilbert–Samuel estimates, and controlled descent maps. A representative step compares total arithmetic degree with total rank:</p>
+  <div class="technical-equation">\[
+    2\,\frac{\sum_Z\deg_Z}{\sum_Z r_Z}
+      \le \mu_{\mathrm{cover}},
+    \qquad \sum_Z r_Z&gt;0.
+  \]</div>
+  <p>Lower bounds for the left-hand side therefore give lower bounds for the cover’s slope. Descent and norm comparisons carry that information back to the core. Toroidal models and Hodge bundles supply the geometric objects; resolution, positivity, and deformation results support the height and section estimates. <a href="sources.html#nv-covolume-proof">The geometric assembly</a> shows where those inputs enter. The inequalities above explain their role; their individual construction proofs remain deeper dependencies.</p>
+
+  <h3 id="geometric-handoff">7. Make the estimate uniform and carry it to the same data.</h3>
+  <p>The constants and thresholds are chosen for an eligible family, before the later point and lift index. With \(C_0=C_1+C_2+1\), the result has the order of quantifiers</p>
+  <div class="technical-equation">\[
+    \exists C_0\ge0,\ x_0\quad
+    \forall x\ge x_0,\ \forall\text{ eligible }p,\ \forall i,
+    \forall C\ge C_0:\quad
+    \mathcal C_i(p)\le T_i(p)+CE_i(p).
+  \]</div>
+  <p>Eligibility includes the family’s base threshold and the required correspondence ties. Taking the maximum of finitely many thresholds makes the component bounds hold together. The <a href="sources.html#nv-linked-covolume">transport theorem</a> then carries this estimate to the compatible selections used by the theta and Galois branches. It becomes one geometric input to the <a href="#arithmetic-comparison">prime-sum comparison</a>; the cohomology bound supplies another. The ensuing interval estimate is what the Landau argument can use.</p>
+</section>
+
+
+<section class="technical-section" id="nv-assembly" aria-labelledby="nv-assembly-title">
+  <p class="technical-kicker">The final assembly</p>
+  <h2 id="nv-assembly-title">Choose the parameters, then exclude a zero.</h2>
+  <p>The final assembly is more than a list of inputs. The constructions must refer to the same data, their constants must be chosen in the right order, and their estimates must hold throughout the intervals used by the analytic argument. Here is that logic with the intermediate inequalities made explicit.</p>
+
+  <h3 id="assembly-witness">1. Obtain one family satisfying all the required conditions.</h3>
+  <p>The theta, geometric, and Galois constructions supply a compatible family. Schematically, the assertion is</p>
+  <div class="technical-equation">\[
+    \exists D,\quad \mathcal A(D)\land\mathcal F(D)\land\mathcal G(D),
+  \]</div>
+  <p>where the three predicates stand for the required arithmetic, functional, and geometric conditions. This single witness matters: an arithmetic bound for one family and a geometric bound for an unrelated family cannot be substituted into the same comparison. The source’s constructor also includes the definite-side condition needed downstream. It constructs these conditions without assuming Dirichlet nonvanishing.</p>
+
+  <h3 id="assembly-order">2. Fix the loss exponents before choosing a small parameter.</h3>
+  <p>Fix the analytic character family \(\mathcal F\), so its prime-sum error \(G_{\mathcal F}\) is fixed. The compatible arithmetic and geometric data, together with the Green representation input, supply the aggregate comparison. The arithmetic window provides a realization for that character family. After these steps, the useful numerical conclusion has the form</p>
+  <div class="technical-equation">\[
+    G_{\mathcal F}(x)\le x^{1/2+A\varepsilon},
+    \qquad A=e_D+e_L+7,
+  \]</div>
+  <p>on the permitted windows, beyond a threshold. Crucially, the exponents \(e_D,e_L\) and a positive admissibility limit \(\varepsilon_*\) are fixed before \(\varepsilon\) is chosen. Suitable auxiliary realizations are available for every \(0&lt;\varepsilon&lt;\varepsilon_*\). The realization and the eventual scale may depend on \(\varepsilon\); the analytic character family \(\mathcal F\) remains fixed. If \(A\) were allowed to grow like \(1/\varepsilon\), shrinking \(\varepsilon\) would not necessarily bring the exponent toward one half.</p>
+  <p>The earlier <a href="#arithmetic-comparison">arithmetic comparison</a> explains the numerical bound. The deeper Green representation theorem remains an input at this stage; the parameter calculation below does not replace its proof.</p>
+
+  <h3 id="assembly-epsilon">3. Place the error exponent strictly before a candidate zero.</h3>
+  <p>Suppose a candidate zero has real part \(\sigma&gt;1/2\), away from the pole exception. Define a positive margin and an intermediate exponent by</p>
+  <div class="technical-equation">\[
+    m=\min\{\sigma-\tfrac12,\tfrac12\},
+    \qquad \theta=\tfrac12+\frac m2.
+  \]</div>
+  <p>Because \(0&lt;m\le1/2\) and \(m\le\sigma-1/2\), we have</p>
+  <div class="technical-equation">\[
+    \tfrac12&lt;\theta\le\tfrac34&lt;1,
+    \qquad
+    \theta\le\tfrac12+\frac{\sigma-1/2}{2}&lt;\sigma.
+  \]</div>
+  <p>Now choose, for example,</p>
+  <div class="technical-equation">\[
+    \varepsilon=
+      \min\left\{\frac{\varepsilon_*}{2},
+                 \frac{m}{2(|A|+1)}\right\}.
+  \]</div>
+  <p>Both entries are positive, so \(0&lt;\varepsilon&lt;\varepsilon_*\). Moreover,</p>
+  <div class="technical-equation">\[
+    A\varepsilon\le |A|\varepsilon
+      \le\frac{|A|}{|A|+1}\frac m2
+      \le\frac m2,
+    \qquad \tfrac12+A\varepsilon\le\theta&lt;\sigma.
+  \]</div>
+  <p>The absolute value makes the choice valid for any fixed real \(A\). This is the explicit reason “arbitrarily close to one half” is enough to rule out every fixed point strictly to its right. No uniform positive distance from the critical line is assumed.</p>
+
+  <h3 id="assembly-window">4. Choose a late window after all thresholds are known.</h3>
+  <p>Let \(X_*\ge1\) dominate the finitely many thresholds needed for the comparison and this choice of \(\varepsilon\). The window theorem supplies arbitrarily late intervals; with the final assembly’s parameter \(3/2\), choose</p>
+  <div class="technical-equation">\[
+    Z\ge X_*,
+    \qquad x\in[Z,Z^{3/2}].
+  \]</div>
+  <p>Every point in that interval satisfies \(x\ge1\). Increasing an exponent therefore increases the corresponding power, and step 3 gives</p>
+  <div class="technical-equation">\[
+    G_{\mathcal F}(x)
+       \le x^{1/2+A\varepsilon}
+       \le x^\theta
+       \qquad(Z\le x\le Z^{3/2}).
+  \]</div>
+  <p>This is an upper bound, not an absolute-value estimate. The Landau theorem used here is designed for precisely that one-sided information. A maximum of thresholds is legitimate because the estimates hold at all later eligible scales; the existence of arbitrarily late windows then places a whole interval beyond that maximum.</p>
+
+  <h3 id="assembly-landau">5. Apply the analytic criterion at the chosen exponent.</h3>
+  <p>The <a href="#nv-landau">Landau argument</a> excludes zeros with real part greater than \(\theta\) from the selected character family. The hypothetical zero satisfies \(\sigma&gt;\theta\), so it is excluded. Since the candidate point was arbitrary, the primitive-character conclusion holds throughout \(\operatorname{Re}s&gt;1/2\), apart from the pole exception.</p>
+  <p>There is no need to take a limiting theorem at \(\theta=1/2\). For each proposed zero, a single choice of \(\theta\) strictly between one half and its real part is sufficient.</p>
+
+  <h3 id="assembly-all-characters">6. Pass to all characters, then reflect.</h3>
+  <p>If \(\chi\) modulo \(q\) is induced from a primitive character \(\chi^*\) of conductor \(q^*\), then at the permitted points \(\chi\ne\mathbf1\) or \(s\ne1\), the finite Euler-factor identity is</p>
+  <div class="technical-equation">\[
+    L(s,\chi)=L(s,\chi^*)
+      \prod_{\substack{p\mid q\\p\nmid q^*}}
+        \bigl(1-\chi^*(p)p^{-s}\bigr).
+  \]</div>
+  <p>For \(\sigma=\operatorname{Re}s&gt;0\), each extra factor is nonzero, because</p>
+  <div class="technical-equation">\[
+    |\chi^*(p)p^{-s}|\le p^{-\sigma}&lt;1.
+  \]</div>
+  <p>Thus the primitive nonvanishing result extends to all Dirichlet characters at the permitted points. The functional equation then sends a left-hand zero in the critical strip to a forbidden right-hand zero for the inverse primitive character. The <a href="#reflection">next argument</a> checks the gamma factors and endpoint conditions needed for that last deduction.</p>
+  <p class="source-callout">Selective source links: <a href="sources.html#nv-top-win">the fixed-exponent and small-parameter argument</a>; <a href="sources.html#nv-top-plug">the Green, window, and final nonvanishing assembly</a>.</p>
+</section>
+
+
+<div class="technical-part-banner technical-part-release"><p class="technical-kicker">The final deduction</p><h2>From nonvanishing to the critical line.</h2><p>Having located the theorem that supplies the input, we now explain the short conditional deduction in full. The argument below can also be read independently by assuming H as stated above.</p></div>
+<!-- nonvanishing-chapter:end -->
+        <section class="technical-section" id="reflection" aria-labelledby="reflection-title">
+          <p class="technical-kicker">The theorem</p>
+          <h2 id="reflection-title">A zero in the strip must lie on the line.</h2>
+          <div class="technical-note">
+            <p><strong>Conditional critical-line theorem.</strong> Assume \(H\). Let \(q\ge1\), let \(\chi\) be primitive modulo \(q\), and let \(s\in\mathbb C\) satisfy \(0&lt;\operatorname{Re}s&lt;1\). If \(L(s,\chi)=0\), then \(\operatorname{Re}s=\tfrac12\).</p>
+          </div>
+          <p>This is the mathematical content of <code>Formalism.VW.critLine</code>. It uses the classical functional equation and gamma-factor properties just described. Its two cases have a simple purpose: a zero on the right contradicts \(H\) immediately; a zero on the left is moved to the right before applying \(H\).</p>
+          <p>The strip assumptions also give \(s\ne0\) and \(s\ne1\). After reflection, they give \(1-s\ne0\) and \(1-s\ne1\). Thus every evaluation used below avoids the exceptional endpoints.</p>
+
+          <div id="proof">
+            <h3>Suppose the zero is off the line.</h3>
+            <p>Write \(\sigma=\operatorname{Re}s\), and assume for a contradiction that \(\sigma\ne\tfrac12\). The order on the real numbers gives exactly two possibilities: \(\sigma&gt;\tfrac12\) or \(\sigma&lt;\tfrac12\).</p>
+
+            <h3>On the right, apply the input directly.</h3>
+            <p>If \(\sigma&gt;\tfrac12\), apply \(H\) with \(\psi=\chi\) and \(w=s\). The half-plane condition holds by this case assumption. The pole exception is satisfied because \(s\ne1\), even if \(\chi\) is principal. We obtain \(L(s,\chi)\ne0\), contradicting the hypothesized zero.</p>
+
+            <h3>On the left, first complete the zero.</h3>
+            <p>Now suppose \(\sigma&lt;\tfrac12\). Because \(0&lt;\sigma\), the completion factor at \(s\) is finite and nonzero. Multiplying the zero \(L(s,\chi)=0\) by that factor yields</p>
+            <div class="technical-equation">\[\Lambda(s,\chi)=0.\]</div>
+            <p>There is no limiting or numerical step here. The completion is an ordinary product of well-defined complex values at this point. The positivity of the real part has ruled out gamma poles.</p>
+
+            <h3>Reflect the zero and invert the character.</h3>
+            <p>The character \(\overline\chi=\chi^{-1}\) is primitive and has the same parity and conductor. Apply its functional equation at \(1-s\). Since taking the conjugate twice returns \(\chi\), it gives</p>
+            <div class="technical-equation">
+              \[\Lambda(1-s,\overline\chi)
+                =\varepsilon(\overline\chi)\Lambda(s,\chi)=0.\]
+            </div>
+            <p>In this direction, only multiplication by the functional-equation factor is needed. The source makes the same choice by applying the functional equation for the inverse character.</p>
+
+            <h3>Remove the completion on the right.</h3>
+            <p>Put \(w=1-s\). Its real part satisfies</p>
+            <div class="technical-equation">
+              \[\operatorname{Re}w=1-\sigma&gt;\tfrac12,
+                \qquad 0&lt;\operatorname{Re}w&lt;1.\]
+            </div>
+            <p>The completion factor for \(\overline\chi\) at \(w\) is again finite and nonzero. Dividing the completed zero by it therefore gives \(L(w,\overline\chi)=0\).</p>
+            <p>But \(H\) applies to exactly this character and this point. We have \(\operatorname{Re}w&gt;\tfrac12\), and \(w\ne1\) because \(s\ne0\). It follows that \(L(w,\overline\chi)\ne0\), the required contradiction.</p>
+
+            <h3>Both alternatives are impossible.</h3>
+            <p>A zero in the open strip can be neither to the right nor to the left of the critical line. Hence \(\operatorname{Re}s=\tfrac12\). This completes the conditional proof.</p>
+          </div>
+        </section>
+
+        <section class="technical-section" id="lean" aria-labelledby="lean-title">
+          <p class="technical-kicker">Trace the argument</p>
+          <h2 id="lean-title">The same steps in the formal source.</h2>
+          <p>The source takes \(H\) as the explicit argument <code>h : UpperTheory.EveryCharacter</code>. It proves the left-side case first; changing that presentation order has no mathematical effect.</p>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th scope="col">Mathematical step</th><th scope="col">Source expression</th></tr></thead>
+              <tbody>
+                <tr><td>Exclude the endpoints.</td><td><code>hs0</code> and <code>hs1</code> follow from <code>h0</code> and <code>h1</code>.</td></tr>
+                <tr><td>Split into the two off-line cases.</td><td><code>by_contra hne</code>, then <code>lt_or_gt_of_ne hne</code>.</td></tr>
+                <tr><td>Preserve primitivity under inversion.</td><td><code>hinv</code> uses <code>conductor_inv</code>.</td></tr>
+                <tr><td>Obtain the completed zero.</td><td><code>hc</code> uses <code>LFunction_eq_completed_div_gammaFactor</code> and <code>gammaFactor_ne_zero</code>.</td></tr>
+                <tr><td>Reflect using the inverse character.</td><td><code>hinv.completedLFunction_one_sub s</code>, followed by rewriting with <code>hc</code>.</td></tr>
+                <tr><td>Contradict the half-plane input.</td><td><code>h N χ⁻¹ (1 - s)</code> for the left case; <code>h N χ s</code> for the right case.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The helper <code>gammaFactor_ne_zero</code> splits into even and odd characters. It applies gamma nonvanishing at \(s\) in the even case and at \(s+1\) in the odd case. The inequality \(0&lt;\operatorname{Re}s\) supplies the needed positivity in both branches.</p>
+          <p>Lean defines division for every field element, including zero denominators. That is why the first conversion from the quotient identity explicitly excludes a zero gamma factor: one cannot infer that the numerator is zero from a zero quotient without that check. The conventional analytic presentation above also records where the factors are finite and nonzero. <a href="sources.html#crit-line">Read the complete source snapshot.</a></p>
+        </section>
+
+        <section class="technical-section" id="scope" aria-labelledby="scope-title">
+          <p class="technical-kicker">The boundary of this chapter</p>
+          <h2 id="scope-title">The conclusion is conditional on the input.</h2>
+          <p>The final deduction explains the full implication from \(H\) to the primitive-character critical-line statement. The source separately derives the all-character strip statement, and specializes the nonvanishing input to modulus one to obtain a zeta result. Its <code>rh_of_right</code> lemma explicitly treats the trivial-zero exclusions when deriving <code>RiemannHypothesis</code>. <a href="sources.html#rh-of-right">Inspect that separate zeta deduction.</a></p>
+          <p>The functional equation alone would only pair off-line zeros; it would not forbid them. The force of this proof comes from \(H\), which rules out the reflected zero. The nonvanishing chapter explains the source’s route to \(H\), including the quantitative analytic criterion and its principal arithmetic dependencies. Fully reconstructing every supporting proof remains a larger task.</p>
+          <p>The downloaded files have been checked for complete extraction. The Lean project has not been compiled or independently audited for this website. The source links record what the files state; they do not stand in for a successful formal verification run. <a href="sources.html">Read the provenance and review status.</a></p>
+          <div class="technical-hero-actions">
+            <a class="button button-dark" href="index.html#proof-map">Place this argument on the map</a>
+            <a href="sources.html#main">Inspect the exported claims</a>
+          </div>
+        </section>
+      </article>
+    </div>
+  </main>
+  <footer class="site-footer page-width">
+    <div class="footer-brand">Riemann, <em>line by line.</em></div>
+    <p>A source-linked reading of Alpöge’s released Lean argument.<br>First edition · 20 November 2026.</p>
+    <a class="back-top" href="#top">Back to top</a>
+  </footer>
+</body>
+</html>

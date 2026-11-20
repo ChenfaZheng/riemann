@@ -1,0 +1,763 @@
+{
+  "edition": "2026-11-20",
+  "downloadDate": "2026-11-20",
+  "origin": "https://alpo.ge/",
+  "archive": {
+    "file": "lean.tar.gz",
+    "localPath": "alpo-proof/lean.tar.gz",
+    "bytes": 239275554,
+    "sha256": "9631b4f020199e580ba86178cb56c6e9b09f690c2369a80dc4334aa93f49c7fc",
+    "partUrls": [
+      "https://alpo.ge/lean.tar.gz.part01",
+      "https://alpo.ge/lean.tar.gz.part02",
+      "https://alpo.ge/lean.tar.gz.part03",
+      "https://alpo.ge/lean.tar.gz.part04",
+      "https://alpo.ge/lean.tar.gz.part05",
+      "https://alpo.ge/lean.tar.gz.part06",
+      "https://alpo.ge/lean.tar.gz.part07",
+      "https://alpo.ge/lean.tar.gz.part08",
+      "https://alpo.ge/lean.tar.gz.part09",
+      "https://alpo.ge/lean.tar.gz.part10",
+      "https://alpo.ge/lean.tar.gz.part11",
+      "https://alpo.ge/lean.tar.gz.part12",
+      "https://alpo.ge/lean.tar.gz.part13",
+      "https://alpo.ge/lean.tar.gz.part14"
+    ],
+    "includedInSite": false
+  },
+  "leanToolchain": "leanprover/lean4:v4.33.1",
+  "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "verification": {
+    "downloadAndExtraction": "Downloaded part lengths checked; 175190 extracted file paths and lengths checked against the archive.",
+    "sourceSnapshots": "Selected files copied byte-for-byte; SHA-256 recorded for the archive and each snapshot.",
+    "leanBuild": "not performed",
+    "axiomAudit": "not performed",
+    "mathematicalReview": "Source-linked exposition of the nonvanishing theorem and its principal dependencies, plus a complete conditional critical-line deduction. This does not independently validate the complete claimed proof."
+  },
+  "files": [
+    {
+      "id": "main",
+      "localPath": "references/lean/Main.lean",
+      "archivePath": "lean/src/Main.lean",
+      "module": "Main",
+      "bytes": 433,
+      "sha256": "017645ca448f2fd1f6fd5c4c2cb2c6e96e472725be13f6e180ca6e1574360939",
+      "lineCount": 12
+    },
+    {
+      "id": "statements",
+      "localPath": "references/lean/Statements.lean",
+      "archivePath": "lean/src/Statements.lean",
+      "module": "Statements",
+      "bytes": 783,
+      "sha256": "79ef7ca776e42abe1f46caee13ea09bd19f1e2d0b1620d8d5d200258f33b47bf",
+      "lineCount": 16
+    },
+    {
+      "id": "every-character",
+      "localPath": "references/lean/EveryCharacter.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/CharacterBoxes/EveryCharacter.lean",
+      "module": "Development.AutomorphicArithmetic.CharacterBoxes.EveryCharacter",
+      "bytes": 1215,
+      "sha256": "31f6e49936226cfc3d71b15685347bd2874db0aef384e5cf4fea7d09ba68dc71",
+      "lineCount": 18
+    },
+    {
+      "id": "crit-line",
+      "localPath": "references/lean/CritLine.lean",
+      "archivePath": "lean/src/Formalism/GammaFactorNonvanishing/CritLine.lean",
+      "module": "Formalism.GammaFactorNonvanishing.CritLine",
+      "bytes": 1825,
+      "sha256": "5b1552ac13442150f6900f37b9b44eff1491fad1bebe2ec07a959eecb9bcfe02",
+      "lineCount": 32
+    },
+    {
+      "id": "assembly",
+      "localPath": "references/lean/MainTheorems.lean",
+      "archivePath": "lean/src/Supplements/Kernels/MainTheorems.lean",
+      "module": "Supplements.Kernels.MainTheorems",
+      "bytes": 740,
+      "sha256": "1e734200b9b6a6d2a968743bd0c433d614bd6606cf538ac6d4f0ff70044dde53",
+      "lineCount": 16
+    },
+    {
+      "id": "main-conclusion",
+      "localPath": "references/lean/MainConclusion.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean",
+      "module": "Development.AutomorphicArithmetic.CharacterBoxes.MainConclusion",
+      "bytes": 1213,
+      "sha256": "a5f71e107087e37b2c598709795b0f56c0a6741cf1e8ab99ee1f97e2fce0fe34",
+      "lineCount": 14
+    },
+    {
+      "id": "rh-of-right",
+      "localPath": "references/lean/RhOfRight.lean",
+      "archivePath": "lean/src/Formalism/GammaFactorNonvanishing/RhOfRight.lean",
+      "module": "Formalism.GammaFactorNonvanishing.RhOfRight",
+      "bytes": 2459,
+      "sha256": "7e2c0b519ee420192cad8fb281c2d2bfebae2ba553342fd579c81c2aa0bd3dc5",
+      "lineCount": 62
+    },
+    {
+      "id": "claim-strip",
+      "localPath": "references/lean/ClaimStrip.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/CharacterBoxes/ClaimStrip.lean",
+      "module": "Development.AutomorphicArithmetic.CharacterBoxes.ClaimStrip",
+      "bytes": 5193,
+      "sha256": "74498552f19df4bd5b3c296ed247d25d40cabd1057647dd4db1ee7ba1c57ea03",
+      "lineCount": 104
+    },
+    {
+      "id": "nv-char-family",
+      "localPath": "references/lean/nonvanishing/nv-char-family.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/DedekindLFunctions/CharFamily.lean",
+      "module": "Development.AutomorphicArithmetic.DedekindLFunctions.CharFamily",
+      "bytes": 1636,
+      "sha256": "ca0ca8acb80ff4ffc36896204650f9ca16167193a22c36a140402b27cfc8c336",
+      "lineCount": 49,
+      "excerptRanges": [
+        [
+          10,
+          45
+        ]
+      ]
+    },
+    {
+      "id": "nv-core-gm",
+      "localPath": "references/lean/nonvanishing/nv-core-gm.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/PrimitiveCosets/CoreGm.lean",
+      "module": "Development.AutomorphicArithmetic.PrimitiveCosets.CoreGm",
+      "bytes": 4613,
+      "sha256": "73abeaad38ed40bde0c2f974f53cae9d851e72d23ae389dea129b2bbddc58bc8",
+      "lineCount": 74,
+      "excerptRanges": [
+        [
+          12,
+          15
+        ],
+        [
+          55,
+          74
+        ]
+      ]
+    },
+    {
+      "id": "nv-top-win",
+      "localPath": "references/lean/nonvanishing/nv-top-win.lean",
+      "archivePath": "lean/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/TopWin.lean",
+      "module": "Formalism.SharpRestriction.RamificationFrobenius.TotientGaloisClasses.TopWin",
+      "bytes": 8117,
+      "sha256": "afbbf8ec0a8aca08b7935c6118c76eef06b2eee896805e7de277b9d4e09fc52b",
+      "lineCount": 140,
+      "excerptRanges": [
+        [
+          23,
+          32
+        ],
+        [
+          59,
+          93
+        ]
+      ]
+    },
+    {
+      "id": "nv-window",
+      "localPath": "references/lean/nonvanishing/nv-window.lean",
+      "archivePath": "lean/src/Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/Window.lean",
+      "module": "Formalism.SharpRestriction.RamificationFrobenius.TotientGaloisClasses.Window",
+      "bytes": 1825,
+      "sha256": "882989a78da888b0462d17f285e42e44970a3dee70c1dc8c667fb5a3f985c2f7",
+      "lineCount": 50,
+      "excerptRanges": [
+        [
+          7,
+          15
+        ],
+        [
+          24,
+          33
+        ]
+      ]
+    },
+    {
+      "id": "nv-top-g",
+      "localPath": "references/lean/nonvanishing/nv-top-g.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/CharacterBoxes/ZeroFreeAllOfTopG.lean",
+      "module": "Development.AutomorphicArithmetic.CharacterBoxes.ZeroFreeAllOfTopG",
+      "bytes": 1791,
+      "sha256": "349d9eafe63952c2fa4ccb2055bef7de0144d442c552196183fe48f01958f033",
+      "lineCount": 38,
+      "excerptRanges": [
+        [
+          12,
+          34
+        ]
+      ]
+    },
+    {
+      "id": "nv-level-family",
+      "localPath": "references/lean/nonvanishing/nv-level-family.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/PrimitiveCosets/LevelFamily.lean",
+      "module": "Development.AutomorphicArithmetic.PrimitiveCosets.LevelFamily",
+      "bytes": 3034,
+      "sha256": "99ab2af08664a9d1cf3afbe5113894d2b56bb64eb052a378f62d027d0f74354e",
+      "lineCount": 52,
+      "excerptRanges": [
+        [
+          9,
+          25
+        ],
+        [
+          41,
+          52
+        ]
+      ]
+    },
+    {
+      "id": "nv-form-b",
+      "localPath": "references/lean/nonvanishing/nv-form-b.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/PrimitiveCosets/Imports.lean",
+      "module": "Development.AutomorphicArithmetic.PrimitiveCosets.Imports",
+      "bytes": 1122,
+      "sha256": "9d38c47879d3c02199f747433f009ba4cf6eb44d7480f031e5763a2ee271950e",
+      "lineCount": 19,
+      "excerptRanges": [
+        [
+          8,
+          19
+        ]
+      ]
+    },
+    {
+      "id": "nv-rpow-window",
+      "localPath": "references/lean/nonvanishing/nv-rpow-window.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ZeroFreeOfRpowWindow.lean",
+      "module": "Development.AutomorphicArithmetic.DedekindLFunctions.LandauTheorems.ZeroFreeOfRpowWindow",
+      "bytes": 668,
+      "sha256": "3252473ba2654b05e9d2ea0781ea91b4c7eadcca0def18b0f21d20212c2f0316",
+      "lineCount": 18,
+      "excerptRanges": [
+        [
+          11,
+          14
+        ]
+      ]
+    },
+    {
+      "id": "nv-window-integral",
+      "localPath": "references/lean/nonvanishing/nv-window-integral.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/WindowHypOfRpow.lean",
+      "module": "Development.AutomorphicArithmetic.DedekindLFunctions.LandauTheorems.WindowHypOfRpow",
+      "bytes": 2999,
+      "sha256": "f9238ed2d6c67f1cbe383a33cc3759c00bed31b97a10253fbee59279290c6a5c",
+      "lineCount": 61,
+      "excerptRanges": [
+        [
+          9,
+          10
+        ],
+        [
+          27,
+          44
+        ],
+        [
+          48,
+          57
+        ]
+      ]
+    },
+    {
+      "id": "nv-pole-contract",
+      "localPath": "references/lean/nonvanishing/nv-pole-contract.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauZeroFreeCriterion.lean",
+      "module": "Development.AutomorphicArithmetic.DedekindLFunctions.LandauZeroFreeCriterion",
+      "bytes": 2678,
+      "sha256": "d4c5a8ba961bb0e91121212b697217904bf0ba56c2e89c00435fb7ee416a22d7",
+      "lineCount": 66,
+      "excerptRanges": [
+        [
+          9,
+          29
+        ]
+      ]
+    },
+    {
+      "id": "nv-pole-data",
+      "localPath": "references/lean/nonvanishing/nv-pole-data.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/poleData.lean",
+      "module": "Development.AutomorphicArithmetic.DedekindLFunctions.LandauTheorems.poleData",
+      "bytes": 20079,
+      "sha256": "78fb8ae795a01ad687440b035c377a9fde71088c726d1ac862ba0fd8bb1fc3c0",
+      "lineCount": 404,
+      "excerptRanges": [
+        [
+          22,
+          29
+        ],
+        [
+          248,
+          262
+        ],
+        [
+          336,
+          383
+        ]
+      ]
+    },
+    {
+      "id": "nv-landau-ineq",
+      "localPath": "references/lean/nonvanishing/nv-landau-ineq.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindowIneq.lean",
+      "module": "Development.AutomorphicArithmetic.DedekindLFunctions.LandauTheorems.landauWindowIneq",
+      "bytes": 6547,
+      "sha256": "e3d5d760bcefe1242d4f5b0ced44fc055f1fa8dfe048a2222cf2c39ae812e59c",
+      "lineCount": 115,
+      "excerptRanges": [
+        [
+          27,
+          34
+        ],
+        [
+          80,
+          100
+        ]
+      ]
+    },
+    {
+      "id": "nv-landau-window",
+      "localPath": "references/lean/nonvanishing/nv-landau-window.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindow.lean",
+      "module": "Development.AutomorphicArithmetic.DedekindLFunctions.LandauTheorems.landauWindow",
+      "bytes": 9681,
+      "sha256": "57f49606e6ffd8cab45672d8d4b9c7ded6c0b6b0d140821cc51b5baeb4f67ab5",
+      "lineCount": 170,
+      "excerptRanges": [
+        [
+          20,
+          22
+        ],
+        [
+          40,
+          45
+        ],
+        [
+          83,
+          93
+        ],
+        [
+          113,
+          116
+        ],
+        [
+          134,
+          155
+        ]
+      ]
+    },
+    {
+      "id": "nv-lemma-l",
+      "localPath": "references/lean/nonvanishing/nv-lemma-l.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/lemmaL.lean",
+      "module": "Development.AutomorphicArithmetic.DedekindLFunctions.LandauTheorems.lemmaL",
+      "bytes": 1053,
+      "sha256": "4ce94b876b46e0a3b038c4bfe9ade933c7225170bf07421109ee862fd5941e3d",
+      "lineCount": 26,
+      "excerptRanges": [
+        [
+          13,
+          22
+        ]
+      ]
+    },
+    {
+      "id": "nv-imprimitive",
+      "localPath": "references/lean/nonvanishing/nv-imprimitive.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/CharacterBoxes/Imprimitive.lean",
+      "module": "Development.AutomorphicArithmetic.CharacterBoxes.Imprimitive",
+      "bytes": 1781,
+      "sha256": "8de85415d0d139f23b2b50ba56c18ab3b3e29740f41e2d86eaf99b95765f512e",
+      "lineCount": 35,
+      "excerptRanges": [
+        [
+          5,
+          35
+        ]
+      ]
+    },
+    {
+      "id": "nv-vwin",
+      "localPath": "references/lean/nonvanishing/nv-vwin.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/CharacterBoxes/ExistsPageN.lean",
+      "module": "Development.AutomorphicArithmetic.CharacterBoxes.ExistsPageN",
+      "bytes": 3776,
+      "sha256": "732c3347fb02e410cf9af8831afdbba1d230fc522c3dbbccdb4b708e5dde73db",
+      "lineCount": 81,
+      "excerptRanges": [
+        [
+          12,
+          49
+        ]
+      ]
+    },
+    {
+      "id": "nv-sha",
+      "localPath": "references/lean/nonvanishing/nv-sha.lean",
+      "archivePath": "lean/src/Formalism/GaloisCohomology/Statement.lean",
+      "module": "Formalism.GaloisCohomology.Statement",
+      "bytes": 8427,
+      "sha256": "67dc5835eb4b337dfbbbf7f0accd1198b59793ae70f5af34421a7c35410d632c",
+      "lineCount": 186,
+      "excerptRanges": [
+        [
+          13,
+          15
+        ],
+        [
+          50,
+          78
+        ]
+      ]
+    },
+    {
+      "id": "nv-window-row",
+      "localPath": "references/lean/nonvanishing/nv-window-row.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/VwinOfRow.lean",
+      "module": "Development.AutomorphicArithmetic.AutomorphicVarieties.ModularityArgument.ThresholdArguments.DenseThresholdCases.VwinOfRow",
+      "bytes": 515,
+      "sha256": "d2df45a5cf337190ae6f885e8e43056ae4e804ae8da250a2ab0abd64b1ca7080",
+      "lineCount": 5,
+      "excerptRanges": [
+        [
+          1,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "nv-window-inputs",
+      "localPath": "references/lean/nonvanishing/nv-window-inputs.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/TopMainZj.lean",
+      "module": "Development.AutomorphicArithmetic.AutomorphicVarieties.ModularityArgument.ThresholdArguments.DenseThresholdCases.TopMainZj",
+      "bytes": 6603,
+      "sha256": "f824d3f7873a493432bdfcbdc279fa82d70a6a9dbaac44c2a30316cada2eae3e",
+      "lineCount": 75,
+      "excerptRanges": [
+        [
+          18,
+          74
+        ]
+      ]
+    },
+    {
+      "id": "nv-row-src",
+      "localPath": "references/lean/nonvanishing/nv-row-src.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/RowSrc.lean",
+      "module": "Development.AutomorphicArithmetic.Foundations.GaloisRepresentations.IntegralStructures.RowSrc",
+      "bytes": 433,
+      "sha256": "0cfbca6cb7d1da543ee9d24c30faeeb3f68838f91c4f6c2c0e682e025c8b9a44",
+      "lineCount": 8,
+      "excerptRanges": [
+        [
+          1,
+          8
+        ]
+      ]
+    },
+    {
+      "id": "nv-row-definition",
+      "localPath": "references/lean/nonvanishing/nv-row-definition.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/TypeConditions/WeightsConjBis.lean",
+      "module": "Development.AutomorphicArithmetic.Foundations.GaloisRepresentations.TypeConditions.WeightsConjBis",
+      "bytes": 5507,
+      "sha256": "e3020031e884beef2eff18275019b7213a16f3c721242e9a79891b5396955719",
+      "lineCount": 88,
+      "excerptRanges": [
+        [
+          15,
+          16
+        ],
+        [
+          26,
+          31
+        ],
+        [
+          39,
+          73
+        ],
+        [
+          84,
+          86
+        ]
+      ]
+    },
+    {
+      "id": "nv-galois-construction",
+      "localPath": "references/lean/nonvanishing/nv-galois-construction.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/Development.lean",
+      "module": "Development.AutomorphicArithmetic.Foundations.GaloisRepresentations.IntegralStructures.Development",
+      "bytes": 2933,
+      "sha256": "b78ea71866812c4d1f3df65f1f3f3e702fa65ec2bb1ea61ca1a250b6fdd536bd",
+      "lineCount": 33,
+      "excerptRanges": [
+        [
+          1,
+          12
+        ],
+        [
+          18,
+          31
+        ]
+      ]
+    },
+    {
+      "id": "nv-galois-lift",
+      "localPath": "references/lean/nonvanishing/nv-galois-lift.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GaloisRepresentationsOfThetaLift.lean",
+      "module": "Development.AutomorphicArithmetic.Foundations.GaloisRepresentations.IntegralStructures.GaloisRepresentationsOfThetaLift",
+      "bytes": 495,
+      "sha256": "3f72f1644a6214bb5b90a5e9bac5e33b0474d52eb22f2f1841d443ed342531c2",
+      "lineCount": 8,
+      "excerptRanges": [
+        [
+          1,
+          8
+        ]
+      ]
+    },
+    {
+      "id": "nv-theta-lift",
+      "localPath": "references/lean/nonvanishing/nv-theta-lift.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/ThetaParseval/HalfIndexLattices/TLiftK.lean",
+      "module": "Development.AutomorphicArithmetic.Foundations.GaloisRepresentations.ThetaParseval.HalfIndexLattices.TLiftK",
+      "bytes": 1971,
+      "sha256": "8a58c624cd91dbfb4d3e8b7735e232e1463dd51d0daa7a6174b99349b31d6fc5",
+      "lineCount": 27,
+      "excerptRanges": [
+        [
+          12,
+          23
+        ]
+      ]
+    },
+    {
+      "id": "nv-rec-t",
+      "localPath": "references/lean/nonvanishing/nv-rec-t.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/Foundations/LocalLanglands/IsRecTOfIsRec.lean",
+      "module": "Development.AutomorphicArithmetic.Foundations.LocalLanglands.IsRecTOfIsRec",
+      "bytes": 6283,
+      "sha256": "4054d69535a55b8df339dee1ed766d38cb271ae87ce6033a8e0195ac577d9931",
+      "lineCount": 116,
+      "excerptRanges": [
+        [
+          20,
+          24
+        ],
+        [
+          55,
+          80
+        ]
+      ]
+    },
+    {
+      "id": "nv-rec-exists",
+      "localPath": "references/lean/nonvanishing/nv-rec-exists.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/RecTExists.lean",
+      "module": "Development.AutomorphicArithmetic.Foundations.LocalLanglands.LocalCentralUnits.RecTExists",
+      "bytes": 3557,
+      "sha256": "2411dd4cb455607d3f39761258ccde5c9e945443c421e69a626e4148a79824ab",
+      "lineCount": 66,
+      "excerptRanges": [
+        [
+          1,
+          12
+        ],
+        [
+          20,
+          66
+        ]
+      ]
+    },
+    {
+      "id": "nv-literature",
+      "localPath": "references/lean/nonvanishing/nv-literature.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean",
+      "module": "Development.AutomorphicArithmetic.ThetaCorrespondence.ThetaPairLifts.ThirdPlaceSeries.EveryCharacterOfLiteratureOfVWin",
+      "bytes": 97393,
+      "sha256": "246b74eeb03dae250c45b46c155b3590cb53c2bac86f5e35f4b74338db487068",
+      "lineCount": 814,
+      "excerptRanges": [
+        [
+          215,
+          224
+        ],
+        [
+          561,
+          566
+        ],
+        [
+          589,
+          644
+        ],
+        [
+          645,
+          680
+        ],
+        [
+          727,
+          736
+        ],
+        [
+          781,
+          813
+        ]
+      ]
+    },
+    {
+      "id": "nv-theta-bridge",
+      "localPath": "references/lean/nonvanishing/nv-theta-bridge.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SiegelEisensteinSecondTermHypotheses.lean",
+      "module": "Development.AutomorphicArithmetic.ThetaCorrespondence.ThetaPairLifts.ThirdPlaceSeries.SiegelEisensteinSecondTermHypotheses",
+      "bytes": 8752,
+      "sha256": "e761e876e3236895eec1b67b5a2118846ddfcc6883eed367ac6cc78523da15f2",
+      "lineCount": 76,
+      "excerptRanges": [
+        [
+          44,
+          73
+        ]
+      ]
+    },
+    {
+      "id": "nv-theta-matching",
+      "localPath": "references/lean/nonvanishing/nv-theta-matching.lean",
+      "archivePath": "lean/src/Development/AbelianVarietyTheory/BlockTheory/DivisorBase/WeilTensorModels.lean",
+      "module": "Development.AbelianVarietyTheory.BlockTheory.DivisorBase.WeilTensorModels",
+      "bytes": 28971,
+      "sha256": "62209e957e734a32e4a85feb546cb2e8e7e087475d54fe5575b8fa7b4bd80197",
+      "lineCount": 606,
+      "excerptRanges": [
+        [
+          474,
+          511
+        ],
+        [
+          581,
+          592
+        ]
+      ]
+    },
+    {
+      "id": "nv-covolume-ingredients",
+      "localPath": "references/lean/nonvanishing/nv-covolume-ingredients.lean",
+      "archivePath": "lean/src/Development/AbelianVarietyTheory/Definitions/Divisors/CovolXOfCovol.lean",
+      "module": "Development.AbelianVarietyTheory.Definitions.Divisors.CovolXOfCovol",
+      "bytes": 15459,
+      "sha256": "f40c762ed8c2b18311d604540c15613e4a5969b1395dcab59b2854584fb6d3ae",
+      "lineCount": 294,
+      "excerptRanges": [
+        [
+          51,
+          79
+        ],
+        [
+          88,
+          102
+        ]
+      ]
+    },
+    {
+      "id": "nv-covolume",
+      "localPath": "references/lean/nonvanishing/nv-covolume.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LiftLambdaBound.lean",
+      "module": "Development.AutomorphicArithmetic.ThetaCorrespondence.ThetaPairLifts.ThirdPlaceSeries.LiftLambdaBound",
+      "bytes": 6297,
+      "sha256": "a73cbdc50b441874d719358771398f999f21e720ef899a99b66c09b9bf72272b",
+      "lineCount": 66,
+      "excerptRanges": [
+        [
+          17,
+          44
+        ],
+        [
+          60,
+          63
+        ]
+      ]
+    },
+    {
+      "id": "nv-covolume-inputs",
+      "localPath": "references/lean/nonvanishing/nv-covolume-inputs.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopCovolSlim2Use.lean",
+      "module": "Development.AutomorphicArithmetic.ThetaCorrespondence.ThetaPairLifts.ThirdPlaceSeries.TopCovolSlim2Use",
+      "bytes": 2836,
+      "sha256": "545f4dbcc8b67e0d001951fcad7abaa8250d335a64a6950adf5ce69fee5f30a0",
+      "lineCount": 25,
+      "excerptRanges": [
+        [
+          16,
+          22
+        ]
+      ]
+    },
+    {
+      "id": "nv-covolume-proof",
+      "localPath": "references/lean/nonvanishing/nv-covolume-proof.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopCovolG.lean",
+      "module": "Development.AutomorphicArithmetic.ThetaCorrespondence.ThetaPairLifts.ThirdPlaceSeries.TopCovolG",
+      "bytes": 6400,
+      "sha256": "f29362501bf62b9b6a7eb933aa0bdf9065414ecca014cf4a9da2970d791b4928",
+      "lineCount": 61,
+      "excerptRanges": [
+        [
+          39,
+          58
+        ]
+      ]
+    },
+    {
+      "id": "nv-linked-covolume",
+      "localPath": "references/lean/nonvanishing/nv-linked-covolume.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LinkedBundlesL3OfOpen.lean",
+      "module": "Development.AutomorphicArithmetic.ThetaCorrespondence.ThetaPairLifts.ThirdPlaceSeries.LinkedBundlesL3OfOpen",
+      "bytes": 5296,
+      "sha256": "38b99bb13cfbe01cb1752c03b08eed22db748be05a4f8f03dae70863eaecd467",
+      "lineCount": 48,
+      "excerptRanges": [
+        [
+          31,
+          46
+        ]
+      ]
+    },
+    {
+      "id": "nv-hypotheses",
+      "localPath": "references/lean/nonvanishing/nv-hypotheses.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/HypothesesNonemptyOfUnramifiedExponents.lean",
+      "module": "Development.AutomorphicArithmetic.ThetaCorrespondence.ThetaPairLifts.ThirdPlaceSeries.HypothesesNonemptyOfUnramifiedExponents",
+      "bytes": 7404,
+      "sha256": "80ebd1ee514d8a6a7967fe3e87c775148615416906038a046b27ea9436a2cc1f",
+      "lineCount": 64,
+      "excerptRanges": [
+        [
+          41,
+          61
+        ]
+      ]
+    },
+    {
+      "id": "nv-top-plug",
+      "localPath": "references/lean/nonvanishing/nv-top-plug.lean",
+      "archivePath": "lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopPlug.lean",
+      "module": "Development.AutomorphicArithmetic.ThetaCorrespondence.ThetaPairLifts.ThirdPlaceSeries.TopPlug",
+      "bytes": 1667,
+      "sha256": "7d1d7972a4abe1284c5e4da9dd65a6eb605b06efb5e993b298fe5aaed88e9adf",
+      "lineCount": 19,
+      "excerptRanges": [
+        [
+          12,
+          18
+        ]
+      ]
+    }
+  ]
+}

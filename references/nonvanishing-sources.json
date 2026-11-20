@@ -1,0 +1,618 @@
+[
+  {
+    "id": "nv-char-family",
+    "path": "Development/AutomorphicArithmetic/DedekindLFunctions/CharFamily.lean",
+    "title": "Smoothed character sums and the analytic window hypothesis",
+    "shortTitle": "Character errors",
+    "summary": "Defines ramp, Gchi, positive character families, their real weighted error Gm, and WindowHyp.",
+    "chapter": "nv-analytic",
+    "ranges": [
+      [
+        10,
+        45
+      ]
+    ]
+  },
+  {
+    "id": "nv-core-gm",
+    "path": "Development/AutomorphicArithmetic/PrimitiveCosets/CoreGm.lean",
+    "title": "From compatible arithmetic data to a near-square-root error bound",
+    "shortTitle": "The arithmetic bound",
+    "summary": "The core_gm statement gives the exact exponent 1/2 + (eD + eL + 7) eps; the final proof absorbs constants into x to the eps.",
+    "chapter": "nv-analytic",
+    "ranges": [
+      [
+        12,
+        15
+      ],
+      [
+        55,
+        74
+      ]
+    ]
+  },
+  {
+    "id": "nv-top-win",
+    "path": "Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/TopWin.lean",
+    "title": "Quantified windows and the choice of epsilon",
+    "shortTitle": "Choosing epsilon",
+    "summary": "States the order of quantifiers for window families and proves nonvanishing by choosing epsilon after the candidate real part is fixed.",
+    "chapter": "nv-analytic",
+    "ranges": [
+      [
+        23,
+        32
+      ],
+      [
+        59,
+        93
+      ]
+    ]
+  },
+  {
+    "id": "nv-window",
+    "path": "Formalism/SharpRestriction/RamificationFrobenius/TotientGaloisClasses/Window.lean",
+    "title": "Arbitrarily late power windows",
+    "shortTitle": "Power windows",
+    "summary": "HasWindows requires whole intervals [Y,Y^la] arbitrarily far out; FormBAt turns the one-sided bound there into nonvanishing.",
+    "chapter": "nv-analytic",
+    "ranges": [
+      [
+        7,
+        15
+      ],
+      [
+        24,
+        33
+      ]
+    ]
+  },
+  {
+    "id": "nv-top-g",
+    "path": "Development/AutomorphicArithmetic/CharacterBoxes/ZeroFreeAllOfTopG.lean",
+    "title": "Assembling the character-specific nonvanishing input",
+    "shortTitle": "TopG to nonvanishing",
+    "summary": "Connects host-supplied families to the arithmetic window bound and the analytic FormB criterion for each cyclic character level.",
+    "chapter": "nv-analytic",
+    "ranges": [
+      [
+        12,
+        34
+      ]
+    ]
+  },
+  {
+    "id": "nv-level-family",
+    "path": "Development/AutomorphicArithmetic/PrimitiveCosets/LevelFamily.lean",
+    "title": "Identifying the arithmetic packet with an analytic character family",
+    "shortTitle": "Packet comparison",
+    "summary": "Positive weights and level_family identify the two Gm definitions and their nonvanishing conclusions.",
+    "chapter": "nv-analytic",
+    "ranges": [
+      [
+        9,
+        25
+      ],
+      [
+        41,
+        52
+      ]
+    ]
+  },
+  {
+    "id": "nv-form-b",
+    "path": "Development/AutomorphicArithmetic/PrimitiveCosets/Imports.lean",
+    "title": "The Landau criterion for every arithmetic level",
+    "shortTitle": "The FormB bridge",
+    "summary": "Applies the general analytic theorem with delta = la - 1 and C = 1 after identifying the level family.",
+    "chapter": "nv-landau",
+    "ranges": [
+      [
+        8,
+        19
+      ]
+    ]
+  },
+  {
+    "id": "nv-rpow-window",
+    "path": "Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/ZeroFreeOfRpowWindow.lean",
+    "title": "Power bounds on late windows imply nonvanishing",
+    "shortTitle": "Window criterion",
+    "summary": "The exact theorem takes 0 < theta < 1, delta > 0 and arbitrarily late window bounds Gm(y) <= C y^theta.",
+    "chapter": "nv-landau",
+    "ranges": [
+      [
+        11,
+        14
+      ]
+    ]
+  },
+  {
+    "id": "nv-window-integral",
+    "path": "Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/WindowHypOfRpow.lean",
+    "title": "Converting a power bound into an integral majorant",
+    "shortTitle": "Integral majorant",
+    "summary": "Chooses R(y) = |C| y^theta, whose weighted integral equals |C| delta log Y and is eventually at most Y^eta.",
+    "chapter": "nv-landau",
+    "ranges": [
+      [
+        9,
+        10
+      ],
+      [
+        27,
+        44
+      ],
+      [
+        48,
+        57
+      ]
+    ]
+  },
+  {
+    "id": "nv-pole-contract",
+    "path": "Development/AutomorphicArithmetic/DedekindLFunctions/LandauZeroFreeCriterion.lean",
+    "title": "The analytic continuation and pole contract",
+    "shortTitle": "Pole data",
+    "summary": "Defines the logarithmic-scale error, zero set, Laplace-transform continuation and nonzero pole residues, with positivity at real poles.",
+    "chapter": "nv-landau",
+    "ranges": [
+      [
+        9,
+        29
+      ]
+    ]
+  },
+  {
+    "id": "nv-pole-data",
+    "path": "Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/poleData.lean",
+    "title": "Why zeros give uncancelled poles",
+    "shortTitle": "Positive residues",
+    "summary": "Builds the transform from character and inverse-character contributions; positive weights and zero multiplicities make every residue nonzero.",
+    "chapter": "nv-landau",
+    "ranges": [
+      [
+        22,
+        29
+      ],
+      [
+        248,
+        262
+      ],
+      [
+        336,
+        383
+      ]
+    ]
+  },
+  {
+    "id": "nv-landau-ineq",
+    "path": "Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindowIneq.lean",
+    "title": "Why one-sided control suffices",
+    "shortTitle": "One-sided estimate",
+    "summary": "Uses |g| + g <= 2R on the window and estimates the tails to bound a transform coefficient norm plus a real coefficient.",
+    "chapter": "nv-landau",
+    "ranges": [
+      [
+        27,
+        34
+      ],
+      [
+        80,
+        100
+      ]
+    ]
+  },
+  {
+    "id": "nv-landau-window",
+    "path": "Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/landauWindow.lean",
+    "title": "The windowed Landau pole-exclusion theorem",
+    "shortTitle": "Excluding poles",
+    "summary": "Late windows bound high derivatives; nearest-pole asymptotics and Cauchy estimates contradict the resulting geometric growth rates.",
+    "chapter": "nv-landau",
+    "ranges": [
+      [
+        20,
+        22
+      ],
+      [
+        40,
+        45
+      ],
+      [
+        83,
+        93
+      ],
+      [
+        113,
+        116
+      ],
+      [
+        134,
+        155
+      ]
+    ]
+  },
+  {
+    "id": "nv-lemma-l",
+    "path": "Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/lemmaL.lean",
+    "title": "Translating pole exclusion back to L-function nonvanishing",
+    "shortTitle": "Lemma L",
+    "summary": "Combines poleData and landau_window, using established nonvanishing on Re(s) >= 1 separately.",
+    "chapter": "nv-landau",
+    "ranges": [
+      [
+        13,
+        22
+      ]
+    ]
+  },
+  {
+    "id": "nv-imprimitive",
+    "path": "Development/AutomorphicArithmetic/CharacterBoxes/Imprimitive.lean",
+    "title": "Extending from primitive characters to every character",
+    "shortTitle": "Finite Euler factors",
+    "summary": "The inducing primitive L-function is nonzero, and every added Euler factor is nonzero because its subtracted term has norm less than one.",
+    "chapter": "nv-imprimitive",
+    "ranges": [
+      [
+        5,
+        35
+      ]
+    ]
+  },
+  {
+    "id": "nv-vwin",
+    "path": "Development/AutomorphicArithmetic/CharacterBoxes/ExistsPageN.lean",
+    "title": "The arithmetic window and its cohomology bound",
+    "shortTitle": "VWin: the actual bound",
+    "summary": "Defines VVle, the character fields, admissible auxiliary primes, PageN, VAt and VWin. The bound controls weighted cohomology lengths throughout a suitably chosen interval.",
+    "chapter": "nv-window",
+    "ranges": [
+      [
+        12,
+        49
+      ]
+    ]
+  },
+  {
+    "id": "nv-sha",
+    "path": "Formalism/GaloisCohomology/Statement.lean",
+    "title": "The Galois cohomology module measured by shaLen",
+    "shortTitle": "What shaLen measures",
+    "summary": "Defines local data over primes above l, the inverse cyclotomic twist of Q_l/Z_l, the Sha submodule of first cohomology, and its Z_l-module length.",
+    "chapter": "nv-window",
+    "ranges": [
+      [
+        13,
+        15
+      ],
+      [
+        50,
+        78
+      ]
+    ]
+  },
+  {
+    "id": "nv-window-row",
+    "path": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/VwinOfRow.lean",
+    "title": "From the Galois representation input to VWin",
+    "shortTitle": "Constructing the window",
+    "summary": "Passes the Row0b hypothesis, its OpenImageCondition wrapper and the imported base-change theorem to the automorphic window construction.",
+    "chapter": "nv-window",
+    "ranges": [
+      [
+        1,
+        5
+      ]
+    ]
+  },
+  {
+    "id": "nv-window-inputs",
+    "path": "Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/TopMainZj.lean",
+    "title": "Four families of input to the arithmetic window",
+    "shortTitle": "Window dependencies",
+    "summary": "Assembles local representation theory, automorphic/Galois statements, Galois cohomology and CM/abelian-variety statements into the literal automorphy theorem used for VWin.",
+    "chapter": "nv-window",
+    "ranges": [
+      [
+        18,
+        74
+      ]
+    ]
+  },
+  {
+    "id": "nv-row-src",
+    "path": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/RowSrc.lean",
+    "title": "The Galois input supplied to MainConclusion",
+    "shortTitle": "The RowSrc theorem",
+    "summary": "Supplies Row0b recT by applying galoisRepresentations_of_thetaLift to the imported theta-lifting theorem tLiftK.",
+    "chapter": "nv-galois",
+    "ranges": [
+      [
+        1,
+        8
+      ]
+    ]
+  },
+  {
+    "id": "nv-row-definition",
+    "path": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/TypeConditions/WeightsConjBis.lean",
+    "title": "The exact Galois representation contract Row0b",
+    "shortTitle": "Row0b and local conditions",
+    "summary": "Quantifies regular algebraic polarized cuspidal representations over CM fields and records continuous semisimple Galois representations, weight identities and restricted local comparison conditions.",
+    "chapter": "nv-galois",
+    "ranges": [
+      [
+        15,
+        16
+      ],
+      [
+        26,
+        31
+      ],
+      [
+        39,
+        73
+      ],
+      [
+        84,
+        86
+      ]
+    ]
+  },
+  {
+    "id": "nv-galois-construction",
+    "path": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/Development.lean",
+    "title": "Geometry, congruences and theta lifting feed the Galois theorem",
+    "shortTitle": "Galois construction assembly",
+    "summary": "Defines recT by IsRecT and joins geometric seeds, congruences, trace limits, crystalline input and local compatibility to obtain Row0 and then Row0b.",
+    "chapter": "nv-galois",
+    "ranges": [
+      [
+        1,
+        12
+      ],
+      [
+        18,
+        31
+      ]
+    ]
+  },
+  {
+    "id": "nv-galois-lift",
+    "path": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GaloisRepresentationsOfThetaLift.lean",
+    "title": "Joining geometric realization to a theta lift",
+    "shortTitle": "Geometry plus theta lifting",
+    "summary": "Supplies the geometric realization theorem geoOne_holds to the construction that turns TLiftK into Row0b recT.",
+    "chapter": "nv-galois",
+    "ranges": [
+      [
+        1,
+        8
+      ]
+    ]
+  },
+  {
+    "id": "nv-theta-lift",
+    "path": "Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/ThetaParseval/HalfIndexLattices/TLiftK.lean",
+    "title": "What the theta-lifting input actually asserts",
+    "shortTitle": "The TLiftK statement",
+    "summary": "For the specified CM fields, Hermitian/skew spaces, compatible characters and weight inequalities, asserts the existence of a lift to sufficiently large rank.",
+    "chapter": "nv-galois",
+    "ranges": [
+      [
+        12,
+        23
+      ]
+    ]
+  },
+  {
+    "id": "nv-rec-t",
+    "path": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/IsRecTOfIsRec.lean",
+    "title": "The local correspondence laws used by recT",
+    "shortTitle": "IsRecT and RecTExists",
+    "summary": "Defines the Good cuspidal-support condition, the LawsT record for a map from irreducible GL representations to Weil-Deligne parameters, and universal local existence.",
+    "chapter": "nv-local-global",
+    "ranges": [
+      [
+        20,
+        24
+      ],
+      [
+        55,
+        80
+      ]
+    ]
+  },
+  {
+    "id": "nv-rec-exists",
+    "path": "Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/RecTExists.lean",
+    "title": "Assembling existence of the local correspondence",
+    "shortTitle": "The recTExists proof",
+    "summary": "Chooses an Artin map and cuspidal parameters, extends them using Langlands multisegments, and fills the LawsT fields using imported extension theorems.",
+    "chapter": "nv-local-global",
+    "ranges": [
+      [
+        1,
+        12
+      ],
+      [
+        20,
+        66
+      ]
+    ]
+  },
+  {
+    "id": "nv-literature",
+    "path": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean",
+    "title": "The literature record and the nonvanishing assembly",
+    "shortTitle": "Literature assembly",
+    "summary": "The three-field OpenLiteratureStatements record, construction of the dependency bundles, and the final EveryCharacter theorem.",
+    "chapter": "nv-literature",
+    "ranges": [
+      [
+        215,
+        224
+      ],
+      [
+        561,
+        566
+      ],
+      [
+        589,
+        644
+      ],
+      [
+        645,
+        680
+      ],
+      [
+        727,
+        736
+      ],
+      [
+        781,
+        813
+      ]
+    ]
+  },
+  {
+    "id": "nv-theta-bridge",
+    "path": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SiegelEisensteinSecondTermHypotheses.lean",
+    "title": "From matched theta integrals to a compatible hypothesis witness",
+    "shortTitle": "Theta-to-hypotheses bridge",
+    "summary": "Builds rational test vectors, a common evaluation grid, compatible functional and covolume conditions, and the final nonempty hypothesis record.",
+    "chapter": "nv-literature",
+    "ranges": [
+      [
+        44,
+        73
+      ]
+    ]
+  },
+  {
+    "id": "nv-theta-matching",
+    "path": "Development/AbelianVarietyTheory/BlockTheory/DivisorBase/WeilTensorModels.lean",
+    "title": "What agreement of theta integrals actually asserts",
+    "shortTitle": "Theta matching definitions",
+    "summary": "Matching local and real models; convergence and decay; a unique nonzero proportionality constant; the quantified global agreement and local matching properties.",
+    "chapter": "nv-literature",
+    "ranges": [
+      [
+        474,
+        511
+      ],
+      [
+        581,
+        592
+      ]
+    ]
+  },
+  {
+    "id": "nv-covolume-ingredients",
+    "path": "Development/AbelianVarietyTheory/Definitions/Divisors/CovolXOfCovol.lean",
+    "title": "Concrete inequalities behind the geometric covolume estimate",
+    "shortTitle": "Ranks, slopes and covolumes",
+    "summary": "Recursive log-covolume control, orthogonal truncation, an exponentially small bad subspace, a polynomial slope ceiling, and a lower bound for the core slope.",
+    "chapter": "nv-geometric",
+    "ranges": [
+      [
+        51,
+        79
+      ],
+      [
+        88,
+        102
+      ]
+    ]
+  },
+  {
+    "id": "nv-covolume",
+    "path": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LiftLambdaBound.lean",
+    "title": "The uniform covolume property required by the proof",
+    "shortTitle": "Covolume quantifiers",
+    "summary": "Defines tied points, the eventual uniformity across all points and lift stages, and CovolumeBoundOfX.",
+    "chapter": "nv-geometric",
+    "ranges": [
+      [
+        17,
+        44
+      ],
+      [
+        60,
+        63
+      ]
+    ]
+  },
+  {
+    "id": "nv-covolume-inputs",
+    "path": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopCovolSlim2Use.lean",
+    "title": "Arithmetic geometry supplies the covolume bound",
+    "shortTitle": "Geometric input assembly",
+    "summary": "Uses resolution, principalisation, arithmetic Hilbert-Samuel, positivity, toroidal models and Hodge-bundle inputs to produce CovolumeBoundOfX.",
+    "chapter": "nv-geometric",
+    "ranges": [
+      [
+        16,
+        22
+      ]
+    ]
+  },
+  {
+    "id": "nv-covolume-proof",
+    "path": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopCovolG.lean",
+    "title": "How covering estimates combine into the covolume theorem",
+    "shortTitle": "Covolume proof pipeline",
+    "summary": "Builds Gram and measure control, deep covers, height and degree estimates, a uniform slope lower bound, and the final covolume inequality.",
+    "chapter": "nv-geometric",
+    "ranges": [
+      [
+        39,
+        58
+      ]
+    ]
+  },
+  {
+    "id": "nv-linked-covolume",
+    "path": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LinkedBundlesL3OfOpen.lean",
+    "title": "Transporting the geometric bound to the chosen automorphic families",
+    "shortTitle": "Linked covolume transport",
+    "summary": "Turns CovolumeBoundOfX into the linked third-place-series condition at the same extended parameters as the other inputs.",
+    "chapter": "nv-geometric",
+    "ranges": [
+      [
+        31,
+        46
+      ]
+    ]
+  },
+  {
+    "id": "nv-hypotheses",
+    "path": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/HypothesesNonemptyOfUnramifiedExponents.lean",
+    "title": "Building a complete compatible family of hypotheses",
+    "shortTitle": "Assembling all rows",
+    "summary": "Combines large unramified-exponent bundles with Galois estimates, functional conditions and the covolume bound to construct HypsAlt.",
+    "chapter": "nv-assembly",
+    "ranges": [
+      [
+        41,
+        61
+      ]
+    ]
+  },
+  {
+    "id": "nv-top-plug",
+    "path": "Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopPlug.lean",
+    "title": "From compatible families and windows to EveryCharacter",
+    "shortTitle": "Final analytic handoff",
+    "summary": "Produces TopG from the hypothesis witness and Green input, supplies each character using VWin, then passes from ZeroFreeAll to EveryCharacter.",
+    "chapter": "nv-assembly",
+    "ranges": [
+      [
+        12,
+        18
+      ]
+    ]
+  }
+]

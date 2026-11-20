@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A source-linked field guide to the Riemann hypothesis and Alpöge’s released Lean argument, with mathematical foundations and a fully explained conditional deduction.">
+  <meta name="theme-color" content="#0b3537">
+  <meta name="author" content="Alexis Plascencia">
+  <title>Riemann, line by line — A mathematical field guide</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/counters.css">
+  <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
+  <script defer data-math-dependency src="assets/vendor/katex/katex.min.js"></script>
+  <script defer data-math-dependency src="assets/vendor/katex/contrib/auto-render.min.js"></script>
+  <script defer src="assets/math.js"></script>
+  <script defer src="assets/counters.js"></script>
+  <script defer src="assets/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="reading-progress" aria-hidden="true"><span id="reading-progress"></span></div>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Riemann field guide home"><img src="assets/favicon.svg" width="36" height="36" alt=""><span>RIEMANN<span class="brand-sub">A mathematical field guide</span></span></a>
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="main-nav" aria-expanded="false">Menu</button>
+    <nav id="main-nav" aria-label="Main navigation"><a href="index.html" aria-current="page">Overview</a><a href="#proof-map">Proof map</a><a href="technical.html">Technical notes</a><a href="sources.html">Sources</a></nav>
+  </header>
+  <div class="author-strip page-width">
+    <p class="author-byline"><span>Created by</span> <a href="https://alexisplascencia.com" rel="author noopener" target="_blank">Alexis Plascencia</a></p>
+    <div class="visit-counters" role="group" aria-label="Riemann field guide counters from HitsCounter.dev and Hits.sh">
+      <span class="visit-total" data-visit-counter data-counter-state="loading" data-counter-url="https://hitscounter.dev/api/hit?url=https%3A%2F%2Falexisdpc.github.io%2Friemann%2F&amp;output=json" role="img" aria-label="Total website visits: loading" title="Overall page visits across the guide, technical notes and sources, counted by HitsCounter.dev"><span class="visit-total-label">Visits</span><span class="visit-total-value">—</span></span>
+      <img src="https://hits.sh/alexisdpc.github.io/riemann.svg?label=Hits&amp;color=2e8177" alt="Riemann website hits from Hits.sh" height="20" decoding="async" referrerpolicy="no-referrer" title="Page hits to the Riemann field guide, counted by Hits.sh">
+    </div>
+  </div>
+  <main id="main-content">
+    <section class="hero page-width" aria-labelledby="hero-title">
+      <div>
+        <p class="eyebrow"><span class="tiny-line" aria-hidden="true"></span>PRIMES, ZEROS, AND THE CRITICAL LINE</p>
+        <h1 id="hero-title">Riemann,<br><em>line by line.</em></h1>
+        <p class="hero-description">An extraordinary claim. A vast formal argument. A place to begin understanding it.</p>
+        <p class="hero-secondary">Explore the mathematics behind the Riemann hypothesis, follow the structure of Alpöge’s released Lean source, and trace the nonvanishing theorem and its dependencies, then work through the final deduction.</p>
+        <div class="hero-actions"><a class="button button-dark" href="#problem">Start with the problem</a><a class="text-link" href="technical.html#reflection">Read the explained argument</a></div>
+        <p class="hero-footnote">This first edition is a guided reading of the source. The explanations and website checks here are separate from an independent build of the complete Lean project.</p>
+      </div>
+      <figure class="hero-art" aria-labelledby="strip-caption">
+        <div class="art-heading"><span>THE CRITICAL STRIP</span><span>\(s=\sigma+it\)</span></div>
+        <svg viewBox="0 0 480 345" role="img" aria-labelledby="hero-svg-title hero-svg-desc">
+          <title id="hero-svg-title">The critical line inside the complex plane</title><desc id="hero-svg-desc">The critical strip lies between real parts zero and one. The vertical critical line is at one half. Gold dots illustrate the conjectured location of nontrivial zeros; they are not computed data.</desc>
+          <defs><linearGradient id="strip-shade" x1="0" x2="1"><stop stop-color="#99c4ad" stop-opacity=".04"/><stop offset=".5" stop-color="#99c4ad" stop-opacity=".15"/><stop offset="1" stop-color="#99c4ad" stop-opacity=".04"/></linearGradient></defs>
+          <rect x="116" y="20" width="248" height="285" fill="url(#strip-shade)"/>
+          <path d="M116 20V305M364 20V305" stroke="#7ca79a" stroke-opacity=".45"/>
+          <path d="M40 255H440M65 75H415M65 135H415M65 195H415" stroke="#85aa9e" stroke-opacity=".15"/>
+          <path d="M240 20V305" stroke="#c3d9b8" stroke-width="1.5"/>
+          <path d="M40 255H440" stroke="#a4c4b3" stroke-opacity=".5"/>
+          <g fill="#e2bc80"><circle cx="240" cy="65" r="4"/><circle cx="240" cy="117" r="4"/><circle cx="240" cy="153" r="4"/><circle cx="240" cy="188" r="4"/><circle cx="240" cy="288" r="4"/></g>
+          <g fill="#bfd5c9" font-size="14"><text x="112" y="280">0</text><text x="360" y="280">1</text><text x="430" y="280">σ</text><text x="107" y="13">t</text><text x="231" y="330">½</text></g>
+          <path d="M247 116H300" stroke="#e2bc80" stroke-opacity=".6"/><text x="310" y="112" fill="#e8d4ad" font-size="14">Re(s) = ½</text><text x="310" y="134" fill="#b4cfc1" font-size="12">critical line</text>
+        </svg>
+        <figcaption id="strip-caption">A statement about every nontrivial zero.<br>Schematic geometry; the dots are illustrative.</figcaption>
+      </figure>
+    </section>
+    <div class="edition-strip page-width"><p><strong>First edition · 20 November 2026</strong> &nbsp; Overview, nonvanishing dependencies, and a source-linked deduction.</p><a href="sources.html#provenance">Read the scope and sources</a></div>
+    <aside class="compilation-note page-width" aria-label="Compilation reports"><p><strong>Compilation reports · 20 November 2026.</strong> Many people claim successful Lean compilation.</p></aside>
+    <section class="chapter page-width" id="problem" aria-labelledby="problem-title">
+      <div class="chapter-heading"><span class="chapter-number">THE QUESTION</span><span class="chapter-note">From the primes to a complex function</span></div>
+      <div class="section-intro"><h2 id="problem-title">Why should the zeros<br>lie on <em>one line?</em></h2><p>The zeta function brings the primes into analysis. Its Euler product records prime factorization; its zeros govern the oscillations in prime-counting formulas. The Riemann hypothesis predicts an exact location for all of its nontrivial zeros.</p></div>
+      <div class="problem-statement"><div class="statement-label"><span>THE RIEMANN HYPOTHESIS</span><a href="technical.html#zeta">Definitions and conventions</a></div><blockquote>Every zero of the zeta function in the critical strip has real part one half.</blockquote><div class="statement-equation">\[0&lt;\operatorname{Re}s&lt;1,\qquad \zeta(s)=0\quad\Longrightarrow\quad\operatorname{Re}s=\tfrac12.\]</div><p>The negative even integers are the trivial zeros. The point \(s=1\) is a pole. The technical notes explain how these exceptions appear in the source’s full statement.</p></div>
+      <div class="two-demands"><article><h3>One function, all the primes.</h3><p>For \(\operatorname{Re}s&gt;1\), a sum over integers equals a product over primes. Analytic continuation then carries the zeta function into the critical strip.</p><div class="equation-scroll">\[\zeta(s)=\sum_{n=1}^{\infty}n^{-s}=\prod_{p\ \mathrm{prime}}(1-p^{-s})^{-1}.\]</div></article><article><h3>A whole family of questions.</h3><p>Dirichlet characters weight the integers and give functions \(L(s,\chi)\). The released source states nonvanishing and critical-line results for this family as well as RH.</p><div class="equation-scroll">\[L(s,\chi)=\sum_{n=1}^{\infty}\frac{\chi(n)}{n^s}\qquad(\operatorname{Re}s&gt;1).\]</div><a class="text-link" href="technical.html#characters">Meet the characters</a></article></div>
+      <details class="math-note"><summary><span>THE PRECISE SCOPE</span>What does “generalized” mean here?<span class="expand-icon" aria-hidden="true">+</span></summary><div><p>This guide follows the declarations in <a href="sources.html#statements">the released statement file</a>: the Riemann zeta function and Dirichlet L-functions. “Dirichlet GRH” here means the critical-line assertion for those L-functions. It is not a claim here about every automorphic L-function or every possible generalization of RH.</p><p>The defining series above converge in the right half-plane \(\operatorname{Re}s&gt;1\). Statements about zeros in the critical strip concern their analytic continuations.</p></div></details>
+    </section>
+    <section class="reflection-section" id="explore" aria-labelledby="reflection-title"><div class="page-width">
+      <div class="chapter-heading"><span class="chapter-number">THE KEY GEOMETRY</span><span class="chapter-note">A conditional deduction you can follow</span></div>
+      <div class="section-intro"><h2 id="reflection-title">A zero on the left<br>has a <em>partner.</em></h2><p>For a primitive character, the functional equation relates the completed L-function at \(s\) to the one for the inverse character at \(1-s\). A hypothetical zero to the left of the line therefore produces a zero to its right.</p></div>
+      <div class="reflection-layout">
+        <figure class="reflection-figure"><svg id="reflection-diagram" viewBox="0 0 540 365" role="img" aria-label="Hypothetical zero at real part 0.30, reflected to real part 0.70 for the inverse character. Imaginary parts have opposite signs.">
+          <rect class="diagram-strip" x="80" y="40" width="380" height="275"/>
+          <path class="diagram-axis" d="M80 40V315M460 40V315M45 177H495"/>
+          <path class="diagram-critical" d="M270 30V325"/>
+          <line id="reflection-join" x1="194" y1="100" x2="346" y2="254" stroke="#b8a486" stroke-width="1.5" stroke-dasharray="4 5"/>
+          <circle id="point-original" class="diagram-point" cx="194" cy="100" r="7"/>
+          <circle id="point-reflected" class="diagram-inverse" cx="346" cy="254" r="7"/>
+          <text id="label-original" class="point-label" x="194" y="77" text-anchor="middle" fill="#7e532b">s, character χ</text>
+          <text id="label-reflected" class="point-label" x="346" y="284" text-anchor="middle" fill="#1a6359">1 − s, character χ⁻¹</text>
+          <g class="diagram-label"><text x="76" y="344">0</text><text x="264" y="344">½</text><text x="456" y="344">1</text><text x="500" y="183">σ</text><text x="69" y="26">t</text></g>
+        </svg><figcaption>Reflection sends \(\sigma+it\) to \((1-\sigma)-it\), and changes \(\chi\) to \(\chi^{-1}\). This shows the geometry of a hypothetical zero, not a numerical search.</figcaption></figure>
+        <div class="reflection-copy"><h3>The missing half is supplied<br>by the functional equation.</h3><p>Assume that <strong>every Dirichlet L-function is nonzero when \(\operatorname{Re}s&gt;1/2\)</strong>, apart from the pole exception. A reflected zero in that region is then impossible. This strong nonvanishing input is the hard theorem; the reflection argument is the final deduction.</p>
+          <div class="reflection-control"><label for="sigma">Real part of the hypothetical zero <output id="sigma-value" for="sigma">0.30</output></label><input id="sigma" type="range" min="0.1" max="0.5" step="0.01" value="0.3" aria-describedby="reflection-summary"><div class="range-labels"><span>Left of the line</span><span>On the line</span></div></div>
+          <p><strong>Original:</strong> <span id="point-original-coordinate">0.30 + it</span><br><strong>Reflected:</strong> <span id="point-reflected-coordinate">0.70 − it</span></p>
+          <p class="reflection-result" id="reflection-summary" aria-live="polite">A zero at real part 0.30 would give a zero for the inverse character at real part 0.70. The nonvanishing input excludes that reflected zero.</p>
+          <a class="text-link" href="technical.html#reflection">Follow every step of the argument</a>
+        </div>
+      </div>
+    </div></section>
+    <section class="chapter page-width" id="proof-map" aria-labelledby="map-title">
+      <div class="chapter-heading"><span class="chapter-number">OUTLINE OF THE PROOF</span><span class="chapter-note">Five layers of the released argument</span></div>
+      <div class="section-intro"><h2 id="map-title">From arithmetic<br>to a <em>line.</em></h2><p>The released source brings together algebraic number theory, automorphic forms, arithmetic geometry, and complex analysis. Start with the short final deduction, then follow the deeper inputs that supply its nonvanishing theorem.</p></div>
+      <div class="proof-map-tabs" role="tablist" aria-label="Five layers of the proof outline">
+        <button id="route-tab-0" role="tab" aria-selected="true" aria-controls="route-panel-0" data-step="0" type="button">1. The final deduction</button>
+        <button id="route-tab-1" role="tab" aria-selected="false" aria-controls="route-panel-1" data-step="1" tabindex="-1" type="button">2. Nonvanishing</button>
+        <button id="route-tab-2" role="tab" aria-selected="false" aria-controls="route-panel-2" data-step="2" tabindex="-1" type="button">3. Cohomology bounds</button>
+        <button id="route-tab-3" role="tab" aria-selected="false" aria-controls="route-panel-3" data-step="3" tabindex="-1" type="button">4. Galois representations</button>
+        <button id="route-tab-4" role="tab" aria-selected="false" aria-controls="route-panel-4" data-step="4" tabindex="-1" type="button">5. Arithmetic geometry</button>
+      </div>
+      <article class="route-panel" id="route-panel-0" role="tabpanel" aria-labelledby="route-tab-0" tabindex="0">
+        <div class="route-main">
+          <span class="panel-label">THE SHORT LAST STEP</span>
+          <h3>Nonvanishing forces the critical line.</h3>
+          <p>The central input says that every Dirichlet L-function is nonzero to the right of one half, excluding the principal-character point \(s=1\):</p>
+          <div class="equation-scroll">\[\operatorname{Re}s&gt;\tfrac12,\quad(\chi\ne\mathbf1\ \lor\ s\ne1)\quad\Longrightarrow\quad L(s,\chi)\ne0.\]</div>
+          <p>For a primitive character, the functional equation sends a zero in the left half of the critical strip to a right-hand zero for the inverse character. The input rules that out. Zeros already on the right are excluded directly, leaving only the critical line. Finite Euler factors handle imprimitive characters; the zeta case yields RH.</p>
+          <div class="proof-source-links"><a href="technical.html#reflection">Follow the complete deduction</a><a href="technical.html#nonvanishing">State the nonvanishing input precisely</a></div>
+        </div>
+        <aside class="route-aside"><h4>WHY THIS PART IS SHORT</h4><p>The functional equation supplies the symmetry. The difficult new burden lies in establishing the right-half-plane nonvanishing input.</p><h4>THE SCOPE</h4><p>The conclusions followed here concern the Riemann zeta function and Dirichlet L-functions.</p></aside>
+      </article>
+      <article class="route-panel" id="route-panel-1" role="tabpanel" aria-labelledby="route-tab-1" tabindex="0">
+        <div class="route-main">
+          <span class="panel-label">WHERE THE MAIN BRANCHES MEET</span>
+          <h3>Turn arithmetic estimates into an obstruction to zeros.</h3>
+          <p>Three kinds of input meet here: bounds on Galois cohomology for selected subfields of cyclotomic fields; geometric bounds on covolumes and slopes of integral lattices; and matching results for theta integrals on unitary groups. Local Langlands parameters for \(\mathrm{GL}_n\), with the source’s stated compatibility hypotheses, connect the automorphic and Galois data.</p>
+          <p>The intermediate output is an upper bound for a smoothed prime-sum error on arbitrarily late, long intervals. A Landau argument converts these bounds into nonvanishing: a forbidden zero would create a pole whose derivative growth contradicts the interval estimates.</p>
+          <div class="proof-source-links"><a href="technical.html#arithmetic-comparison">See how the estimates combine</a><a href="technical.html#nv-analytic">Follow the Landau argument</a></div>
+        </div>
+        <aside class="route-aside"><h4>WHY COMPATIBILITY MATTERS</h4><p>The bounds must hold for the same arithmetic and geometric data. The theta and local comparison results help assemble those data into one construction.</p><h4>THE ANALYTIC OUTPUT</h4><p>For each \(\theta&gt;1/2\), the relevant prime-sum error admits a bound of size \(x^\theta\) on suitable intervals far out along the positive axis.</p></aside>
+      </article>
+      <article class="route-panel" id="route-panel-2" role="tabpanel" aria-labelledby="route-tab-2" tabindex="0">
+        <div class="route-main">
+          <span class="panel-label">THE ARITHMETIC WINDOW</span>
+          <h3>Control classes invisible to the local tests.</h3>
+          <p>The cohomology groups are Tate–Shafarevich-like localization kernels: they measure global Galois cohomology classes whose restrictions vanish at the specified places above \(\ell\). They are not simply the usual Tate–Shafarevich groups of elliptic curves. The fields vary through a particular family of cyclotomic subfields.</p>
+          <p>The window construction passes through lifting and automorphy arguments. Its inputs include Galois representations attached to regular algebraic, polarized cuspidal automorphic representations of \(\mathrm{GL}_n\) over CM fields, together with base change, Jacquet–Shalika, Clozel’s purity, Bernstein–Zelevinsky, the main theorem of complex multiplication, and Deligne–Ribet.</p>
+          <p>The resulting bound controls weighted logarithmic sizes of these cohomology groups throughout a long interval. Further comparisons turn that arithmetic budget into the prime-sum estimate required by Landau.</p>
+          <div class="proof-source-links"><a href="technical.html#nv-window">Walk through the cohomology bounds</a><a href="technical.html#arithmetic-construction">Follow their main dependencies</a></div>
+        </div>
+        <aside class="route-aside"><h4>THE INTUITION</h4><p>Local tests can leave a global ambiguity. Bounding the localization kernel limits the size of that ambiguity.</p><h4>WHY A WINDOW?</h4><p>A single good scale is insufficient. The analytic argument needs control throughout a long interval, with such intervals available arbitrarily far out.</p></aside>
+      </article>
+      <article class="route-panel" id="route-panel-3" role="tabpanel" aria-labelledby="route-tab-3" tabindex="0">
+        <div class="route-main">
+          <span class="panel-label">BEHIND THE AUTOMORPHIC INPUT</span>
+          <h3>Build the Galois representations through geometry and lifting.</h3>
+          <p>At the inspected assembly point, the Galois-representation input is supplied by a theorem combining a geometric realization with theta lifting between unitary groups. It is not left as a free hypothesis of the final theorem.</p>
+          <p>The geometric branch supplies Frobenius–Hecke compatibility and crystalline/Hodge conditions above \(\ell\), under its local hypotheses. The construction then uses geometric seeds, congruences, trace limits, and descent to reach the Galois representations needed by the arithmetic window.</p>
+          <p>The guiding idea is to realize suitable automorphic information in cohomology, where Galois acts, and carry that information through the lifting and comparison steps. The exact local conditions remain part of the statement.</p>
+          <div class="proof-source-links"><a href="technical.html#nv-galois">Understand the representation construction</a><a href="technical.html#nv-local-global">See what local compatibility means</a></div>
+        </div>
+        <aside class="route-aside"><h4>TWO DESCRIPTIONS OF ONE INPUT</h4><p>Automorphic representations organize symmetries of forms. Galois representations encode field symmetries as matrices. The comparison identifies their local arithmetic information.</p><h4>WHAT IS BEING DESCRIBED</h4><p>This is the route visible in the released source. Its relationship to constructions in the literature requires a separate comparison.</p></aside>
+      </article>
+      <article class="route-panel" id="route-panel-4" role="tabpanel" aria-labelledby="route-tab-4" tabindex="0">
+        <div class="route-main">
+          <span class="panel-label">THE GEOMETRIC FOUNDATIONS</span>
+          <h3>Control integral structures using arithmetic geometry.</h3>
+          <p>The geometric and deformation branches invoke named inputs for resolution of singularities in characteristic zero, toroidal compactifications of Siegel varieties, arithmetic Hilbert–Samuel, Moriwaki’s bigness theorem, Kawamata–Viehweg and Nadel vanishing, Grothendieck–Messing, and prismatic Dieudonné theory.</p>
+          <p>These inputs serve different purposes. Compactifications and resolution supply geometric models; positivity, vanishing, and Hilbert–Samuel estimates control sections and their growth; deformation and comparison results connect integral and cohomological structures.</p>
+          <p>On the covolume branch, the goal is a quantitative bound for lattices attached to the automorphic construction. Together with the cohomological estimate and theta matching, it constrains the prime-sum error.</p>
+          <div class="proof-source-links"><a href="technical.html#nv-geometric">Understand the covolume bound</a><a href="technical.html#nv-literature">See how the theta inputs fit</a></div>
+        </div>
+        <aside class="route-aside"><h4>THE INTUITION</h4><p>A vector space records linear relations. A lattice also records integral size. Covolumes and slopes quantify that extra information so it can enter an estimate.</p><h4>READING THE NAMED RESULTS</h4><p>The inspected files assemble theorem terms under these names. Establishing that each statement fully matches its classical counterpart requires examining its definitions and hypotheses.</p></aside>
+      </article>
+      <div class="map-bridge">
+        <h3>How the pieces exclude a zero.</h3>
+        <p><strong>Arithmetic and geometry</strong> control cohomology sizes and lattices. <strong>Theta matching and local compatibility</strong> make those bounds apply to the same construction. The result is a <strong>prime-sum bound on long intervals</strong>. The <strong>Landau argument</strong> then rules out zeros to the right of one half, and the <strong>functional equation</strong> finishes the critical-line deduction.</p>
+        <a class="text-link" href="technical.html#arithmetic-landau">Follow the arithmetic-to-Landau handoff</a>
+      </div>
+      <div class="map-contract"><p>This is a source-based dependency outline. A full Lean build and an audit of the final theorem’s assumptions have not been performed here, so “no additional axioms” and “complete formalizations of all the named theorems” are not conclusions of this guide. <a class="text-link" href="sources.html#provenance">Source identity and review status</a></p></div>
+    </section>
+
+    <section class="argument-feature" aria-labelledby="argument-title"><div class="page-width argument-layout"><div><span class="chapter-number">ONE ARGUMENT, FULLY EXPLAINED</span><h2 id="argument-title">The last deduction,<br>with <em>every hypothesis.</em></h2><p>Work through the critical-line lemma in ordinary mathematical prose. The notes explain the character, gamma factors, functional equation, and both possible sides of the line, then match the reasoning to Lean.</p><a class="button" href="technical.html#reflection">Read the technical companion</a></div><ol class="argument-chain"><li><strong>State the nonvanishing input.</strong><p>It applies to every character, including the inverse one.</p></li><li><strong>Use the completed L-function.</strong><p>Gamma factors are finite and nonzero in the open strip.</p></li><li><strong>Eliminate both off-line cases.</strong><p>Right-hand zeros contradict the input directly; left-hand zeros do so after reflection.</p></li></ol></div></section>
+    <section class="chapter page-width" id="reading" aria-labelledby="reading-title"><div class="section-intro"><h2 id="reading-title">Choose your<br><em>way in.</em></h2><p>Start with the language, follow the deduction, or inspect the exact declarations. Each reading route leads back to the same mathematical statements.</p></div><div class="reading-paths"><article><h3>Build the foundations.</h3><p>Zeta, characters, analytic continuation, and the functional equation. The vocabulary used throughout the guide.</p><a href="technical.html#foundations">Read the foundations</a></article><article><h3>Follow the deduction.</h3><p>The nonvanishing theorem’s main dependencies, followed by the complete conditional deduction to the critical line.</p><a href="technical.html#reflection">Read the explained argument</a></article><article><h3>Go to the source.</h3><p>Selected Lean declarations, line references, and a record of the archive used for this edition.</p><a href="sources.html">Explore the source index</a></article></div><div class="scope-block"><h3>A guide that makes<br>its scope explicit.</h3><div><p>Alpöge’s released Lean source states RH and a Dirichlet generalization. This website explains selected material from that development. The archive has been downloaded and extracted, and the prose has been checked against the selected source statements; the full Lean project has not been compiled or independently audited here.</p><p>The expanded technical notes trace the analytic estimate, the arithmetic cohomology window, Galois compatibility, theta matching and geometric bounds. They identify the deeper construction proofs that still need separate treatment.</p><a class="text-link" href="sources.html#provenance">Read the source and review record</a></div></div></section>
+  </main>
+  <footer class="site-footer page-width"><span class="footer-brand">Riemann, <em>line by line.</em></span><p>A source-linked reading of Alpöge’s released Lean argument.<br>First edition · 20 November 2026</p><a class="back-top" href="#main-content">Back to top</a></footer>
+  <noscript><p class="noscript-note">All text, equations, source links, and proof-map panels remain available. Interactive controls and equation typesetting require JavaScript.</p></noscript>
+</body>
+</html>

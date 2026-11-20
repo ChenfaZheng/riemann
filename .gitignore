@@ -1,0 +1,24 @@
+# Alpoge's downloaded note, archive parts, combined archive, and extracted files.
+/alpo-proof/
+
+# Downloaded research reading; kept local and excluded from the website.
+/research/tao/
+
+# Generated local website output and previews.
+/dist/
+/.preview/
+/tmp/
+node_modules/
+*.log
+
+# Local configuration and editor state.
+.env
+.env.*
+!.env.example
+/.codex/
+/.agents/
+/.vscode/
+/.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini

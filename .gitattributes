@@ -1,0 +1,4 @@
+* text=auto eol=lf
+
+# Preserve the exact bytes recorded in references/provenance.json.
+references/lean/** -text

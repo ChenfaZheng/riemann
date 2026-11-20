@@ -1,0 +1,12 @@
+{
+  "name": "riemann-field-guide",
+  "private": true,
+  "type": "module",
+  "description": "A source-linked reading guide to Alpöge's released Riemann hypothesis argument.",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "check": "node scripts/check.mjs",
+    "build": "node scripts/build.mjs"
+  },
+  "engines": { "node": ">=18" }
+}
