@@ -1,4 +1,10 @@
 /* Riemann edition of the Yang–Mills field guide. */
+.translation-banner{display:flex;align-items:center;justify-content:space-between;gap:16px 24px;flex-wrap:wrap;margin-top:18px;padding:14px 20px;background:#f0eadd;border:1px solid #d5c3a5;border-left:4px solid var(--gold);border-radius:4px;font-size:14px;line-height:1.7;color:var(--ink)}
+.translation-banner p{margin:0;flex:1 1 420px}
+.translation-banner strong{font-weight:600;color:var(--ink)}
+.translation-banner .orig-link{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--ink);color:var(--paper);border-radius:3px;font-size:13px;font-weight:500;white-space:nowrap;text-decoration:none;transition:background .2s}
+.translation-banner .orig-link:hover{background:var(--teal)}
+@media(max-width:600px){.translation-banner{padding:12px 14px;font-size:13px}.translation-banner .orig-link{width:100%;justify-content:center}}
 .compilation-note{padding-block:20px;border-bottom:1px solid var(--line);font-size:16px;line-height:1.8;color:var(--muted)}
 .compilation-note p{margin:0}.compilation-note strong{color:var(--ink);font-weight:500}
 .map-bridge{margin-top:28px;padding:28px 32px;background:var(--mint);border-left:3px solid var(--teal)}

@@ -1,3 +1,11 @@
+# 逐行细读黎曼猜想（非官方 AI 中文译本）
+
+> **翻译声明 / Translation Notice**
+>
+> 本仓库与部署站点（https://chenfazheng.github.io/riemann/）为 [Alexis Plascencia](https://alexisplascencia.com) 原作 [alexisdpc/riemann](https://github.com/alexisdpc/riemann)（英文原站：https://alexisdpc.github.io/riemann/）的**非官方中文译本**。本仓库维护者仅借助 AI 依照严格数学术语表（见 [`GLOSSARY.md`](./GLOSSARY.md)）完成文本翻译，未对原文数学内容或 Lean 源码快照作实质改动。所有原作版权、站点设计与学术内容归属均归原作者 Alexis Plascencia 及原始数学作者 Levent Alpöge 所有；如译文存在误差或歧义，请以英文原站为准。
+
+---
+
 # Riemann, line by line
 
 **A human-readable field guide to the mathematics in Levent Alpöge’s released Lean argument.**
