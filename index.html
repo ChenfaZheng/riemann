@@ -121,7 +121,7 @@
         <div class="route-main">
           <span class="panel-label">主干分支的交汇处</span>
           <h3>将算术估计转化为零点的障碍。</h3>
-          <p>三类输入在此汇合：对特定分圆子域的伽罗瓦上同调界；对整格余体积与斜率的几何界；以及酉群上 \(\theta\) 积分的匹配结果。在源码陈述的相容性假设下，\(\mathrm{GL}_n\) 的局部朗兰兹参数将自守数据与伽罗瓦数据联系起来。</p>
+          <p>三类输入在此汇合：对特定分圆子域的伽罗瓦上同调（Galois cohomology）界；对整格余体积（covolumes）与斜率（slopes）的几何界；以及酉群上 \(\theta\) 积分的匹配结果。在源码陈述的相容性假设下，\(\mathrm{GL}_n\) 的局部朗兰兹参数（local Langlands parameters）将自守数据与伽罗瓦数据联系起来。</p>
           <p>其中间输出是在任意靠后且足够长的区间上，对光滑素数和误差的一个上界。一段朗道论证将这些界转化为非零性：任何被禁止的零点都会制造一个极点，其高阶导数的增长将与区间估计相矛盾。</p>
           <div class="proof-source-links"><a href="technical.html#arithmetic-comparison">查看各项估计如何结合</a><a href="technical.html#nv-analytic">跟进朗道论证</a></div>
         </div>
@@ -131,8 +131,8 @@
         <div class="route-main">
           <span class="panel-label">算术窗口</span>
           <h3>控制局部检测无法察觉的上同调类。</h3>
-          <p>这里的上同调群是类泰特–沙法列维奇局部化核：它们度量那些在 \(\ell\) 上方指定素位处限制为零的全局伽罗瓦上同调类，而并非通常意义下椭圆曲线的泰特–沙法列维奇群。数域则在一个特定的分圆子域族中变化。</p>
-          <p>窗口构造经由提升与自守性论证完成。其输入包括附属于 CM 域上 \(\mathrm{GL}_n\) 的正则代数极化尖点自守表示的伽罗瓦表示，以及基变换、雅凯–沙利卡、克洛泽尔纯性、伯恩斯坦–泽列文斯基、复乘主定理与德利涅–里贝特。</p>
+          <p>这里的上同调群是类泰特–沙法列维奇局部化核（Tate–Shafarevich-like localization kernel）：它们度量那些在 \(\ell\) 上方指定素位处限制为零的全局伽罗瓦上同调类，而并非通常意义下椭圆曲线的泰特–沙法列维奇群。数域则在一个特定的分圆子域族中变化。</p>
+          <p>窗口构造经由提升与自守性论证完成。其输入包括附属于 CM 域上 \(\mathrm{GL}_n\) 的正则代数极化尖点自守表示（regular algebraic, polarized cuspidal automorphic representations）的伽罗瓦表示，以及基变换（base change）、雅凯–沙利卡（Jacquet–Shalika）、克洛泽尔纯性（Clozel’s purity）、伯恩斯坦–泽列文斯基（Bernstein–Zelevinsky）、复乘主定理（main theorem of complex multiplication）与德利涅–里贝特（Deligne–Ribet）。</p>
           <p>所得界在整段长区间上控制这些上同调群的加权对数大小。进一步的比较将这一算术预算转化为朗道论证所需的素数和估计。</p>
           <div class="proof-source-links"><a href="technical.html#nv-window">逐步梳理上同调界</a><a href="technical.html#arithmetic-construction">追踪其主要依赖</a></div>
         </div>
@@ -153,7 +153,7 @@
         <div class="route-main">
           <span class="panel-label">几何基础</span>
           <h3>运用算术几何控制整结构。</h3>
-          <p>几何与形变分支调用了多项具名输入：零特征奇点消解、西格尔簇的环面紧化、算术希尔伯特–塞缪尔、森胁大性定理、川又–菲韦格与纳德尔消没定理、格罗滕迪克–梅辛以及棱柱迪厄多内理论。</p>
+          <p>几何与形变分支调用了多项具名输入：零特征奇点消解（resolution of singularities in characteristic zero）、西格尔簇的环面紧化（toroidal compactifications of Siegel varieties）、算术希尔伯特–塞缪尔（arithmetic Hilbert–Samuel）、森胁大性定理（Moriwaki’s bigness theorem）、川又–菲韦格与纳德尔消没定理（Kawamata–Viehweg and Nadel vanishing）、格罗滕迪克–梅辛（Grothendieck–Messing）以及棱柱迪厄多内理论（prismatic Dieudonné theory）。</p>
           <p>这些输入各司其职：紧化与消解提供几何模型；正性、消没与希尔伯特–塞缪尔估计控制截面及其增长；形变与比较结果则连接整结构与上同调结构。</p>
           <p>在余体积分支上，目标是给出附属于自守构造的整格的定量界。它与上同调估计及 \(\theta\) 匹配共同约束素数和误差。</p>
           <div class="proof-source-links"><a href="technical.html#nv-geometric">理解余体积界</a><a href="technical.html#nv-literature">查看 \(\theta\) 输入如何衔接</a></div>

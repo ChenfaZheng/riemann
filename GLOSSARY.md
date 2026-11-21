@@ -19,7 +19,9 @@
 | quadratic character | 二次特征 | |
 | parity (even / odd character) | 奇偶性（偶特征 / 奇特征） | |
 | modulus / moduli | 模 / 模数 | |
+| units (in $(\mathbb Z/q\mathbb Z)^\times$) | 可逆元 | 不可译为“单位”或“单位元” |
 | conductor | 导子 | |
+| index (of a subgroup / sublattice) | 指标 | 不可译为“指数” |
 | critical strip / open strip | 临界带 / 开临界带 | $0 < \operatorname{Re} s < 1$ |
 | critical line | 临界线 | $\operatorname{Re} s = 1/2$ |
 | right half-plane / positive half-plane | 右半平面 / 正半平面 | |
@@ -120,6 +122,8 @@
 | height / height allowance / height budget | 高度 / 高度容差 / 高度预算 | |
 | arithmetic geometry | 算术几何 | |
 | resolution of singularities in characteristic zero | 零特征奇点消解 | |
+| principalization | 主理想化 | |
+| functional condition | 泛函条件 | 不可译为“函数条件” |
 | toroidal compactifications of Siegel varieties | 西格尔簇的环面紧化 | |
 | Hodge bundle | 霍奇丛 | |
 | arithmetic Hilbert–Samuel | 算术希尔伯特–塞缪尔 | |

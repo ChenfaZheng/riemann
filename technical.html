@@ -109,13 +109,13 @@
         <section class="technical-section" id="zeta" aria-labelledby="zeta-title">
           <p class="technical-kicker">第一个对象</p>
           <h3 id="zeta-title"><span class="note-number">1.1</span> 一个铭记素数的函数。</h3>
-          <p>当 \(\operatorname{Re}s&gt;1\) 时，黎曼 \(\zeta\) 函数同时具有正整数级数表示与素数乘积表示：</p>
+          <p>当 \(\operatorname{Re}s&gt;1\) 时，黎曼 \(\zeta\) 函数（Riemann zeta function）同时具有正整数级数表示与素数乘积表示：</p>
           <div class="technical-equation">
             \[\zeta(s)=\sum_{n=1}^{\infty}n^{-s}
             =\prod_{p\ \mathrm{prime}}(1-p^{-s})^{-1}.\]
           </div>
-          <p>唯一因数分解解释了这一联系。展开每个几何级数因子即为每个素数选取一个幂次；将它们相乘恰好不重不漏地收集了每一个正整数。该区域内的绝对收敛保证了重排的合法性，而欧拉乘积也直接给出了函数在该区域的非零性。</p>
-          <p>解析延拓将 \(\zeta\) 延拓为复平面上的亚纯函数，仅在 \(s=1\) 处有一个单极点。原始级数并不能直接在整个临界带内用于求值。位于 \(-2,-4,-6,\ldots\) 的零点称为<em>平凡零点</em>。其余零点均落在开临界带 \(0&lt;\sigma&lt;1\) 内；黎曼猜想（RH）断定它们的实部恒为 \(\tfrac12\)。</p>
+          <p>唯一因数分解解释了这一联系。展开每个几何级数因子即为每个素数选取一个幂次；将它们相乘恰好不重不漏地收集了每一个正整数。该区域内的绝对收敛保证了重排的合法性，而欧拉乘积（Euler product）也直接给出了函数在该区域的非零性。</p>
+          <p>解析延拓（analytic continuation）将 \(\zeta\) 延拓为复平面上的亚纯函数（meromorphic function），仅在 \(s=1\) 处有一个单极点（simple pole）。原始级数并不能直接在整个临界带内用于求值。位于 \(-2,-4,-6,\ldots\) 的零点称为<em>平凡零点（trivial zeros）</em>。其余零点均落在开临界带 \(0&lt;\sigma&lt;1\) 内；黎曼猜想（RH）断定它们的实部恒为 \(\tfrac12\)。</p>
           <div class="technical-equation">
             \[\zeta(\rho)=0,\quad 0&lt;\operatorname{Re}\rho&lt;1
             \quad\Longrightarrow\quad \operatorname{Re}\rho=\tfrac12.\]
@@ -127,22 +127,22 @@
             <div class="equation-scroll">\[-\frac{\zeta'(s)}{\zeta(s)}
               =\sum_{n=1}^{\infty}\frac{\Lambda_{\mathrm{vM}}(n)}{n^s},
               \qquad \operatorname{Re}s&gt;1.\]</div>
-            <p>其中冯·曼戈尔特函数在素数幂处取值为 \(\Lambda_{\mathrm{vM}}(p^k)=\log p\)，其余处为零。\(\zeta\) 的零点会成为其对数导数的极点。通过显式公式，这些极点的位置支配着素数计数函数中的振荡。这说明控制零点即是在获取算术信息；详细的显式公式论证不在本章范围内。</p>
+            <p>其中冯·曼戈尔特函数（von Mangoldt function）在素数幂处取值为 \(\Lambda_{\mathrm{vM}}(p^k)=\log p\)，其余处为零。\(\zeta\) 的零点会成为其对数导数的极点。通过显式公式（explicit formulas），这些极点的位置支配着素数计数函数中的振荡。这说明控制零点即是在获取算术信息；详细的显式公式论证不在本章范围内。</p>
           </details>
         </section>
 
         <section class="technical-section" id="characters" aria-labelledby="characters-title">
           <p class="technical-kicker">更广的函数族</p>
           <h3 id="characters-title"><span class="note-number">1.2</span> 用特征对整数加权扭转。</h3>
-          <p>模正整数 \(q\) 的狄利克雷特征是有限群 \((\mathbb Z/q\mathbb Z)^\times\) 的乘法特征，经周期延拓定义到全体整数上，并在与 \(q\) 不互素的整数处取值为零。在单位元群上其取值为单位根。主特征 \(\chi_0\) 在单位上取值为 \(1\)，其余处为零。</p>
+          <p>模正整数 \(q\) 的狄利克雷特征（Dirichlet character）是有限群 \((\mathbb Z/q\mathbb Z)^\times\) 的乘法特征，经周期延拓定义到全体整数上，并在与 \(q\) 不互素的整数处取值为零。在可逆元（units，即与 \(q\) 互素的整数）上其取值为单位根。主特征（principal character）\(\chi_0\) 在可逆元上取值为 \(1\)，其余处为零。</p>
           <div class="technical-equation">
             \[L(s,\chi)=\sum_{n=1}^{\infty}\frac{\chi(n)}{n^s}
             =\prod_p(1-\chi(p)p^{-s})^{-1},
             \qquad \operatorname{Re}s&gt;1.\]
           </div>
-          <p>这些函数皆可亚纯延拓。非主特征对应整函数；主特征在 \(1\) 处有一个单极点。它们在开临界带内的零点构成了此处所研究的对象族。<a href="https://dlmf.nist.gov/25.15">DLMF §25.15 给出了经典定义与恒等式。</a></p>
-          <p>当一个特征并非由其模的真因子的特征诱导而来时，称其为<strong>本原特征</strong>，此时其导子等于 \(q\)。下文使用的简洁函数方程适用于本原特征。对于非本原特征，可先将其 \(L\)-函数与某个本原特征的 \(L\)-函数联系起来，两者仅相差有限个欧拉因子。</p>
-          <p>逆特征 \(\chi^{-1}\) 等于复共轭 \(\overline\chi\)：单位模复数的逆等于其共轭，且两者在非单位处均取零。取逆保持导子不变，因此本原特征的逆特征仍是本原特征。这使得论证在切换特征时不会失去函数方程。</p>
+          <p>这些函数皆可亚纯延拓。非主特征对应整函数（entire function）；主特征在 \(1\) 处有一个单极点。它们在开临界带内的零点构成了此处所研究的对象族。<a href="https://dlmf.nist.gov/25.15">DLMF §25.15 给出了经典定义与恒等式。</a></p>
+          <p>当一个特征并非由其模的真因子的特征诱导而来时，称其为<strong>本原特征（primitive character）</strong>，此时其导子（conductor）等于 \(q\)。下文使用的简洁函数方程适用于本原特征。对于非本原特征（imprimitive character），可先将其 \(L\)-函数与某个本原特征的 \(L\)-函数联系起来，两者仅相差有限个欧拉因子。</p>
+          <p>逆特征（inverse character）\(\chi^{-1}\) 等于复共轭 \(\overline\chi\)：单位模复数的逆等于其共轭，且两者在非可逆元处均取零。取逆保持导子不变，因此本原特征的逆特征仍是本原特征。这使得论证在切换特征时不会失去函数方程。</p>
           <div class="technical-note">
             <p><strong>精确范围。</strong>此处的“狄利克雷广义黎曼猜想（Dirichlet GRH）”指针对狄利克雷 \(L\)-函数的临界线断语，并不表示关于所有自守 \(L\)-函数或其他 \(L\)-函数的定理。源码暴露了若干种表述，包括本原特征命题以及适用于开临界带内全体特征的命题。</p>
           </div>
@@ -151,20 +151,20 @@
         <section class="technical-section" id="completed" aria-labelledby="completed-title">
           <p class="technical-kicker">对称性</p>
           <h3 id="completed-title"><span class="note-number">1.3</span> 先完备化，再反射。</h3>
-          <p>本原特征具有奇偶性 \(a\in\{0,1\}\)，由 \(\chi(-1)=(-1)^a\) 定义。在常规归一化下，完备 \(L\)-函数为</p>
+          <p>本原特征具有奇偶性（parity）\(a\in\{0,1\}\)，由 \(\chi(-1)=(-1)^a\) 定义。在常规归一化下，完备 \(L\)-函数（completed \(L\)-function）为</p>
           <div class="technical-equation">
             \[\Lambda(s,\chi)=
               \left(\frac q\pi\right)^{(s+a)/2}
               \Gamma\!\left(\frac{s+a}{2}\right)L(s,\chi).\]
           </div>
           <p>正实底数 \(q/\pi\) 通过实对数无歧义地确定了幂次，其复指数永不为零。在开临界带内有 \(\operatorname{Re}((s+a)/2)&gt;0\)，因此 \(\Gamma\) 因子有限且非零。于是 \(L(s,\chi)\) 与 \(\Lambda(s,\chi)\) 在该区域内具有完全相同的零点。这里用到的经典事实是：<a href="https://dlmf.nist.gov/5.2">\(\Gamma\) 函数无零点，且仅在非正整数处有极点</a>。</p>
-          <p>函数方程具有如下对称形式：</p>
+          <p>函数方程（functional equation）具有如下对称形式：</p>
           <div class="technical-equation">
             \[\Lambda(s,\chi)=
               \varepsilon(\chi)\Lambda(1-s,\overline\chi),
               \qquad |\varepsilon(\chi)|=1.\]
           </div>
-          <p>常数 \(\varepsilon(\chi)\) 称为根数。这是<a href="https://dlmf.nist.gov/25.15#E5">本原狄利克雷函数方程</a>的完备形式。对于模 \(1\) 特征，该方程在亚纯意义下理解；其在 \(0\) 与 \(1\) 处的极点不落入开临界带。</p>
+          <p>常数 \(\varepsilon(\chi)\) 称为根数（root number）。这是<a href="https://dlmf.nist.gov/25.15#E5">本原狄利克雷函数方程</a>的完备形式。对于模 \(1\) 特征，该方程在亚纯意义下理解；其在 \(0\) 与 \(1\) 处的极点不落入开临界带。</p>
           <p>变换 \(s\mapsto1-s\) 将 \(\sigma+it\) 映至 \(1-\sigma-it\)，并将 \(\chi\) 变为 \(\overline\chi\)，从而互换临界线两侧。对于非实特征，它关联的是两个不同的 \(L\)-函数，切不可暗中保持同一特征不变。</p>
           <details>
             <summary>这里的记号与 Lean 源码如何对应？</summary>
@@ -353,7 +353,7 @@
     [Y,Y^{1+\delta}]\longmapsto[U,(1+\delta)U],
     \qquad U=\log Y.
   \]</div>
-  <p>在此区间上，取非负优函数 \(R(u)=|C|e^{\theta u}\)。即便原常数 \(C\) 为负，仍有 \(g(u)\le R(u)\)。除去预期的指数增长后，其加权质量仅为</p>
+  <p>在此区间上，取非负优函数（majorant）\(R(u)=|C|e^{\theta u}\)。即便原常数 \(C\) 为负，仍有 \(g(u)\le R(u)\)。除去预期的指数增长后，其加权质量仅为</p>
   <div class="technical-equation">\[
     \int_U^{(1+\delta)U}R(u)e^{-\theta u}\,du
       =|C|\delta U\le e^{\eta U}
@@ -550,19 +550,19 @@
   </nav>
 
   <h4 id="arithmetic-cohomology"><span class="note-number">2.6.1</span> 识别局部平凡而全局非平凡的类。</h4>
-  <p>固定数域 \(E\) 与有理素数 \(\ell\)。设 \(S_\ell\) 为 \(E\) 在 \(\ell\) 上方的有限素位集合。群 \(G_{E,S_\ell}\) 保留在这些素位之外非分歧的伽罗瓦信息：它是将 \(S_\ell\) 之外的惯性子群商去后的绝对伽罗瓦群。这本身已经内置了一组局部限制。</p>
+  <p>固定数域 \(E\) 与有理素数 \(\ell\)。设 \(S_\ell\) 为 \(E\) 在 \(\ell\) 上方的有限素位集合。群 \(G_{E,S_\ell}\) 保留在这些素位之外非分歧（unramified）的伽罗瓦信息：它是将 \(S_\ell\) 之外的惯性子群（inertia subgroup）商去后的绝对伽罗瓦群。这本身已经内置了一组局部限制。</p>
   <p>对正整数 \(k\)，系数模定义为</p>
   <div class="technical-equation">\[
     M_{\ell,k}=(\mathbb Q_\ell/\mathbb Z_\ell)(-k),
     \qquad g\cdot m=\chi_{\mathrm{cyc}}(g)^{-k}m.
   \]</div>
-  <p>该商群由 \(\ell\)-幂挠类组成。扭转改变了伽罗瓦自同构在其上的作用：分圆特征记录了它们对单位根的作用，而此处其逆的 \(k\) 次幂以标量乘法作用。底层加法群保持不变，因此不同的 \(k\) 探测该群上不同的算术作用。</p>
-  <p>一阶上同调可通过相容方程来理解。连续上循环是满足下式的映射 \(f:G\to M\)：</p>
+  <p>该商群由 \(\ell\)-幂挠类（torsion classes）组成。扭转改变了伽罗瓦自同构在其上的作用：分圆特征（cyclotomic character）记录了它们对单位根的作用，而此处其逆的 \(k\) 次幂以标量乘法作用。底层加法群保持不变，因此不同的 \(k\) 探测该群上不同的算术作用。</p>
+  <p>一阶上同调可通过相容方程来理解。连续上循环（cocycle）是满足下式的映射 \(f:G\to M\)：</p>
   <div class="technical-equation">\[
     f(gh)=f(g)+g\cdot f(h).
   \]</div>
-  <p>这恰好是仿射变换 \(g*x=g\cdot x+f(g)\) 复合构成群作用的条件。形如 \(f(g)=g\cdot m-m\) 的上循环可通过平移原点消除，称为上边缘；\(H^1(G,M)\) 便是上循环模去这些原点平移所得的空间。</p>
-  <p>窗口定理中的算术对象是局部化核</p>
+  <p>这恰好是仿射变换 \(g*x=g\cdot x+f(g)\) 复合构成群作用的条件。形如 \(f(g)=g\cdot m-m\) 的上循环可通过平移原点消除，称为上边缘（coboundary）；\(H^1(G,M)\) 便是上循环模去这些原点平移所得的空间。</p>
+  <p>窗口定理中的算术对象是局部化核（localization kernel）</p>
   <div class="technical-equation">\[
     \operatorname{Sha}_\ell(E,k)=\ker\!\left[
       H^1(G_{E,S_\ell},M_{\ell,k})
@@ -570,7 +570,7 @@
       \prod_{v\mid\ell}H^1(G_{E_v},M_{\ell,k})
     \right].
   \]</div>
-  <p>源码中用代数闭包中所选素位处的分解群来表示这些局部群。该核中的一个类在 \(\ell\) 上方的每个素位处都可以分别通过平移原点消除，却仍可能抗拒任何统一的全局原点平移。它记录的正是这些特定局部检测所无法察觉的全局算术信息。</p>
+  <p>源码中用代数闭包中所选素位处的分解群（decomposition group）来表示这些局部群。该核中的一个类在 \(\ell\) 上方的每个素位处都可以分别通过平移原点消除，却仍可能抗拒任何统一的全局原点平移。它记录的正是这些特定局部检测所无法察觉的全局算术信息。</p>
   <div class="technical-note"><p><strong>究竟是哪些局部检测？</strong>该核中的消没限制施加于 \(\ell\) 上方的有限素位。在 \(\ell\) 之外的非分歧性已经内置于 \(G_{E,S_\ell}\) 之中。这是两类不同的条件，定义并未要求在所有素位处皆平凡。此处的记号 \(\operatorname{Sha}\) 特指这一上同调局部化核。</p></div>
 
   <h4 id="arithmetic-length"><span class="note-number">2.6.2</span> 用单层数目度量局部化核。</h4>
@@ -580,7 +580,7 @@
       \operatorname{length}_{\mathbb Z_\ell}\operatorname{Sha}_\ell(E,k)
       \in\mathbb N\cup\{\infty\}.
   \]</div>
-  <p>模长度计数组成合成列的单层数目。在 \(\mathbb Z_\ell\) 上，每一单层恰有 \(\ell\) 个元素。例如，</p>
+  <p>模长度（module length）计数组成合成列（composition series）的单层（simple layers）数目。在 \(\mathbb Z_\ell\) 上，每一单层恰有 \(\ell\) 个元素。例如，</p>
   <div class="technical-equation">\[
     M=\mathbb Z_\ell/\ell^3\mathbb Z_\ell
        \oplus\mathbb Z_\ell/\ell^2\mathbb Z_\ell,
@@ -690,7 +690,7 @@
   <div class="technical-equation">\[
     \log|N_p|\le|\mathcal O|\,|S|\,(2r\log q+1).
   \]</div>
-  <p>实质性的形变比较对满足条件的一般素数 \(\ell\ne p\) 将相关归一化特征长度之和定界于 \(2v_\ell(N_p)\) 以内。此处 \(v_\ell(\ell)=1\)；归一化长度指在系数离散赋值环上的模长度除以其分歧指数。这类界经由形变环的余切模与迹同余获得，并非仅由整数构造本身就能推出。</p>
+  <p>实质性的形变比较对满足条件的一般素数 \(\ell\ne p\) 将相关归一化特征长度之和定界于 \(2v_\ell(N_p)\) 以内。此处 \(v_\ell(\ell)=1\)；归一化长度指在系数离散赋值环（discrete valuation ring）上的模长度除以其分歧指数（ramification index）。这类界经由形变环（deformation ring）的余切模（cotangent module）与迹同余（trace congruences）获得，并非仅由整数构造本身就能推出。</p>
   <p>再选取第二个辅助素数 \(p'\ne p\) 以覆盖先前遗漏的系数素数。对任意有限合格素数集 \(P\)，唯一因数分解立即给出</p>
   <div class="technical-equation">\[
     \begin{aligned}
@@ -700,7 +700,7 @@
       &amp;\le2\log|N_p|+2\log|N_{p'}|.
     \end{aligned}
   \]</div>
-  <p>这一界不随 \(|P|\) 增长。对自守迹标签数目的多项式界，继之以对特征轨道与扭转求和，即给出一般性贡献。回到数域上同调的比较还计入了导子与指数因子；例外素数与素数 \(2\) 则需要额外论证。</p>
+  <p>这一界不随 \(|P|\) 增长。对自守迹标签数目的多项式界，继之以对特征轨道与扭转求和，即给出一般性贡献。回到数域上同调的比较还计入了导子与指标因子（conductor and index factors）；例外素数与素数 \(2\) 则需要额外论证。</p>
   <p class="source-callout">源码入口：<a href="https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AutomorphicArithmetic/AutomorphicVarieties/UnitaryThreeGroups/CorGSumLog.lean#L37">跨系数素数的归一化长度之和</a>。</p>
 
   <h5 id="arithmetic-exceptional-window"><span class="note-number">2.6.6.2</span> 选取使例外扭转保持较小的窗口。</h5>
@@ -722,7 +722,7 @@
   <p class="source-callout">源码入口：<a href="https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Development/AutomorphicArithmetic/AutomorphicVarieties/LayeredIsomorphisms/Window1.lean#L6">对数区间筛选引理</a>。</p>
 
   <h4 id="arithmetic-rescaling"><span class="note-number">2.6.7</span> 使算术窗口适配宿主构造。</h4>
-  <p>下一阶段构造一个<em>宿主</em>：即一套集数域、秩与选定算术类于一体的结构，使所有比较估计得以在同一舞台上共同陈述。宿主同时承载上同调预算与素数和所需的特征信息。其数域可随 \(x\) 变化；附属于固定目标层级的解析特征族则保持固定。</p>
+  <p>下一阶段构造一个<em>宿主（host）</em>：即一套集数域、秩与选定算术类于一体的结构，使所有比较估计得以在同一舞台上共同陈述。宿主同时承载上同调预算与素数和所需的特征信息。其数域可随 \(x\) 变化；附属于固定目标层级的解析特征族则保持固定。</p>
   <p>从算术窗口 \([W,W^2]\) 过渡到后续窗口 \([Z,Z^{3/2}]\) 时预留了余量。一个固定的域大小因子 \(c\ge1\) 通过如下尺度重标定被吸收：</p>
   <div class="technical-equation">\[
     \kappa=c^{1/(2+8\varepsilon)},\qquad
@@ -808,7 +808,7 @@
   <div class="technical-equation">\[
     (a/p^j-w)_+=w\bigl((a/w)/p^j-1\bigr)_+
   \]</div>
-  <p>将其化为解析误差中所用的同一种光滑化形式。局部理想大小的对数提供因子 \(\log p\)，而惯性与剩余次数则计入算术类公式。减去匹配的主项后即留下特征误差；对平移取平均消去多余相位，产生正加权特征族 \(G_F\)。</p>
+  <p>将其化为解析误差中所用的同一种光滑化形式。局部理想大小的对数提供因子 \(\log p\)，而惯性次数与剩余次数（inertia and residue degrees）则计入算术类公式。减去匹配的主项后即留下特征误差；对平移取平均消去多余相位，产生正加权特征族 \(G_F\)。</p>
   <p>更精确地说，设 \(N_T\) 为所选平移个数，\(m\) 为链长，\(b&gt;0\) 为其权重尺度。\(H\) 的第二个选定子集含 \(N_2\) 个元素，正比例为 \(\delta=N_2/n\)；下文参数界给出 \(\delta\ge x^{-\varepsilon}&gt;0\)。记 \(Q=N_Tmb\)。控制权重与自变量的变化后，平均后的比较式为</p>
   <div class="technical-equation">\[
     \frac{Q\delta}{2}
@@ -892,7 +892,7 @@
     P_{BAB^{-1}}(T)=P_A(T),\qquad
     \operatorname{tr}(BAB^{-1})=\operatorname{tr}(A).
   \]</div>
-  <p>这些不变量使得算术构造与自守构造无需选取同一组基即可进行比较。弗罗贝尼乌斯是其特征值进入常见非分歧比较的局部算术算子。在分歧素位处，韦伊–德利涅参数同时记录一个韦伊群表示与一个幂零单值算子 \(N\)。本节的多项式公式旨在阐明比较语言，并不主张无限制的弗罗贝尼乌斯相容性；实际的局部结论陈述于下文。</p>
+  <p>这些不变量使得算术构造与自守构造无需选取同一组基即可进行比较。弗罗贝尼乌斯（Frobenius）是其特征值进入常见非分歧比较的局部算术算子。在分歧素位处，韦伊–德利涅参数（Weil–Deligne parameter）同时记录一个韦伊群（Weil group）表示与一个幂零单值算子（monodromy operator）\(N\)。本节的多项式公式旨在阐明比较语言，并不主张无限制的弗罗贝尼乌斯相容性；实际的局部结论陈述于下文。</p>
 
   <h4 id="galois-weights"><span class="note-number">2.7.3</span> 保留无穷型及其共轭对称性。</h4>
   <p>定理还提供一个整数 \(\mathrm{wt}\) 以及一组整数多重集 \(\mathrm{HT}(\tau)\)，每个嵌入 \(\tau:E\to\overline{\mathbb Q}_\ell\) 对应一个。若 \(Z_{\iota\tau}\) 表示自守无穷小特征多重集，则源码通过下式固定归一化：</p>
@@ -905,10 +905,10 @@
     \mathrm{HT}(\tau\circ c_E)
        =\{\mathrm{wt}-h:h\in\mathrm{HT}(\tau)\}.
   \]</div>
-  <p>因此一个嵌入上的权重决定了共轭嵌入上的伴侣权重。在 \(\ell\) 上方，定理在其比较假设下将这些多重集与相应的跳跃认同起来：在球局部情形中它给出晶体与德拉姆性质；在单独的“nice”情形中它在附加条件下给出德拉姆、潜在半稳定、跳跃以及局部参数结论。它并未宣称每个局部成分都是晶体的。</p>
+  <p>因此一个嵌入上的权重决定了共轭嵌入上的伴侣权重。在 \(\ell\) 上方，定理在其比较假设下将这些多重集与相应的跳跃认同起来：在球局部情形（spherical local case）中它给出晶体的（crystalline）与德拉姆的（de Rham）性质；在单独的“nice”情形中它在附加条件下给出德拉姆的、潜在半稳定的（potentially semistable）、跳跃以及局部参数结论。它并未宣称每个局部成分都是晶体的。</p>
 
   <h4 id="galois-construction"><span class="note-number">2.7.4</span> 追踪从几何到最终表示的构造。</h4>
-  <p>所检视的构造始于提供初始伽罗瓦数据的几何实现，继而将这些种子与同余结合，经过迹极限引理，并借助下降与 \(\theta\) 提升抵达更广的表示定理。迹之所以有用，是因为它保留不依赖于基的信息；从极限信息中产出一个表示则是该链条中的实质性定理。</p>
+  <p>所检视的构造始于提供初始伽罗瓦数据的几何实现，继而将这些种子与同余结合，经过迹极限定理（trace-limit theorem），并借助下降（descent）与 \(\theta\) 提升（theta lifting）抵达更广的表示定理。迹之所以有用，是因为它保留不依赖于基的信息；从极限信息中产出一个表示则是该链条中的实质性定理。</p>
   <p>\(\theta\) 提升输入涉及附属于 CM 域上埃尔米特空间与斜埃尔米特空间的酉群。当特征与权重满足规定的相容性条件且目标秩充分大时，它提供一次提升。随后经由局部相容性结果过渡到算术窗口所用的精确声明。由此，装配过程通过定理构造提供了伽罗瓦输入；阐释这一装配并不复现更深层的几何、同余、迹极限或下降证明。</p>
 
   <h4 id="galois-local-restrictions"><span class="note-number">2.7.5</span> 按原陈述强度保留局部结论。</h4>
@@ -1035,7 +1035,7 @@
   <p>其中 \(\mathcal A,\mathcal F,\mathcal G\) 示意算术、泛函与几何条件。为每条条件各自给出不同的见证对象是不够的。所得相容族与 Green 输入一同送入汇总素数和估计，算术窗口随后提供朗道论证所需的特定特征数据。</p>
   <p class="source-callout"><a href="sources.html#nv-theta-bridge">测试向量、公共阈值与余体积装配。</a></p>
   <h4 id="theta-common-target"><span class="note-number">2.9.7</span> 在同一个公共空间内比较周期。</h4>
-  <p>为何定量估计需要匹配？分别给每个周期一个范数界，并不能告诉我们不同周期是否探测了不同的方向——我们需要比较它们的像。跷跷板构造提供了这一公共舞台：它将一次提升从配对的一侧移至另一侧，同时携带测试数据与归一化。</p>
+  <p>为何定量估计需要匹配？分别给每个周期一个范数界，并不能告诉我们不同周期是否探测了不同的方向——我们需要比较它们的像。跷跷板构造（seesaw construction）提供了这一公共舞台：它将一次提升从配对的一侧移至另一侧，同时携带测试数据与归一化。</p>
   <p>对一组特征数据 \(i\)，周期比较形如</p>
   <div class="technical-equation">\[
     B_i(\phi,F)=a_i\,B_i^{\mathrm{Bes}}(U_i\phi,VF),
@@ -1081,7 +1081,7 @@
     s=\frac{\sum_i r_i(\mu(N_i)-h_i)}{R},
     \qquad U=\max_i\{\mu_{\max}(N_i)-h_i\}-s\ge0.
   \]</div>
-  <p>斜率滤过将高斜率方向与低斜率方向分开。若调整后的源斜率中有比例 \(\alpha\) 低于 \(s-\tau\)，同时没有任何方向超过 \(s+U\)，则它们的均值满足</p>
+  <p>斜率滤过（slope filtration）将高斜率方向与低斜率方向分开。若调整后的源斜率中有比例 \(\alpha\) 低于 \(s-\tau\)，同时没有任何方向超过 \(s+U\)，则它们的均值满足</p>
   <div class="technical-equation">\[
     s\le\alpha(s-\tau)+(1-\alpha)(s+U)
     \quad\Longrightarrow\quad
@@ -1098,7 +1098,7 @@
   <p class="source-callout"><a href="https://github.com/TomasOrtega/RH/blob/a6ac91a412dcbaab31801355ec5707024a71bf65/extracted/lean/src/Formalism/HarderNarasimhan/StatementFrameF.lean#L10">Lean 中的框架与平均斜率估计。</a></p>
 
   <h4 id="theta-main-cancellation"><span class="note-number">2.9.10</span> 在估计误差之前先抵消大项。</h4>
-  <p>斜率比较中仍含有远大于平方根误差的大项，它们的抵消依赖精确的 CM 周期归一化。设 \(d&gt;0\) 为绝对二次判别式。对选定的判别式为 \(-d\) 的二次特征记 \(\ell=\operatorname{Re}(L'(1,\chi_d)/L(1,\chi_d))\)，\(\gamma_E\) 为欧拉常数，并令 \(v=\operatorname{rd}(E)/2&gt;0\)（即宿主域根判别式的一半）。归一化周期常数为</p>
+  <p>斜率比较中仍含有远大于平方根误差的大项，它们的抵消依赖精确的 CM 周期（CM-period）归一化。设 \(d&gt;0\) 为绝对二次判别式。对选定的判别式为 \(-d\) 的二次特征记 \(\ell=\operatorname{Re}(L'(1,\chi_d)/L(1,\chi_d))\)，\(\gamma_E\) 为欧拉常数，并令 \(v=\operatorname{rd}(E)/2&gt;0\)（即宿主域根判别式（root discriminant）的一半）。归一化周期常数为</p>
   <div class="technical-equation">\[
     \log\Omega=\gamma_E+\log(\pi/v)-\ell.
   \]</div>
@@ -1135,12 +1135,12 @@
   <p>几何分支控制自守构造底层的整格。其核心机制是定量的：只要“坏方向”的斜率不能过大，删去极小一部分坏方向所付出的代价就很小。剩余格的斜率下界随后转化为下文所用的对数余体积上界。</p>
 
   <h4 id="geometric-lattice"><span class="note-number">2.10.1</span> 理解余体积所度量的内容。</h4>
-  <p>作为模型，考虑满秩格 \(\Lambda\subset\mathbb R^n\)，其基向量构成矩阵 \(B\) 的各列。它的余体积是一个基本平行多面体的体积：</p>
+  <p>作为模型，考虑满秩格 \(\Lambda\subset\mathbb R^n\)，其基向量构成矩阵 \(B\) 的各列。它的余体积（covolume）是一个基本平行多面体的体积：</p>
   <div class="technical-equation">\[
     \operatorname{covol}(\Lambda)=|\det B|
       =\sqrt{\det(B^{\mathsf T}B)}.
   \]</div>
-  <p>格拉姆矩阵 \(B^{\mathsf T}B\) 记录了长度与夹角。将每个向量按 \(t&gt;0\) 缩放会使余体积乘以 \(t^n\)，从而模型斜率 \(\mu_{\mathrm{toy}}=-\log\operatorname{covol}(\Lambda)/n\) 变化 \(-\log t\)。这解释了符号的含义：斜率下界阻止格的基本体积过度膨胀。源码使用的是数域上的算术格、各嵌入处的范数以及自定义的归一化平方范数斜率；这里的欧氏模型提供直觉启发，而非替代那些定义。</p>
+  <p>格拉姆矩阵（Gram matrix）\(B^{\mathsf T}B\) 记录了长度与夹角。将每个向量按 \(t&gt;0\) 缩放会使余体积乘以 \(t^n\)，从而模型斜率 \(\mu_{\mathrm{toy}}=-\log\operatorname{covol}(\Lambda)/n\) 变化 \(-\log t\)。这解释了符号的含义：斜率下界阻止格的基本体积过度膨胀。源码使用的是数域上的算术格、各嵌入处的范数以及自定义的归一化平方范数斜率；这里的欧氏模型提供直觉启发，而非替代那些定义。</p>
 
   <h4 id="geometric-core"><span class="note-number">2.10.2</span> 合并两条斜率比较。</h4>
   <p>固定一个合格族、充分大的尺度 \(x\)、一个相容点以及提升指标 \(i\)。记 \(E_i\) 为名为 <code>unitE</code> 的正误差尺度，\(T_i\) 为 <code>mainT</code>，\(\mu_{\mathrm{core}},\mu_{\mathrm{type}},\mu_{\mathrm{good}}\) 为源码中的三个斜率。两条几何输入以固定常数 \(C_1,C_2\ge0\) 给出</p>
@@ -1170,7 +1170,7 @@
   <p>于是分母代价由同一份误差预算支付。这正是为何仅靠向量空间分解远远不够。</p>
 
 <p>对坏秩的依赖可以直接看出。设 \(L=\Lambda_{\mathrm{type}}\ne0\)、\(L_g=L\cap\operatorname{im}P\)、\(L_b=L\cap\ker P\)，秩分别为 \(r_g,r_b\)（故 \(r_g+r_b&gt;0\)）。互补投影将 \(L\) 送入 \(N^{-1}L_b\)：确实 \(N(1-P)v=Nv-NPv\in L_b\)。它模 \(L_b\) 的核恰好是 \(L_g+L_b\)，因此有限商群 \(L/(L_g+L_b)\) 嵌入 \(N^{-1}L_b/L_b\)。分母代价仅与 \(r_b\) 成正比，而非与满秩成正比。</p>
-  <p>将这一指数界与正交性结合，在源码的平方范数约定下给出</p>
+  <p>将这一指标界（index bound）与正交性结合，在源码的平方范数约定下给出</p>
   <div class="technical-equation">\[
     (r_g+r_b)\mu(L)
       \le r_g\mu(L_g)+r_b\bigl(M+2\log N\bigr),
@@ -1276,8 +1276,8 @@
   \]</div>
   <p>合格性包含族的基础阈值与所需的对应绑定。取有限个阈值的最大值使各分量界同时成立。<a href="sources.html#nv-linked-covolume">传递定理</a>随后将该估计传递至 \(\theta\) 与伽罗瓦分支所用的相容选择，成为<a href="#arithmetic-comparison">素数和比较</a>的一项几何输入（上同调界提供另一项）。由此产生的区间估计正是朗道论证所能使用的。</p>
 <h4 id="geometric-jets"><span class="note-number">2.10.8</span> 防止局部导数消没为零。</h4>
-  <p>局部可除性估计必须伴随一个它所作用的非零对象。按 \(v_p(p)=1\)（且 \(v_p(0)=+\infty\)）归一化加法赋值。下界 \(v_p(J)\ge b\) 说明 \(J\) 至少能被整除至规定阶数，但它允许 \(J=0\)；相反，上界 \(v_p(J)\le B&lt;\infty\) 保证所选导数在抵消中幸存。两个方向都进入局部构造。</p>
-  <p>射流是原点处的加权导数。若 \(P=\sum_\nu P_\nu X^\nu\) 为多项式、\(F\) 为形式幂级数，则</p>
+  <p>局部可除性估计必须伴随一个它所作用的非零对象。按 \(v_p(p)=1\)（且 \(v_p(0)=+\infty\)）归一化加法赋值（additive valuation）。下界 \(v_p(J)\ge b\) 说明 \(J\) 至少能被整除至规定阶数，但它允许 \(J=0\)；相反，上界 \(v_p(J)\le B&lt;\infty\) 保证所选导数在抵消中幸存。两个方向都进入局部构造。</p>
+  <p>射流（jet）是原点处的加权导数。若 \(P=\sum_\nu P_\nu X^\nu\) 为多项式、\(F\) 为形式幂级数（formal power series），则</p>
   <div class="technical-equation">\[
     P(\partial)F(0)=\sum_\nu P_\nu\,\nu!\,[X^\nu]F.
   \]</div>
@@ -1329,7 +1329,7 @@
   <div class="technical-equation">\[
     \exists D,\quad \mathcal A(D)\land\mathcal F(D)\land\mathcal G(D),
   \]</div>
-  <p>其中三个谓词分别代表所需的算术、泛函与几何条件。这同一个见证对象至关重要：针对一个族的算术界与针对无关族的几何界无法代入同一条比较。源码的构造器还包含下游所需的正定侧条件，且整个构造不以狄利克雷非零性为前提。</p>
+  <p>其中三个谓词分别代表所需的算术、泛函与几何条件。这同一个见证对象至关重要：针对一个族的算术界与针对无关族的几何界无法代入同一条比较。源码的构造器还包含下游所需的正定侧条件（definite-side condition），且整个构造不以狄利克雷非零性为前提。</p>
 
 <p>筛选具有精确的顺序。设 \(K\) 编码对辅助参数的下界要求，\(P(F,K)\) 表示族 \(F\) 满足这些要求，\(B(F)\) 汇集比较界，\(W(F)\) 为所需的算术窗口性质。奏效的逻辑组合是</p>
   <div class="technical-equation">\[

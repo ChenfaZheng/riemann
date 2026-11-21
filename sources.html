@@ -1058,7 +1058,7 @@
 <section class="technical-section source-card" id="nv-row-definition" aria-labelledby="nv-row-definition-title">
   <p class="technical-kicker">Development.AutomorphicArithmetic.Foundations.GaloisRepresentations.TypeConditions.WeightsConjBis</p>
   <h2 id="nv-row-definition-title">精确的伽罗瓦表示契约 Row0b</h2>
-  <p>对 CM 域上的正则代数极化尖点表示加以量化，并记录连续半单伽罗瓦表示、权恒等式以及受限局部比较条件。</p>
+  <p>对 CM 域上的正则代数极化尖点表示加以量化，并记录连续半单伽罗瓦表示、权重恒等式（weight identities）以及受限局部比较条件。</p>
   <p class="source-meta">精确摘录 · 第 15–16, 26–31, 39–73, 84–86 行（共 88 行） · lean/src/Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/TypeConditions/WeightsConjBis.lean</p>
   <pre class="source-code" tabindex="0" aria-label="Lean 源码：Development.AutomorphicArithmetic.Foundations.GaloisRepresentations.TypeConditions.WeightsConjBis"><code><span class="source-line" id="nv-row-definition-L15"><a class="line-number" href="#nv-row-definition-L15" aria-label="Line 15">15</a>def IsQpBig {E : Type} [Field E] [NumberField E] (w : HeightOneSpectrum (𝓞 E)) (n : ℕ) : Prop :=</span>
 <span class="source-line" id="nv-row-definition-L16"><a class="line-number" href="#nv-row-definition-L16" aria-label="Line 16">16</a>  ∃ (g : ℕ) (_ : Fact g.Prime) (i : ℚ_[g] ≃+* w.adicCompletion E), Continuous i ∧ (n = 1 ∨ 16 * n ^ 2 &lt; g)</span>
@@ -1166,7 +1166,7 @@
 <section class="technical-section source-card" id="nv-theta-lift" aria-labelledby="nv-theta-lift-title">
   <p class="technical-kicker">Development.AutomorphicArithmetic.Foundations.GaloisRepresentations.ThetaParseval.HalfIndexLattices.TLiftK</p>
   <h2 id="nv-theta-lift-title">θ 提升输入的实际论断</h2>
-  <p>针对指定的 CM 域、埃尔米特/斜埃尔米特空间、相容特征与权不等式，断言存在通向充分大秩的提升。</p>
+  <p>针对指定的 CM 域、埃尔米特/斜埃尔米特空间、相容特征与权重不等式（weight inequalities），断言存在通向充分大秩的提升。</p>
   <p class="source-meta">精确摘录 · 第 12–23 行（共 27 行） · lean/src/Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/ThetaParseval/HalfIndexLattices/TLiftK.lean</p>
   <pre class="source-code" tabindex="0" aria-label="Lean 源码：Development.AutomorphicArithmetic.Foundations.GaloisRepresentations.ThetaParseval.HalfIndexLattices.TLiftK"><code><span class="source-line" id="nv-theta-lift-L12"><a class="line-number" href="#nv-theta-lift-L12" aria-label="Line 12">12</a>def TLiftK : Prop :=</span>
 <span class="source-line" id="nv-theta-lift-L13"><a class="line-number" href="#nv-theta-lift-L13" aria-label="Line 13">13</a>  ∀ (E : Type) [Field E] [NumberField E] [IsCMField E] (B : Base (maximalRealSubfield E) E), W.GoodK (cj E) B →</span>
@@ -1458,7 +1458,7 @@
 <section class="technical-section source-card" id="nv-theta-bridge" aria-labelledby="nv-theta-bridge-title">
   <p class="technical-kicker">Development.AutomorphicArithmetic.ThetaCorrespondence.ThetaPairLifts.ThirdPlaceSeries.SiegelEisensteinSecondTermHypotheses</p>
   <h2 id="nv-theta-bridge-title">从匹配的 θ 积分到相容假设见证</h2>
-  <p>构造有理测试向量、公共求值网格、相容的函数与余体积条件，以及最终的非空假设记录。</p>
+  <p>构造有理测试向量、公共求值网格、相容的泛函条件（functional conditions）与余体积条件，以及最终的非空假设记录。</p>
   <p class="source-meta">精确摘录 · 第 44–73 行（共 76 行） · lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SiegelEisensteinSecondTermHypotheses.lean</p>
   <pre class="source-code" tabindex="0" aria-label="Lean 源码：Development.AutomorphicArithmetic.ThetaCorrespondence.ThetaPairLifts.ThirdPlaceSeries.SiegelEisensteinSecondTermHypotheses"><code><span class="source-line" id="nv-theta-bridge-L44"><a class="line-number" href="#nv-theta-bridge-L44" aria-label="Line 44">44</a>theorem nonempty_hyps_definite_side_of_closed_bound : _root_.GlobalTheory.Fc.S0.UnitaryGroupThirdPlaceHypotheses → _root_.GlobalTheory.FunPr.ThetaLocalInputs → GlobalTheory.IndefiniteRowSideFullHecke.WeilTensorModels.ThetaIntegralsAgree → GlobalTheory.IndefiniteRowSideFullHecke.WeilTensorModels.LocalMatching → _root_.GlobalTheory.CovTop.CovolumeBoundOfX → ∀ (hL : _root_.UpperTheory.Zero.LLC.RecTExists), (∀ cDep : ℝ, _root_.GlobalTheory.Fc.RL.LinkedAt (_root_.GlobalTheory.Mem.Top.Bl.parametersOfDependence hL cDep) (fun Q L =&gt; _root_.GlobalTheory.Fc.R1.SlotNormCondition Q L fun 𝒞 =&gt; Formalism.MainNotions.Closed 𝒞 fun Fm _ =&gt; _root_.GlobalTheory.NLink.BoundAtTwoThreeFamilyFonAlt Fm)) → Nonempty (_root_.GlobalTheory.Fc.HypsAlt S0.NL _root_.GlobalTheory.Fc.DefiniteSideCondition) := by</span>
 <span class="source-line" id="nv-theta-bridge-L45"><a class="line-number" href="#nv-theta-bridge-L45" aria-label="Line 45">45</a>  intro P F hA hM hX hL hN</span>
@@ -1496,7 +1496,7 @@
 <section class="technical-section source-card" id="nv-theta-matching" aria-labelledby="nv-theta-matching-title">
   <p class="technical-kicker">Development.AbelianVarietyTheory.BlockTheory.DivisorBase.WeilTensorModels</p>
   <h2 id="nv-theta-matching-title">θ 积分一致性的实际论断</h2>
-  <p>匹配的局部与实模型；收敛性与衰减；唯一的非零比例常数；带量词的整体一致性与局部匹配性质。</p>
+  <p>匹配的局部与实模型；收敛性与衰减；唯一的非零比例常数；带量词的全局等式（global equality）与局部匹配性质。</p>
   <p class="source-meta">精确摘录 · 第 474–511, 581–592 行（共 606 行） · lean/src/Development/AbelianVarietyTheory/BlockTheory/DivisorBase/WeilTensorModels.lean</p>
   <pre class="source-code" tabindex="0" aria-label="Lean 源码：Development.AbelianVarietyTheory.BlockTheory.DivisorBase.WeilTensorModels"><code><span class="source-line" id="nv-theta-matching-L474"><a class="line-number" href="#nv-theta-matching-L474" aria-label="Line 474">474</a>def PolMatch (Φ : (Fin a × Fin (a + a') → AF F) → ℂ) (Φ' : (Fin a' × Fin (a + a') → AF F) → ℂ) : Prop :=</span>
 <span class="source-line" id="nv-theta-matching-L475"><a class="line-number" href="#nv-theta-matching-L475" aria-label="Line 475">475</a>  ∃ T : Finset (Pl F), X.T ⊆ T ∧ ∃ (m m' : ℕ) (f : Fin m → SInf F _) (φ : Fin m → ∀ v : Pl F, (_ → Fv F v) → ℂ)</span>
@@ -1608,7 +1608,7 @@
 <section class="technical-section source-card" id="nv-covolume" aria-labelledby="nv-covolume-title">
   <p class="technical-kicker">Development.AutomorphicArithmetic.ThetaCorrespondence.ThetaPairLifts.ThirdPlaceSeries.LiftLambdaBound</p>
   <h2 id="nv-covolume-title">证明所需的一致余体积性质</h2>
-  <p>定义绑定点、对所有点与提升阶段的最终一致性，以及 CovolumeBoundOfX。</p>
+  <p>定义绑定点、对所有点与提升阶段的渐近一致性（eventual uniformity），以及 CovolumeBoundOfX。</p>
   <p class="source-meta">精确摘录 · 第 17–44, 60–63 行（共 66 行） · lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LiftLambdaBound.lean</p>
   <pre class="source-code" tabindex="0" aria-label="Lean 源码：Development.AutomorphicArithmetic.ThetaCorrespondence.ThetaPairLifts.ThirdPlaceSeries.LiftLambdaBound"><code><span class="source-line" id="nv-covolume-L17"><a class="line-number" href="#nv-covolume-L17" aria-label="Line 17">17</a>def RowsTAlt : Prop := p.PointConditions' ∧ RecTied D L</span>
 <span class="source-line" id="nv-covolume-L18"><a class="line-number" href="#nv-covolume-L18" aria-label="Line 18">18</a>def EventuallyAtAllPoints {eps : ℝ} (Fm : FamP eps) (Q : ∀ (x : ℝ) (hx : Fm.x1 &lt; x) (ι : Fm.Ix x), Pt Fm x hx ι → Prop) : Prop :=</span>
@@ -1649,7 +1649,7 @@
 <section class="technical-section source-card" id="nv-covolume-inputs" aria-labelledby="nv-covolume-inputs-title">
   <p class="technical-kicker">Development.AutomorphicArithmetic.ThetaCorrespondence.ThetaPairLifts.ThirdPlaceSeries.TopCovolSlim2Use</p>
   <h2 id="nv-covolume-inputs-title">算术几何提供余体积界</h2>
-  <p>利用奇点消解、主理想化、算术希尔伯特–塞缪尔、正性、环面模型与霍奇丛输入导出 CovolumeBoundOfX。</p>
+  <p>利用奇点消解、主理想化（principalization）、算术希尔伯特–塞缪尔、正性、环面模型与霍奇丛输入导出 CovolumeBoundOfX。</p>
   <p class="source-meta">精确摘录 · 第 16–22 行（共 25 行） · lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopCovolSlim2Use.lean</p>
   <pre class="source-code" tabindex="0" aria-label="Lean 源码：Development.AutomorphicArithmetic.ThetaCorrespondence.ThetaPairLifts.ThirdPlaceSeries.TopCovolSlim2Use"><code><span class="source-line" id="nv-covolume-inputs-L16"><a class="line-number" href="#nv-covolume-inputs-L16" aria-label="Line 16">16</a>theorem topCovolSlim2_use_alt_alt : GlobalTheory.CompanionTheory.Hypotheses₂.ResolutionCharZero → GlobalTheory.CompanionTheory.Hypotheses₂.PrincipalisationCharZero → GlobalTheory.CompanionTheory.Hypotheses₂.PoincareLelongInv → PositivityTheory.MbHsUse.HSUse → ReciprocityTheory.ChartRestriction.G.ArakelovGeometry.MoriwakiBigStatement → HT.FarguesExact → GR.ZarhinStatement → Pub.NefRR → GlobalTheory.Published.SiegelToroidalIntegral → GlobalTheory.Published.ToroidalForFanKS → GlobalTheory.Published.SemiAbelianLieSeminegative → GlobalTheory.Published.PointSeparationPair → GlobalTheory.Published.ArDegree → _root_.GlobalTheory.CovTop.PublishedHodgeBundleTheorems → GlobalTheory.Published.GrothendieckDeformation → _root_.GlobalTheory.CovTop.CovolumeBoundOfX :=</span>
 <span class="source-line" id="nv-covolume-inputs-L17"><a class="line-number" href="#nv-covolume-inputs-L17" aria-label="Line 17">17</a>  fun h₁ h₂ hPL hU hBig hFar hZar hRR hS hK hN hSep hDeg hP hGD =&gt;</span>
@@ -1716,7 +1716,7 @@
 <section class="technical-section source-card" id="nv-hypotheses" aria-labelledby="nv-hypotheses-title">
   <p class="technical-kicker">Development.AutomorphicArithmetic.ThetaCorrespondence.ThetaPairLifts.ThirdPlaceSeries.HypothesesNonemptyOfUnramifiedExponents</p>
   <h2 id="nv-hypotheses-title">构建完整的相容假设族</h2>
-  <p>将大非分歧指数束与伽罗瓦估计、函数条件及余体积界结合起来，构造 HypsAlt。</p>
+  <p>将大非分歧指数束与伽罗瓦估计、泛函条件（functional conditions）及余体积界结合起来，构造 HypsAlt。</p>
   <p class="source-meta">精确摘录 · 第 41–61 行（共 64 行） · lean/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/HypothesesNonemptyOfUnramifiedExponents.lean</p>
   <pre class="source-code" tabindex="0" aria-label="Lean 源码：Development.AutomorphicArithmetic.ThetaCorrespondence.ThetaPairLifts.ThirdPlaceSeries.HypothesesNonemptyOfUnramifiedExponents"><code><span class="source-line" id="nv-hypotheses-L41"><a class="line-number" href="#nv-hypotheses-L41" aria-label="Line 41">41</a>theorem hypotheses_nonempty_of_unramified_exponents_alt : _root_.GlobalTheory.Fc.S0.UnitaryGroupThirdPlaceHypotheses → S0.RowRat → ∀ (hL : _root_.UpperTheory.Zero.LLC.RecTExists) (cDep : ℝ) (A : GroupRetwisting.AtP), EvLgG A → _root_.GlobalTheory.Fc.RL.LinkedAt (_root_.GlobalTheory.Mem.Top.Bl.parametersOfDependence hL cDep) (fun Q L =&gt; _root_.GlobalTheory.Fc.R1.SlotNormCondition Q L fun 𝒞 =&gt; Formalism.MainNotions.Closed 𝒞 fun Fm _ =&gt; _root_.GlobalTheory.NLink.BoundAtTwoThreeFamilyFonAlt Fm) → _root_.GlobalTheory.Fc.RL.LinkedAt (_root_.GlobalTheory.Mem.Top.Bl.parametersOfExtension (_root_.GlobalTheory.Mem.LiteralAutomorphy.extensionWithAtProperty hL (_root_.GlobalTheory.HeightCounting.Up.extensionWithOrigin hL cDep) A) SExt.none (geoCl anyGeometry)) _root_.GlobalTheory.Fc.S0.FunctionalCondition → _root_.GlobalTheory.Fc.RL.LinkedAt (_root_.GlobalTheory.Mem.Top.Bl.parametersOfExtension (_root_.GlobalTheory.Mem.LiteralAutomorphy.extensionWithAtProperty hL (_root_.GlobalTheory.HeightCounting.Up.extensionWithOrigin hL cDep) A) SExt.none (geoCl anyGeometry)) _root_.GlobalTheory.Fc.S0.CovolumeBoundThirdPlaceSeries → Nonempty (_root_.GlobalTheory.Fc.HypsAlt S0.NL _root_.GlobalTheory.Fc.DefiniteSideCondition) := by</span>
 <span class="source-line" id="nv-hypotheses-L42"><a class="line-number" href="#nv-hypotheses-L42" aria-label="Line 42">42</a>  intro P hR hL cDep A hA hN hF hL3</span>
