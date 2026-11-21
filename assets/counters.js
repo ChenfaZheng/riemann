@@ -20,14 +20,14 @@
     }
     const total = Number(raw);
     if (!Number.isSafeInteger(total) || total < 0) throw new Error('Invalid counter total');
-    const formatted = total.toLocaleString('en-US');
+    const formatted = total.toLocaleString('zh-CN');
     value.textContent = formatted;
-    badge.setAttribute('aria-label', `Total website visits: ${formatted}, counted by HitsCounter.dev`);
+    badge.setAttribute('aria-label', `网站总访问量：${formatted}，由 HitsCounter.dev 统计`);
     badge.dataset.counterState = 'ready';
   } catch {
     value.textContent = '—';
-    badge.setAttribute('aria-label', 'Total website visits temporarily unavailable');
-    badge.title = 'The total visit count is temporarily unavailable';
+    badge.setAttribute('aria-label', '网站总访问量暂不可用');
+    badge.title = '网站总访问量暂不可用';
     badge.dataset.counterState = 'unavailable';
   } finally {
     clearTimeout(timeout);

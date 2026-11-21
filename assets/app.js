@@ -50,9 +50,9 @@
     document.querySelector('#point-original-coordinate').textContent = `${sigma.toFixed(2)} + it`;
     document.querySelector('#point-reflected-coordinate').textContent = `${reflected.toFixed(2)} − it`;
     document.querySelector('#reflection-summary').textContent = sigma < .5
-      ? `A zero at real part ${sigma.toFixed(2)} would give a zero for the inverse character at real part ${reflected.toFixed(2)}. The nonvanishing input excludes that reflected zero.`
-      : 'At real part 0.50, reflection stays on the critical line. The input excludes zeros strictly to its right, so it gives no contradiction here.';
-    document.querySelector('#reflection-diagram').setAttribute('aria-label', `Hypothetical zero at real part ${sigma.toFixed(2)}, reflected to real part ${reflected.toFixed(2)} for the inverse character. Imaginary parts have opposite signs.`);
+      ? `实部为 ${sigma.toFixed(2)} 的零点会为逆特征给出一个实部为 ${reflected.toFixed(2)} 的零点。非零性输入排除了这个反射零点。`
+      : '在实部 0.50 处，反射仍停留在临界线上。非零性输入仅排除严格位于临界线右侧的零点，因此在此处不产生矛盾。';
+    document.querySelector('#reflection-diagram').setAttribute('aria-label', `位于实部 ${sigma.toFixed(2)} 的假设零点，反射为逆特征位于实部 ${reflected.toFixed(2)} 的零点。虚部符号相反。`);
   };
   if (slider) { slider.addEventListener('input', updateReflection); updateReflection(); }
 })();

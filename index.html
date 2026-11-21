@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A source-linked field guide to the Riemann hypothesis and Alpöge’s released Lean argument, with mathematical foundations and a fully explained conditional deduction.">
+  <meta name="description" content="黎曼猜想与 Alpöge 公开发布的 Lean 论证之源码关联导览手册，包含数学基础与完整阐释的条件推导。">
   <meta name="theme-color" content="#0b3537">
   <meta name="author" content="Alexis Plascencia">
-  <title>Riemann, line by line — A mathematical field guide</title>
+  <title>逐行细读黎曼猜想 — 数学导览手册</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="stylesheet" href="assets/site.css">
@@ -19,34 +19,34 @@
   <script defer src="assets/app.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to content</a>
+  <a class="skip-link" href="#main-content">跳至正文</a>
   <div class="reading-progress" aria-hidden="true"><span id="reading-progress"></span></div>
   <header class="site-header">
-    <a class="brand" href="index.html" aria-label="Riemann field guide home"><img src="assets/favicon.svg" width="36" height="36" alt=""><span>RIEMANN<span class="brand-sub">A mathematical field guide</span></span></a>
-    <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="main-nav" aria-expanded="false">Menu</button>
-    <nav id="main-nav" aria-label="Main navigation"><a href="index.html" aria-current="page">Overview</a><a href="#proof-map">Proof map</a><a href="technical.html">Technical notes</a><a href="sources.html">Sources</a></nav>
+    <a class="brand" href="index.html" aria-label="黎曼猜想导览手册首页"><img src="assets/favicon.svg" width="36" height="36" alt=""><span>RIEMANN<span class="brand-sub">数学导览手册</span></span></a>
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="main-nav" aria-expanded="false">菜单</button>
+    <nav id="main-nav" aria-label="主导航"><a href="index.html" aria-current="page">概览</a><a href="#proof-map">证明路线图</a><a href="technical.html">技术笔记</a><a href="sources.html">源码</a></nav>
   </header>
   <div class="author-strip page-width">
-    <p class="author-byline"><span>Created by</span> <a href="https://alexisplascencia.com" rel="author noopener" target="_blank">Alexis Plascencia</a></p>
-    <div class="visit-counters" role="group" aria-label="Riemann field guide counters from HitsCounter.dev and Hits.sh">
-      <span class="visit-total" data-visit-counter data-counter-state="loading" data-counter-url="https://hitscounter.dev/api/hit?url=https%3A%2F%2Falexisdpc.github.io%2Friemann%2F&amp;output=json" role="img" aria-label="Total website visits: loading" title="Overall page visits across the guide, technical notes and sources, counted by HitsCounter.dev"><span class="visit-total-label">Visits</span><span class="visit-total-value">—</span></span>
-      <img src="https://hits.sh/alexisdpc.github.io/riemann.svg?label=Hits&amp;color=2e8177" alt="Riemann website hits from Hits.sh" height="20" decoding="async" referrerpolicy="no-referrer" title="Page hits to the Riemann field guide, counted by Hits.sh">
+    <p class="author-byline"><span>作者</span> <a href="https://alexisplascencia.com" rel="author noopener" target="_blank">Alexis Plascencia</a></p>
+    <div class="visit-counters" role="group" aria-label="来自 HitsCounter.dev 与 Hits.sh 的黎曼猜想导览手册访问统计">
+      <span class="visit-total" data-visit-counter data-counter-state="loading" data-counter-url="https://hitscounter.dev/api/hit?url=https%3A%2F%2Fchenfazheng.github.io%2Friemann%2F&amp;output=json" role="img" aria-label="网站总访问量：加载中" title="导览手册、技术笔记与源码页面的总访问量，由 HitsCounter.dev 统计"><span class="visit-total-label">访问量</span><span class="visit-total-value">—</span></span>
+      <img src="https://hits.sh/chenfazheng.github.io/riemann.svg?label=Hits&amp;color=2e8177" alt="来自 Hits.sh 的黎曼猜想网站访问次数" height="20" decoding="async" referrerpolicy="no-referrer" title="黎曼猜想导览手册页面访问次数，由 Hits.sh 统计">
     </div>
   </div>
   <main id="main-content">
     <section class="hero page-width" aria-labelledby="hero-title">
       <div>
-        <p class="eyebrow"><span class="tiny-line" aria-hidden="true"></span>PRIMES, ZEROS, AND THE CRITICAL LINE</p>
-        <h1 id="hero-title">Riemann,<br><em>line by line.</em></h1>
-        <p class="hero-description">An extraordinary claim. A vast formal argument. A place to begin understanding it.</p>
-        <p class="hero-secondary">Explore the mathematics behind the Riemann hypothesis, follow the structure of Alpöge’s released Lean source, and trace the nonvanishing theorem and its dependencies, then work through the final deduction.</p>
-        <div class="hero-actions"><a class="button button-dark" href="#problem">Start with the problem</a><a class="text-link hero-notes-link" href="technical.html">Technical Notes</a></div>
-        <p class="hero-footnote">This first edition is a guided reading of the source. The explanations and website checks here are separate from an independent build of the complete Lean project.</p>
+        <p class="eyebrow"><span class="tiny-line" aria-hidden="true"></span>素数、零点与临界线</p>
+        <h1 id="hero-title">逐行细读<br><em>黎曼猜想。</em></h1>
+        <p class="hero-description">一项非凡的论断，一部庞大的形式化论证，以及理解它的起点。</p>
+        <p class="hero-secondary">探索黎曼猜想背后的数学，循着 Alpöge 公开发布的 Lean 源码结构，追踪非零性定理及其依赖链，进而逐步研读最终推导。</p>
+        <div class="hero-actions"><a class="button button-dark" href="#problem">从问题出发</a><a class="text-link hero-notes-link" href="technical.html">技术笔记</a></div>
+        <p class="hero-footnote">本第一版是对源码的导读指南。此处的阐释与网站校验独立于对完整 Lean 项目的独立编译构建。</p>
       </div>
       <figure class="hero-art" aria-labelledby="strip-caption">
-        <div class="art-heading"><span>THE CRITICAL STRIP</span><span>\(s=\sigma+it\)</span></div>
+        <div class="art-heading"><span>临界带</span><span>\(s=\sigma+it\)</span></div>
         <svg viewBox="0 0 480 345" role="img" aria-labelledby="hero-svg-title hero-svg-desc">
-          <title id="hero-svg-title">The critical line inside the complex plane</title><desc id="hero-svg-desc">The critical strip lies between real parts zero and one. The vertical critical line is at one half. Gold dots illustrate the conjectured location of nontrivial zeros; they are not computed data.</desc>
+          <title id="hero-svg-title">复平面中的临界线</title><desc id="hero-svg-desc">临界带位于实部 0 与 1 之间。垂直临界线位于二分之一处。金色圆点示意非平凡零点的猜想位置，并非实际计算数据。</desc>
           <defs><linearGradient id="strip-shade" x1="0" x2="1"><stop stop-color="#99c4ad" stop-opacity=".04"/><stop offset=".5" stop-color="#99c4ad" stop-opacity=".15"/><stop offset="1" stop-color="#99c4ad" stop-opacity=".04"/></linearGradient></defs>
           <rect x="116" y="20" width="248" height="285" fill="url(#strip-shade)"/>
           <path d="M116 20V305M364 20V305" stroke="#7ca79a" stroke-opacity=".45"/>
@@ -55,120 +55,120 @@
           <path d="M40 255H440" stroke="#a4c4b3" stroke-opacity=".5"/>
           <g fill="#e2bc80"><circle cx="240" cy="65" r="4"/><circle cx="240" cy="117" r="4"/><circle cx="240" cy="153" r="4"/><circle cx="240" cy="188" r="4"/><circle cx="240" cy="288" r="4"/></g>
           <g fill="#bfd5c9" font-size="14"><text x="112" y="280">0</text><text x="360" y="280">1</text><text x="430" y="280">σ</text><text x="107" y="13">t</text><text x="231" y="330">½</text></g>
-          <path d="M247 116H300" stroke="#e2bc80" stroke-opacity=".6"/><text x="310" y="112" fill="#e8d4ad" font-size="14">Re(s) = ½</text><text x="310" y="134" fill="#b4cfc1" font-size="12">critical line</text>
+          <path d="M247 116H300" stroke="#e2bc80" stroke-opacity=".6"/><text x="310" y="112" fill="#e8d4ad" font-size="14">Re(s) = ½</text><text x="310" y="134" fill="#b4cfc1" font-size="12">临界线</text>
         </svg>
-        <figcaption id="strip-caption">A statement about every nontrivial zero.<br>Schematic geometry; the dots are illustrative.</figcaption>
+        <figcaption id="strip-caption">关于每一个非平凡零点的命题。<br>几何示意图；圆点仅作示意。</figcaption>
       </figure>
     </section>
-    <div class="edition-strip page-width"><p><strong>First edition · 20 November 2026</strong> &nbsp; Overview, nonvanishing dependencies, and a source-linked deduction.</p><a href="sources.html#provenance">Read the scope and sources</a></div>
-    <aside class="compilation-note page-width" aria-label="Compilation reports"><p><strong>Compilation reports · 20 November 2026.</strong> Many people claim successful Lean compilation.</p></aside>
+    <div class="edition-strip page-width"><p><strong>第一版 · 2026 年 11 月 20 日</strong> &nbsp; 概览、非零性依赖链与源码关联推导。</p><a href="sources.html#provenance">阅读范围与源码说明</a></div>
+    <aside class="compilation-note page-width" aria-label="编译报告"><p><strong>编译报告 · 2026 年 11 月 20 日。</strong> 已有不少人报告称 Lean 编译成功。</p></aside>
     <section class="chapter page-width" id="problem" aria-labelledby="problem-title">
-      <div class="chapter-heading"><span class="chapter-number">THE QUESTION</span><span class="chapter-note">From the primes to a complex function</span></div>
-      <div class="section-intro"><h2 id="problem-title">Why should the zeros<br>lie on <em>one line?</em></h2><p>The zeta function brings the primes into analysis. Its Euler product records prime factorization; its zeros govern the oscillations in prime-counting formulas. The Riemann hypothesis predicts an exact location for all of its nontrivial zeros.</p></div>
-      <div class="problem-statement"><div class="statement-label"><span>THE RIEMANN HYPOTHESIS</span><a href="technical.html#zeta">Definitions and conventions</a></div><blockquote>Every zero of the zeta function in the critical strip has real part one half.</blockquote><div class="statement-equation">\[0&lt;\operatorname{Re}s&lt;1,\qquad \zeta(s)=0\quad\Longrightarrow\quad\operatorname{Re}s=\tfrac12.\]</div><p>The negative even integers are the trivial zeros. The point \(s=1\) is a pole. The technical notes explain how these exceptions appear in the source’s full statement.</p></div>
-      <div class="two-demands"><article><h3>One function, all the primes.</h3><p>For \(\operatorname{Re}s&gt;1\), a sum over integers equals a product over primes. Analytic continuation then carries the zeta function into the critical strip.</p><div class="equation-scroll">\[\zeta(s)=\sum_{n=1}^{\infty}n^{-s}=\prod_{p\ \mathrm{prime}}(1-p^{-s})^{-1}.\]</div></article><article><h3>A whole family of questions.</h3><p>Dirichlet characters weight the integers and give functions \(L(s,\chi)\). The released source states nonvanishing and critical-line results for this family as well as RH.</p><div class="equation-scroll">\[L(s,\chi)=\sum_{n=1}^{\infty}\frac{\chi(n)}{n^s}\qquad(\operatorname{Re}s&gt;1).\]</div><a class="text-link" href="technical.html#characters">Meet the characters</a></article></div>
-      <details class="math-note"><summary><span>THE PRECISE SCOPE</span>What does “generalized” mean here?<span class="expand-icon" aria-hidden="true">+</span></summary><div><p>This guide follows the declarations in <a href="sources.html#statements">the released statement file</a>: the Riemann zeta function and Dirichlet L-functions. “Dirichlet GRH” here means the critical-line assertion for those L-functions. It is not a claim here about every automorphic L-function or every possible generalization of RH.</p><p>The defining series above converge in the right half-plane \(\operatorname{Re}s&gt;1\). Statements about zeros in the critical strip concern their analytic continuations.</p></div></details>
+      <div class="chapter-heading"><span class="chapter-number">核心问题</span><span class="chapter-note">从素数到复变函数</span></div>
+      <div class="section-intro"><h2 id="problem-title">为何零点应当<br>落在<em>同一条线上？</em></h2><p>\(\zeta\) 函数将素数引入解析领域。它的欧拉乘积记录了素因数分解；它的零点支配着素数计数公式中的振荡。黎曼猜想预言了其所有非平凡零点的精确位置。</p></div>
+      <div class="problem-statement"><div class="statement-label"><span>黎曼猜想</span><a href="technical.html#zeta">定义与约定</a></div><blockquote>\(\zeta\) 函数在临界带内的每一个零点，其实部均为二分之一。</blockquote><div class="statement-equation">\[0&lt;\operatorname{Re}s&lt;1,\qquad \zeta(s)=0\quad\Longrightarrow\quad\operatorname{Re}s=\tfrac12.\]</div><p>负偶整数称为平凡零点。点 \(s=1\) 是一个极点。技术笔记将解释这些例外情形如何在源码的完整陈述中体现。</p></div>
+      <div class="two-demands"><article><h3>一个函数，囊括全部素数。</h3><p>当 \(\operatorname{Re}s&gt;1\) 时，对正整数求和等于对素数求积。解析延拓随后将 \(\zeta\) 函数延拓至临界带内。</p><div class="equation-scroll">\[\zeta(s)=\sum_{n=1}^{\infty}n^{-s}=\prod_{p\ \mathrm{prime}}(1-p^{-s})^{-1}.\]</div></article><article><h3>一整族相关问题。</h3><p>狄利克雷特征为整数赋予权重，给出函数 \(L(s,\chi)\)。公开发布的源码不仅陈述了黎曼猜想（RH），也陈述了这一函数族的非零性与临界线结果。</p><div class="equation-scroll">\[L(s,\chi)=\sum_{n=1}^{\infty}\frac{\chi(n)}{n^s}\qquad(\operatorname{Re}s&gt;1).\]</div><a class="text-link" href="technical.html#characters">认识狄利克雷特征</a></article></div>
+      <details class="math-note"><summary><span>精确范围</span>此处的“广义”具体指什么？<span class="expand-icon" aria-hidden="true">+</span></summary><div><p>本导览手册遵循<a href="sources.html#statements">公开发布的命题声明文件</a>中的定义：即黎曼 \(\zeta\) 函数与狄利克雷 \(L\)-函数。此处的“狄利克雷广义黎曼猜想（Dirichlet GRH）”指针对这些 \(L\)-函数的临界线断语，并不涉及所有自守 \(L\)-函数或黎曼猜想的每一种可能推广。</p><p>上述定义级数在右半平面 \(\operatorname{Re}s&gt;1\) 内收敛；关于临界带内零点的命题针对的是它们的解析延拓。</p></div></details>
     </section>
     <section class="reflection-section" id="explore" aria-labelledby="reflection-title"><div class="page-width">
-      <div class="chapter-heading"><span class="chapter-number">THE KEY GEOMETRY</span><span class="chapter-note">A conditional deduction you can follow</span></div>
-      <div class="section-intro"><h2 id="reflection-title">A zero on the left<br>has a <em>partner.</em></h2><p>For a primitive character, the functional equation relates the completed L-function at \(s\) to the one for the inverse character at \(1-s\). A hypothetical zero to the left of the line therefore produces a zero to its right.</p></div>
+      <div class="chapter-heading"><span class="chapter-number">关键几何</span><span class="chapter-note">一段可以逐步跟进的条件推导</span></div>
+      <div class="section-intro"><h2 id="reflection-title">左侧的零点<br>必有一个<em>伴侣。</em></h2><p>对于本原特征，函数方程将完备 \(L\)-函数在 \(s\) 处的值与逆特征在 \(1-s\) 处的值联系起来。因此，临界线左侧的一个假设零点必然在右侧生成一个零点。</p></div>
       <div class="reflection-layout">
-        <figure class="reflection-figure"><svg id="reflection-diagram" viewBox="0 0 540 365" role="img" aria-label="Hypothetical zero at real part 0.30, reflected to real part 0.70 for the inverse character. Imaginary parts have opposite signs.">
+        <figure class="reflection-figure"><svg id="reflection-diagram" viewBox="0 0 540 365" role="img" aria-label="位于实部 0.30 的假设零点，反射为逆特征位于实部 0.70 的零点。虚部符号相反。">
           <rect class="diagram-strip" x="80" y="40" width="380" height="275"/>
           <path class="diagram-axis" d="M80 40V315M460 40V315M45 177H495"/>
           <path class="diagram-critical" d="M270 30V325"/>
           <line id="reflection-join" x1="194" y1="100" x2="346" y2="254" stroke="#b8a486" stroke-width="1.5" stroke-dasharray="4 5"/>
           <circle id="point-original" class="diagram-point" cx="194" cy="100" r="7"/>
           <circle id="point-reflected" class="diagram-inverse" cx="346" cy="254" r="7"/>
-          <text id="label-original" class="point-label" x="194" y="77" text-anchor="middle" fill="#7e532b">s, character χ</text>
-          <text id="label-reflected" class="point-label" x="346" y="284" text-anchor="middle" fill="#1a6359">1 − s, character χ⁻¹</text>
+          <text id="label-original" class="point-label" x="194" y="77" text-anchor="middle" fill="#7e532b">s，特征 χ</text>
+          <text id="label-reflected" class="point-label" x="346" y="284" text-anchor="middle" fill="#1a6359">1 − s，特征 χ⁻¹</text>
           <g class="diagram-label"><text x="76" y="344">0</text><text x="264" y="344">½</text><text x="456" y="344">1</text><text x="500" y="183">σ</text><text x="69" y="26">t</text></g>
-        </svg><figcaption>Reflection sends \(\sigma+it\) to \((1-\sigma)-it\), and changes \(\chi\) to \(\chi^{-1}\). This shows the geometry of a hypothetical zero, not a numerical search.</figcaption></figure>
-        <div class="reflection-copy"><h3>The missing half is supplied<br>by the functional equation.</h3><p>Assume that <strong>every Dirichlet L-function is nonzero when \(\operatorname{Re}s&gt;1/2\)</strong>, apart from the pole exception. A reflected zero in that region is then impossible. This strong nonvanishing input is the hard theorem; the reflection argument is the final deduction.</p>
-          <div class="reflection-control"><label for="sigma">Real part of the hypothetical zero <output id="sigma-value" for="sigma">0.30</output></label><input id="sigma" type="range" min="0.1" max="0.5" step="0.01" value="0.3" aria-describedby="reflection-summary"><div class="range-labels"><span>Left of the line</span><span>On the line</span></div></div>
-          <p><strong>Original:</strong> <span id="point-original-coordinate">0.30 + it</span><br><strong>Reflected:</strong> <span id="point-reflected-coordinate">0.70 − it</span></p>
-          <p class="reflection-result" id="reflection-summary" aria-live="polite">A zero at real part 0.30 would give a zero for the inverse character at real part 0.70. The nonvanishing input excludes that reflected zero.</p>
-          <a class="text-link" href="technical.html#reflection">Follow every step of the argument</a>
+        </svg><figcaption>反射将 \(\sigma+it\) 映为 \((1-\sigma)-it\)，并将 \(\chi\) 变为 \(\chi^{-1}\)。此图展示的是假设零点的几何关系，而非数值搜索结果。</figcaption></figure>
+        <div class="reflection-copy"><h3>缺失的另一半<br>由函数方程补全。</h3><p>假设<strong>每个狄利克雷 \(L\)-函数在 \(\operatorname{Re}s&gt;1/2\) 时均非零</strong>（除去极点例外）。那么落在该区域内的反射零点就不可能存在。这项强非零性输入才是困难的定理；反射论证则是最终的推导步骤。</p>
+          <div class="reflection-control"><label for="sigma">假设零点的实部 <output id="sigma-value" for="sigma">0.30</output></label><input id="sigma" type="range" min="0.1" max="0.5" step="0.01" value="0.3" aria-describedby="reflection-summary"><div class="range-labels"><span>临界线左侧</span><span>临界线上</span></div></div>
+          <p><strong>原零点：</strong> <span id="point-original-coordinate">0.30 + it</span><br><strong>反射零点：</strong> <span id="point-reflected-coordinate">0.70 − it</span></p>
+          <p class="reflection-result" id="reflection-summary" aria-live="polite">实部为 0.30 的零点会为逆特征给出一个实部为 0.70 的零点。非零性输入排除了这个反射零点。</p>
+          <a class="text-link" href="technical.html#reflection">逐步跟进论证的每一步</a>
         </div>
       </div>
     </div></section>
     <section class="chapter page-width" id="proof-map" aria-labelledby="map-title">
-      <div class="chapter-heading"><span class="chapter-number">OUTLINE OF THE PROOF</span><span class="chapter-note">Five layers of the released argument</span></div>
-      <div class="section-intro"><h2 id="map-title">From arithmetic<br>to a <em>line.</em></h2><p>The released source brings together algebraic number theory, automorphic forms, arithmetic geometry, and complex analysis. Start with the short final deduction, then follow the deeper inputs that supply its nonvanishing theorem.</p></div>
-      <div class="proof-map-tabs" role="tablist" aria-label="Five layers of the proof outline">
-        <button id="route-tab-0" role="tab" aria-selected="true" aria-controls="route-panel-0" data-step="0" type="button">1. The final deduction</button>
-        <button id="route-tab-1" role="tab" aria-selected="false" aria-controls="route-panel-1" data-step="1" tabindex="-1" type="button">2. Nonvanishing</button>
-        <button id="route-tab-2" role="tab" aria-selected="false" aria-controls="route-panel-2" data-step="2" tabindex="-1" type="button">3. Cohomology bounds</button>
-        <button id="route-tab-3" role="tab" aria-selected="false" aria-controls="route-panel-3" data-step="3" tabindex="-1" type="button">4. Galois representations</button>
-        <button id="route-tab-4" role="tab" aria-selected="false" aria-controls="route-panel-4" data-step="4" tabindex="-1" type="button">5. Arithmetic geometry</button>
+      <div class="chapter-heading"><span class="chapter-number">证明纲要</span><span class="chapter-note">公开论证的五个层次</span></div>
+      <div class="section-intro"><h2 id="map-title">从算术<br>走向<em>一条直线。</em></h2><p>公开发布的源码汇集了代数数论、自守形式、算术几何与复分析。请先从简短的最终推导切入，再循迹深入提供非零性定理的底层输入。</p></div>
+      <div class="proof-map-tabs" role="tablist" aria-label="证明纲要的五个层次">
+        <button id="route-tab-0" role="tab" aria-selected="true" aria-controls="route-panel-0" data-step="0" type="button">1. 最终推导</button>
+        <button id="route-tab-1" role="tab" aria-selected="false" aria-controls="route-panel-1" data-step="1" tabindex="-1" type="button">2. 非零性</button>
+        <button id="route-tab-2" role="tab" aria-selected="false" aria-controls="route-panel-2" data-step="2" tabindex="-1" type="button">3. 上同调界</button>
+        <button id="route-tab-3" role="tab" aria-selected="false" aria-controls="route-panel-3" data-step="3" tabindex="-1" type="button">4. 伽罗瓦表示</button>
+        <button id="route-tab-4" role="tab" aria-selected="false" aria-controls="route-panel-4" data-step="4" tabindex="-1" type="button">5. 算术几何</button>
       </div>
       <article class="route-panel" id="route-panel-0" role="tabpanel" aria-labelledby="route-tab-0" tabindex="0">
         <div class="route-main">
-          <span class="panel-label">THE SHORT LAST STEP</span>
-          <h3>Nonvanishing forces the critical line.</h3>
-          <p>The central input says that every Dirichlet L-function is nonzero to the right of one half, excluding the principal-character point \(s=1\):</p>
+          <span class="panel-label">简短的最后一步</span>
+          <h3>非零性迫使零点落于临界线。</h3>
+          <p>核心输入断定：除去主特征在 \(s=1\) 处的极点例外，每一个狄利克雷 \(L\)-函数在二分之一的右侧均非零：</p>
           <div class="equation-scroll">\[\operatorname{Re}s&gt;\tfrac12,\quad(\chi\ne\mathbf1\ \lor\ s\ne1)\quad\Longrightarrow\quad L(s,\chi)\ne0.\]</div>
-          <p>For a primitive character, the functional equation sends a zero in the left half of the critical strip to a right-hand zero for the inverse character. The input rules that out. Zeros already on the right are excluded directly, leaving only the critical line. Finite Euler factors handle imprimitive characters; the zeta case yields RH.</p>
-          <div class="proof-source-links"><a href="technical.html#reflection">Follow the complete deduction</a><a href="technical.html#nonvanishing">State the nonvanishing input precisely</a></div>
+          <p>对于本原特征，函数方程会将临界带左半部分的零点映为逆特征在右半部分的零点，而上述输入将其排除。原本就位于右侧的零点则被直接排除，于是只剩下临界线。有限欧拉因子处理非本原特征；特化到 \(\zeta\) 函数即得黎曼猜想（RH）。</p>
+          <div class="proof-source-links"><a href="technical.html#reflection">跟进完整推导</a><a href="technical.html#nonvanishing">精确陈述非零性输入</a></div>
         </div>
-        <aside class="route-aside"><h4>WHY THIS PART IS SHORT</h4><p>The functional equation supplies the symmetry. The difficult new burden lies in establishing the right-half-plane nonvanishing input.</p><h4>THE SCOPE</h4><p>The conclusions followed here concern the Riemann zeta function and Dirichlet L-functions.</p></aside>
+        <aside class="route-aside"><h4>为何这一部分很短</h4><p>函数方程提供了对称性。真正艰巨的新重担在于建立右半平面的非零性输入。</p><h4>适用范围</h4><p>此处追踪的结论涉及黎曼 \(\zeta\) 函数与狄利克雷 \(L\)-函数。</p></aside>
       </article>
       <article class="route-panel" id="route-panel-1" role="tabpanel" aria-labelledby="route-tab-1" tabindex="0">
         <div class="route-main">
-          <span class="panel-label">WHERE THE MAIN BRANCHES MEET</span>
-          <h3>Turn arithmetic estimates into an obstruction to zeros.</h3>
-          <p>Three kinds of input meet here: bounds on Galois cohomology for selected subfields of cyclotomic fields; geometric bounds on covolumes and slopes of integral lattices; and matching results for theta integrals on unitary groups. Local Langlands parameters for \(\mathrm{GL}_n\), with the source’s stated compatibility hypotheses, connect the automorphic and Galois data.</p>
-          <p>The intermediate output is an upper bound for a smoothed prime-sum error on arbitrarily late, long intervals. A Landau argument converts these bounds into nonvanishing: a forbidden zero would create a pole whose derivative growth contradicts the interval estimates.</p>
-          <div class="proof-source-links"><a href="technical.html#arithmetic-comparison">See how the estimates combine</a><a href="technical.html#nv-analytic">Follow the Landau argument</a></div>
+          <span class="panel-label">主干分支的交汇处</span>
+          <h3>将算术估计转化为零点的障碍。</h3>
+          <p>三类输入在此汇合：对特定分圆子域的伽罗瓦上同调界；对整格余体积与斜率的几何界；以及酉群上 \(\theta\) 积分的匹配结果。在源码陈述的相容性假设下，\(\mathrm{GL}_n\) 的局部朗兰兹参数将自守数据与伽罗瓦数据联系起来。</p>
+          <p>其中间输出是在任意靠后且足够长的区间上，对光滑素数和误差的一个上界。一段朗道论证将这些界转化为非零性：任何被禁止的零点都会制造一个极点，其高阶导数的增长将与区间估计相矛盾。</p>
+          <div class="proof-source-links"><a href="technical.html#arithmetic-comparison">查看各项估计如何结合</a><a href="technical.html#nv-analytic">跟进朗道论证</a></div>
         </div>
-        <aside class="route-aside"><h4>WHY COMPATIBILITY MATTERS</h4><p>The bounds must hold for the same arithmetic and geometric data. The theta and local comparison results help assemble those data into one construction.</p><h4>THE ANALYTIC OUTPUT</h4><p>For each \(\theta&gt;1/2\), the relevant prime-sum error admits a bound of size \(x^\theta\) on suitable intervals far out along the positive axis.</p></aside>
+        <aside class="route-aside"><h4>为何相容性至关重要</h4><p>各项界必须针对同一套算术与几何数据同时成立。\(\theta\) 匹配与局部比较结果正是用于将这些数据装配进同一个构造中。</p><h4>解析输出</h4><p>对任意 \(\theta&gt;1/2\)，相应的素数和误差在正实轴上足够靠后的适当区间内满足 \(x^\theta\) 量级的界。</p></aside>
       </article>
       <article class="route-panel" id="route-panel-2" role="tabpanel" aria-labelledby="route-tab-2" tabindex="0">
         <div class="route-main">
-          <span class="panel-label">THE ARITHMETIC WINDOW</span>
-          <h3>Control classes invisible to the local tests.</h3>
-          <p>The cohomology groups are Tate–Shafarevich-like localization kernels: they measure global Galois cohomology classes whose restrictions vanish at the specified places above \(\ell\). They are not simply the usual Tate–Shafarevich groups of elliptic curves. The fields vary through a particular family of cyclotomic subfields.</p>
-          <p>The window construction passes through lifting and automorphy arguments. Its inputs include Galois representations attached to regular algebraic, polarized cuspidal automorphic representations of \(\mathrm{GL}_n\) over CM fields, together with base change, Jacquet–Shalika, Clozel’s purity, Bernstein–Zelevinsky, the main theorem of complex multiplication, and Deligne–Ribet.</p>
-          <p>The resulting bound controls weighted logarithmic sizes of these cohomology groups throughout a long interval. Further comparisons turn that arithmetic budget into the prime-sum estimate required by Landau.</p>
-          <div class="proof-source-links"><a href="technical.html#nv-window">Walk through the cohomology bounds</a><a href="technical.html#arithmetic-construction">Follow their main dependencies</a></div>
+          <span class="panel-label">算术窗口</span>
+          <h3>控制局部检测无法察觉的上同调类。</h3>
+          <p>这里的上同调群是类泰特–沙法列维奇局部化核：它们度量那些在 \(\ell\) 上方指定素位处限制为零的全局伽罗瓦上同调类，而并非通常意义下椭圆曲线的泰特–沙法列维奇群。数域则在一个特定的分圆子域族中变化。</p>
+          <p>窗口构造经由提升与自守性论证完成。其输入包括附属于 CM 域上 \(\mathrm{GL}_n\) 的正则代数极化尖点自守表示的伽罗瓦表示，以及基变换、雅凯–沙利卡、克洛泽尔纯性、伯恩斯坦–泽列文斯基、复乘主定理与德利涅–里贝特。</p>
+          <p>所得界在整段长区间上控制这些上同调群的加权对数大小。进一步的比较将这一算术预算转化为朗道论证所需的素数和估计。</p>
+          <div class="proof-source-links"><a href="technical.html#nv-window">逐步梳理上同调界</a><a href="technical.html#arithmetic-construction">追踪其主要依赖</a></div>
         </div>
-        <aside class="route-aside"><h4>THE INTUITION</h4><p>Local tests can leave a global ambiguity. Bounding the localization kernel limits the size of that ambiguity.</p><h4>WHY A WINDOW?</h4><p>A single good scale is insufficient. The analytic argument needs control throughout a long interval, with such intervals available arbitrarily far out.</p></aside>
+        <aside class="route-aside"><h4>核心直觉</h4><p>局部检测仍可能留下全局歧义。为局部化核定界，正是为了限制这种歧义的规模。</p><h4>为何需要窗口？</h4><p>单个良好尺度是不够的。解析论证需要在整段长区间上保持控制，并且这样的区间在任意靠后处都必须存在。</p></aside>
       </article>
       <article class="route-panel" id="route-panel-3" role="tabpanel" aria-labelledby="route-tab-3" tabindex="0">
         <div class="route-main">
-          <span class="panel-label">BEHIND THE AUTOMORPHIC INPUT</span>
-          <h3>Build the Galois representations through geometry and lifting.</h3>
-          <p>At the inspected assembly point, the Galois-representation input is supplied by a theorem combining a geometric realization with theta lifting between unitary groups. It is not left as a free hypothesis of the final theorem.</p>
-          <p>The geometric branch supplies Frobenius–Hecke compatibility and crystalline/Hodge conditions above \(\ell\), under its local hypotheses. The construction then uses geometric seeds, congruences, trace limits, and descent to reach the Galois representations needed by the arithmetic window.</p>
-          <p>The guiding idea is to realize suitable automorphic information in cohomology, where Galois acts, and carry that information through the lifting and comparison steps. The exact local conditions remain part of the statement.</p>
-          <div class="proof-source-links"><a href="technical.html#nv-galois">Understand the representation construction</a><a href="technical.html#nv-local-global">See what local compatibility means</a></div>
+          <span class="panel-label">自守输入的背后</span>
+          <h3>借助几何与提升构造伽罗瓦表示。</h3>
+          <p>在所检视的装配节点上，伽罗瓦表示输入是由一条结合了几何实现与酉群间 \(\theta\) 提升的定理提供的，并未作为最终定理的自由假设留白。</p>
+          <p>几何分支在其局部假设下提供了弗罗贝尼乌斯–赫克相容性以及 \(\ell\) 上方的晶体/霍奇条件。随后，该构造利用几何种子、同余、迹极限与下降，得到算术窗口所需的伽罗瓦表示。</p>
+          <p>其指导思想是将恰当的自守信息实现于伽罗瓦群作用的上同调中，再通过提升与比较步骤传递这些信息。精确的局部条件仍是命题陈述的一部分。</p>
+          <div class="proof-source-links"><a href="technical.html#nv-galois">理解表示构造</a><a href="technical.html#nv-local-global">查看局部相容性的含义</a></div>
         </div>
-        <aside class="route-aside"><h4>TWO DESCRIPTIONS OF ONE INPUT</h4><p>Automorphic representations organize symmetries of forms. Galois representations encode field symmetries as matrices. The comparison identifies their local arithmetic information.</p><h4>WHAT IS BEING DESCRIBED</h4><p>This is the route visible in the released source. Its relationship to constructions in the literature requires a separate comparison.</p></aside>
+        <aside class="route-aside"><h4>同一输入的两种刻画</h4><p>自守表示组织了自守形式的对称性；伽罗瓦表示将域对称性编码为矩阵。两者的比较识别出它们共同的局部算术信息。</p><h4>此处描述的对象</h4><p>这是公开源码中可见的路线。它与既有文献中构造之间的关系，尚需另行比对。</p></aside>
       </article>
       <article class="route-panel" id="route-panel-4" role="tabpanel" aria-labelledby="route-tab-4" tabindex="0">
         <div class="route-main">
-          <span class="panel-label">THE GEOMETRIC FOUNDATIONS</span>
-          <h3>Control integral structures using arithmetic geometry.</h3>
-          <p>The geometric and deformation branches invoke named inputs for resolution of singularities in characteristic zero, toroidal compactifications of Siegel varieties, arithmetic Hilbert–Samuel, Moriwaki’s bigness theorem, Kawamata–Viehweg and Nadel vanishing, Grothendieck–Messing, and prismatic Dieudonné theory.</p>
-          <p>These inputs serve different purposes. Compactifications and resolution supply geometric models; positivity, vanishing, and Hilbert–Samuel estimates control sections and their growth; deformation and comparison results connect integral and cohomological structures.</p>
-          <p>On the covolume branch, the goal is a quantitative bound for lattices attached to the automorphic construction. Together with the cohomological estimate and theta matching, it constrains the prime-sum error.</p>
-          <div class="proof-source-links"><a href="technical.html#nv-geometric">Understand the covolume bound</a><a href="technical.html#nv-literature">See how the theta inputs fit</a></div>
+          <span class="panel-label">几何基础</span>
+          <h3>运用算术几何控制整结构。</h3>
+          <p>几何与形变分支调用了多项具名输入：零特征奇点消解、西格尔簇的环面紧化、算术希尔伯特–塞缪尔、森胁大性定理、川又–菲韦格与纳德尔消没定理、格罗滕迪克–梅辛以及棱柱迪厄多内理论。</p>
+          <p>这些输入各司其职：紧化与消解提供几何模型；正性、消没与希尔伯特–塞缪尔估计控制截面及其增长；形变与比较结果则连接整结构与上同调结构。</p>
+          <p>在余体积分支上，目标是给出附属于自守构造的整格的定量界。它与上同调估计及 \(\theta\) 匹配共同约束素数和误差。</p>
+          <div class="proof-source-links"><a href="technical.html#nv-geometric">理解余体积界</a><a href="technical.html#nv-literature">查看 \(\theta\) 输入如何衔接</a></div>
         </div>
-        <aside class="route-aside"><h4>THE INTUITION</h4><p>A vector space records linear relations. A lattice also records integral size. Covolumes and slopes quantify that extra information so it can enter an estimate.</p><h4>READING THE NAMED RESULTS</h4><p>The inspected files assemble theorem terms under these names. Establishing that each statement fully matches its classical counterpart requires examining its definitions and hypotheses.</p></aside>
+        <aside class="route-aside"><h4>核心直觉</h4><p>向量空间记录线性关系，而格还记录了整尺度大小。余体积与斜率将这些额外信息量化，使其得以进入估计之中。</p><h4>如何阅读具名结果</h4><p>所检视的文件以这些名称装配定理项。要确认每条陈述是否完全等价于其经典对应定理，必须逐一核查其定义与假设。</p></aside>
       </article>
       <div class="map-bridge">
-        <h3>How the pieces exclude a zero.</h3>
-        <p><strong>Local divisibility</strong> measures arithmetic constraints on periods, with cohomology bounds controlling the losses. <strong>Theta matching</strong> puts the periods into one lattice, where correlations and covolumes constrain their sizes. <strong>Finite Fourier inversion</strong> then expresses the arithmetic prime contributions in terms of the corrected character sums.</p>
-        <p>The remaining normalized costs include terms behaving as \(x/m\) and \(m\), up to small powers of \(x\). A chain of about \(\sqrt{x}\) stages balances them. This yields the <strong>prime-sum bound on long intervals</strong> used by Landau to exclude zeros to the right of one half. The functional equation then gives the critical-line conclusion.</p>
-        <a class="text-link" href="technical.html#arithmetic-fourier">Follow the arithmetic-to-prime-sum calculation</a>
+        <h3>各个部件如何合力排除零点。</h3>
+        <p><strong>局部可除性</strong>度量周期上的算术约束，而上同调界控制其中的损耗。<strong>\(\theta\) 匹配</strong>将各周期置入同一个格中，由相关性与余体积约束其大小。随后，<strong>有限傅里叶反演</strong>用修正后的特征和表达出算术素数贡献。</p>
+        <p>剩余的归一化代价包含按 \(x/m\) 与 \(m\) 行为变化的项（至多差 \(x\) 的小幂次）。一条约含 \(\sqrt{x}\) 个阶段的链条使它们达到平衡，从而产生朗道论证用来排除二分之一右侧零点的<strong>长区间素数和界</strong>。最后，函数方程给出临界线结论。</p>
+        <a class="text-link" href="technical.html#arithmetic-fourier">跟进从算术到素数和的计算</a>
       </div>
-      <div class="map-contract"><p>This is a source-based dependency outline. A full Lean build and an audit of the final theorem’s assumptions have not been performed here, so “no additional axioms” and “complete formalizations of all the named theorems” are not conclusions of this guide. <a class="text-link" href="sources.html#provenance">Source identity and review status</a></p></div>
+      <div class="map-contract"><p>这是一份基于源码的依赖纲要。此处并未执行完整的 Lean 编译构建，也未对最终定理的全部假设进行审计，因此“无额外公理”与“所有具名定理均已完整形式化”均非本导览手册的结论。 <a class="text-link" href="sources.html#provenance">源码标识与审阅状态</a></p></div>
     </section>
 
-    <section class="argument-feature" aria-labelledby="argument-title"><div class="page-width argument-layout"><div><span class="chapter-number">ONE ARGUMENT, FULLY EXPLAINED</span><h2 id="argument-title">The last deduction,<br>with <em>every hypothesis.</em></h2><p>Work through the critical-line lemma in ordinary mathematical prose. The notes explain the character, gamma factors, functional equation, and both possible sides of the line, then match the reasoning to Lean.</p><a class="button" href="technical.html#reflection">Read the technical companion</a></div><ol class="argument-chain"><li><strong>State the nonvanishing input.</strong><p>It applies to every character, including the inverse one.</p></li><li><strong>Use the completed L-function.</strong><p>Gamma factors are finite and nonzero in the open strip.</p></li><li><strong>Eliminate both off-line cases.</strong><p>Right-hand zeros contradict the input directly; left-hand zeros do so after reflection.</p></li></ol></div></section>
-    <section class="chapter page-width" id="reading" aria-labelledby="reading-title"><div class="section-intro"><h2 id="reading-title">Choose your<br><em>way in.</em></h2><p>Start with the language, follow the deduction, or inspect the exact declarations. Each reading route leads back to the same mathematical statements.</p></div><div class="reading-paths"><article><h3>Build the foundations.</h3><p>Zeta, characters, analytic continuation, and the functional equation. The vocabulary used throughout the guide.</p><a href="technical.html#foundations">Read the foundations</a></article><article><h3>Follow the deduction.</h3><p>The nonvanishing theorem’s main dependencies, followed by the complete conditional deduction to the critical line.</p><a href="technical.html#reflection">Read the explained argument</a></article><article><h3>Go to the source.</h3><p>Selected Lean declarations, line references, and a record of the archive used for this edition.</p><a href="sources.html">Explore the source index</a></article></div><div class="scope-block"><h3>A guide that makes<br>its scope explicit.</h3><div><p>Alpöge’s released Lean source states RH and a Dirichlet generalization. This website explains selected material from that development. The archive has been downloaded and extracted, and the prose has been checked against the selected source statements; the full Lean project has not been compiled or independently audited here.</p><p>The expanded technical notes trace the analytic estimate, the arithmetic cohomology window, Galois compatibility, theta matching and geometric bounds. They identify the deeper construction proofs that still need separate treatment.</p><a class="text-link" href="sources.html#provenance">Read the source and review record</a></div></div></section>
+    <section class="argument-feature" aria-labelledby="argument-title"><div class="page-width argument-layout"><div><span class="chapter-number">一段完整阐释的论证</span><h2 id="argument-title">最后一步推导，<br>附带<em>每一条假设。</em></h2><p>用日常数学叙述逐步研读临界线引理。技术笔记将详细解释特征、\(\Gamma\) 因子、函数方程以及临界线两侧的情形，并将推理与 Lean 源码一一对应。</p><a class="button" href="technical.html#reflection">阅读技术伴读</a></div><ol class="argument-chain"><li><strong>陈述非零性输入。</strong><p>它适用于每一个特征，包括逆特征。</p></li><li><strong>使用完备 \(L\)-函数。</strong><p>\(\Gamma\) 因子在开临界带内有限且非零。</p></li><li><strong>排除临界线两侧的情形。</strong><p>右侧零点直接与输入矛盾；左侧零点经反射后同样产生矛盾。</p></li></ol></div></section>
+    <section class="chapter page-width" id="reading" aria-labelledby="reading-title"><div class="section-intro"><h2 id="reading-title">选择你的<br><em>切入路径。</em></h2><p>从基础语言起步、跟进完整推导，或直接核查精确声明。每条阅读路径最终都通向同一组数学命题。</p></div><div class="reading-paths"><article><h3>夯实基础。</h3><p>\(\zeta\) 函数、特征、解析延拓与函数方程——贯穿全手册的核心词汇。</p><a href="technical.html#foundations">阅读数学基础</a></article><article><h3>跟进推导。</h3><p>非零性定理的主要依赖，继之以通往临界线的完整条件推导。</p><a href="technical.html#reflection">阅读完整阐释的论证</a></article><article><h3>直抵源码。</h3><p>精选 Lean 声明、行号引用，以及本版本所用归档的完整记录。</p><a href="sources.html">浏览源码索引</a></article></div><div class="scope-block"><h3>明确界定自身范围的<br>导览手册。</h3><div><p>Alpöge 公开发布的 Lean 源码陈述了黎曼猜想及其狄利克雷推广。本网站阐释了该形式化工程中的精选内容。我们已下载并解压原始归档，并将正文与所选源码声明逐一核对；但此处尚未编译或独立审计整个 Lean 项目。</p><p>扩展后的技术笔记追踪了解析估计、算术上同调窗口、伽罗瓦相容性、\(\theta\) 匹配与几何界，同时也标明了仍需单独研读的更深层构造性证明。</p><a class="text-link" href="sources.html#provenance">阅读源码与审阅记录</a></div></div></section>
   </main>
-  <footer class="site-footer page-width"><span class="footer-brand">Riemann, <em>line by line.</em></span><p>A source-linked reading of Alpöge’s released Lean argument.<br>First edition · 20 November 2026</p><a class="back-top" href="#main-content">Back to top</a></footer>
-  <noscript><p class="noscript-note">All text, equations, source links, and proof-map panels remain available. Interactive controls and equation typesetting require JavaScript.</p></noscript>
+  <footer class="site-footer page-width"><span class="footer-brand">逐行细读<em>黎曼猜想。</em></span><p>Alpöge 公开发布的 Lean 论证之源码关联导读。<br>第一版 · 2026 年 11 月 20 日</p><a class="back-top" href="#main-content">返回顶部</a></footer>
+  <noscript><p class="noscript-note">所有正文、公式、源码链接与证明路线图面板均可正常阅读。交互控件与公式排版需要启用 JavaScript。</p></noscript>
 </body>
 </html>
